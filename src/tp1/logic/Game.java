@@ -13,7 +13,7 @@ public class Game {
 	
 	public String positionToString(int col, int row) {
 		// TODO Auto-generated method stub
-		return "*";	// return null patata
+		return "*";	// return null 
 	}
 
 	public boolean playerWins() {

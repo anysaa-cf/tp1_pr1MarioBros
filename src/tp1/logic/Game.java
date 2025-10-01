@@ -1,10 +1,15 @@
 package tp1.logic;
 
+import tp1.view.Messages;
+
 public class Game {
 
 	public static final int DIM_X = 30;
 	public static final int DIM_Y = 15;
 
+	private int time = 100;
+	private int points = 0;
+	
 	//TODO fill your code
 	
 	public Game(int nLevel) {
@@ -13,7 +18,7 @@ public class Game {
 	
 	public String positionToString(int col, int row) {
 		// TODO Auto-generated method stub
-		return "*";	// return null 
+		return Messages.EMPTY;	// return null 
 	}
 
 	public boolean playerWins() {
@@ -22,13 +27,11 @@ public class Game {
 	}
 
 	public int remainingTime() {
-		// TODO Auto-generated method stub
-		return 100;
+		return time;
 	}
 
 	public int points() {
-		// TODO Auto-generated method stub
-		return 0;
+		return points;
 	}
 
 	public int numLives() {
@@ -36,6 +39,12 @@ public class Game {
 		return 3;
 	}
 
+	// creation of the update method
+	public void update() {
+		time--;		// time is reduced by 1 on each cycle
+		// this will called the updates of each object?¿
+	}
+	
 	@Override
 	public String toString() {
 		// TODO returns a textual representation of the object

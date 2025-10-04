@@ -34,7 +34,7 @@ public class Game {
 		return points;
 	}
 
-	public int numLives() {
+	public int numLives() {		// this will change over the course in the mario class?¿
 		// TODO Auto-generated method stub
 		return 3;
 	}
@@ -43,6 +43,9 @@ public class Game {
 	public void update() {
 		time--;		// time is reduced by 1 on each cycle
 		// this will called the updates of each object?¿
+		/*if (gameHasAction()) {
+			points are modified;
+		}*/
 	}
 	
 	@Override

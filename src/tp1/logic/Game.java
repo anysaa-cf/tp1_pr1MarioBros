@@ -1,5 +1,9 @@
 package tp1.logic;
 
+import tp1.logic.gameobjects.Ground;
+import tp1.logic.gameobjects.Mario;
+import tp1.logic.gameobjects.Goomba;
+import tp1.logic.gameobjects.ExitDoor;
 import tp1.view.Messages;
 
 public class Game {
@@ -7,18 +11,69 @@ public class Game {
 	public static final int DIM_X = 30;
 	public static final int DIM_Y = 15;
 
-	private int time = 100;
+	private int remainingTime = 100;
 	private int points = 0;
+	private int nLevel = 0;
+
+	private int groundCounter;
+	private int goombaCounter;
+	private int marioCounter;
 	
-	//TODO fill your code
+	private GameObjectContainer gameObjects;
+	private Mario mario;
 	
 	public Game(int nLevel) {
-		// TODO Auto-generated constructor stub
+		if(nLevel == 0 || nLevel == 1) {
+			this.nLevel = nLevel;
+			initGame(nLevel);			
+		}
+	}
+	
+	public void initGame(int nLevel) {		// selection of the level
+		switch(nLevel) {
+		case 0:
+			initLevel0();
+			break;
+		case 1:
+			// initLevel1();
+			break;
+		}
 	}
 	
 	public String positionToString(int col, int row) {
-		// TODO Auto-generated method stub
-		return Messages.EMPTY;	// return null 
+		Position pos = new Position(col, row);
+		String str = Messages.EMPTY;
+		
+		// option 1: concatenation
+		if(gameObjects.areGroundsInPosition(pos)) {
+			str += Messages.LAND;
+		}
+		
+		if(gameObjects.areGoombasInPosition(pos)) {
+			str += Messages.GOOMBA;
+		}
+		
+		if(gameObjects.areMariosInPosition(pos)) {
+			str += Messages.MARIO_RIGHT;
+		}
+		
+		if(gameObjects.exitDoorInPosition(pos)) {
+			str += Messages.EXIT_DOOR;
+		}
+		
+		
+		// option 2: if-else
+		/*if(gameObjects.areGroundsInPosition(pos)) {
+			str = Messages.LAND;
+		} else if(gameObjects.areGoombasInPosition(pos)) {
+			str = Messages.GOOMBA;
+		} else if(gameObjects.areMariosInPosition(pos)) {
+			str = Messages.MARIO_RIGHT;
+		} else if(gameObjects.exitDoorInPosition(pos)) {
+			str = Messages.EXIT_DOOR;
+		}*/
+		
+		return str;
 	}
 
 	public boolean playerWins() {
@@ -27,7 +82,7 @@ public class Game {
 	}
 
 	public int remainingTime() {
-		return time;
+		return remainingTime;
 	}
 
 	public int points() {
@@ -41,8 +96,8 @@ public class Game {
 
 	// creation of the update method
 	public void update() {
-		time--;		// time is reduced by 1 on each cycle
-		// this will called the updates of each object?¿
+		remainingTime--;		// time is reduced by 1 on each cycle
+		gameObjects.update();
 		/*if (gameHasAction()) {
 			points are modified;
 		}*/
@@ -59,13 +114,17 @@ public class Game {
 		return false;
 	} 
 	
-	/*
+
 	private void initLevel0() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
 		
+		groundCounter = 200;
+		goombaCounter = 10;
+		marioCounter = 1;
+		
 		// 1. Mapa
-		gameObjects = new GameObjectContainer();
+		gameObjects = new GameObjectContainer(groundCounter, goombaCounter, marioCounter);
 		for(int col = 0; col < 15; col++) {
 			gameObjects.add(new Ground(new Position(13,col)));
 			gameObjects.add(new Ground(new Position(14,col)));		
@@ -102,5 +161,5 @@ public class Game {
 
 		gameObjects.add(new Goomba(this, new Position(0, 19)));
 	}
-	*/
+	
 }

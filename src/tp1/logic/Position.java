@@ -7,9 +7,25 @@ package tp1.logic;
  */
 public class Position {
 
-	private int col;
-	private int row;
+	private final int col;
+	private final int row;
+	
+	public Position(int col, int row) {
+		this.col = col;
+		this.row = row;
+	}
+	 
+	public int getRow() {
+		return row;
+	}
 
-	//TODO fill your code
+
+	public int getCol() {
+		return col;
+	}
+
+	public boolean equals(Position position) {
+		return this.col == position.col && this.row == position.row;
+	}
 
 }

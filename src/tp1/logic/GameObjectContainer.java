@@ -70,7 +70,7 @@ public class GameObjectContainer {
 		int i = 0;
 		boolean ok = false;
 		
-		while(i < marioCounter && ok == false) {
+		while(i < marioCounter && ok == false && this.marioObjects[i] != null) {
 			ok = marioObjects[i].isMarioInPosition(position);
 			++i;
 		}
@@ -82,7 +82,7 @@ public class GameObjectContainer {
 		int i = 0;
 		boolean ok = false;
 		
-		while(i < goombaCounter && ok == false) {
+		while(i < goombaCounter && ok == false && this.goombaObjects[i] != null) {
 			ok = goombaObjects[i].isGoombaInPosition(position);
 			++i;
 		}
@@ -90,8 +90,20 @@ public class GameObjectContainer {
 		return ok;
 	}
 	
+	public boolean areGroundsInPosition(Position position) {
+		int i = 0;
+		boolean ok = false;
+		
+		while(i < groundCounter && ok == false && this.groundObjects[i] != null) {
+			ok = groundObjects[i].isGroundInPosition(position);
+			++i;
+		}
+		
+		return ok;
+	}
+	
 	public boolean exitDoorInPosition(Position position) {
-		return this.exitDoor.isExitDoorInPosition(position);
+		return this.exitDoor != null && this.exitDoor.isExitDoorInPosition(position);		// add condition of this.exitDoor != null
 	}
 	
 

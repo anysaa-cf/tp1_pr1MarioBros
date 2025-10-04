@@ -1,5 +1,6 @@
 package tp1.logic.gameobjects;
 
+import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
@@ -8,7 +9,7 @@ public class Goomba {
 	private boolean isSolid = false;	// property of being a solid object
 	private boolean isMobile = false;
 	
-	public Goomba(Position pos) {
+	public Goomba(Game game, Position pos) {
 		isMobile = true;
 		this.pos = pos;
 	}

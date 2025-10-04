@@ -15,9 +15,9 @@ public class Mario {
 	private Action action;
 	private boolean alive = false;
 	
-	public Mario(Position pos, Action action, Game game) {
+	public Mario(Game game, Position pos) {
 		this.pos = pos;
-		this.action = action;
+//		this.action = action;
 		this.game = game;
 		alive = true;
 	}

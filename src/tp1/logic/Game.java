@@ -40,30 +40,36 @@ public class Game {
 		}
 	}
 	
-	public String positionToString(int col, int row) {
-		Position pos = new Position(col, row);
+	public String positionToString(int row, int col) {		// int row, int col or viceversa?¿
+		Position pos = new Position(row, col);
 		String str = Messages.EMPTY;
 		
+		/*
 		// option 1: concatenation
 		if(gameObjects.areGroundsInPosition(pos)) {
-			str += Messages.LAND;
+//			str += Messages.LAND;
+			return Messages.LAND;
 		}
 		
 		if(gameObjects.areGoombasInPosition(pos)) {
-			str += Messages.GOOMBA;
+//			str += Messages.GOOMBA;
+			return Messages.GOOMBA;
 		}
 		
 		if(gameObjects.areMariosInPosition(pos)) {
-			str += Messages.MARIO_RIGHT;
+//			str += Messages.MARIO_RIGHT;
+			return Messages.MARIO_RIGHT;
 		}
 		
 		if(gameObjects.exitDoorInPosition(pos)) {
-			str += Messages.EXIT_DOOR;
+//			str += Messages.EXIT_DOOR;
+			return Messages.EXIT_DOOR;
 		}
 		
+		*/
 		
 		// option 2: if-else
-		/*if(gameObjects.areGroundsInPosition(pos)) {
+		if(gameObjects.areGroundsInPosition(pos)) {
 			str = Messages.LAND;
 		} else if(gameObjects.areGoombasInPosition(pos)) {
 			str = Messages.GOOMBA;
@@ -71,7 +77,7 @@ public class Game {
 			str = Messages.MARIO_RIGHT;
 		} else if(gameObjects.exitDoorInPosition(pos)) {
 			str = Messages.EXIT_DOOR;
-		}*/
+		}
 		
 		return str;
 	}

@@ -12,9 +12,10 @@ public class GameObjectContainer {
 	private ExitDoor exitDoor;		// there is just 1 exit door so no array needed
 	private Mario[] marioObjects;
 	
-	private int groundCounter = 0;
-	private int goombaCounter = 0;
-	private int marioCounter = 0;
+	// initialize the counters to 0 ?¿
+	private int groundCounter;
+	private int goombaCounter;
+	private int marioCounter;
 	
 	public GameObjectContainer(int groundCounter, int goombaCounter, int marioCounter) {
 		// arrays are created with each position in null by default
@@ -51,8 +52,12 @@ public class GameObjectContainer {
 		
 	}
 	
-	public void add(ExitDoor exit) {
-		this.exitDoor = exit;
+	public void add(ExitDoor exit) {	// checks if there is no exitDoor and adds one?¿
+//		this.exitDoor = exit;
+		if(exitDoor == null) {
+			this.exitDoor = exit;
+			return;
+		}
 	}
 	
 	public void add(Mario mario) {

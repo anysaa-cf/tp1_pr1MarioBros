@@ -41,7 +41,7 @@ public class Game {
 	}
 	
 	public String positionToString(int col, int row) {		// int row, int col or viceversa?¿
-		Position pos = new Position(col, row);
+		Position pos = new Position(row, col);
 		String str = Messages.EMPTY;
 		
 		

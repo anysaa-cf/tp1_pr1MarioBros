@@ -10,7 +10,7 @@ public class Position {
 	private final int col;
 	private final int row;
 	
-	public Position(int col, int row) {		// int col, int row or viceversa?¿
+	public Position(int row, int col) {		// int col, int row or viceversa?¿
 		this.row = row;
 		this.col = col;
 	}
@@ -24,13 +24,6 @@ public class Position {
 		return col;
 	}
 
-	/*
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
-	}
-*/
 	
 	public boolean equals(Position position) {
 		return this.col == position.col && this.row == position.row;

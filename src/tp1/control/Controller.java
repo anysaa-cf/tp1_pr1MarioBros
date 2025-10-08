@@ -23,6 +23,9 @@ public class Controller {
 	 * 
 	 */
 	public void run() {
+		
+//		boolean exit = false;
+		
 		view.showWelcome();
 		view.showGame();
 		
@@ -36,12 +39,12 @@ public class Controller {
 		inputs[0] = inputs[0].toLowerCase();		// identifies uppercase / lowercase and converts it to lowercase 
 		
 		// while the game has not finished (either by winning or losing) and the command is != exit or != e (shortcut)
-		while(!game.playerLoses() && !game.playerWins() && 
+		while(!game.playerLoses() && !game.playerWins() &&
 				!inputs[0].equals(Messages.COMMAND_EXIT_NAME) && !inputs[0].equals(Messages.COMMAND_EXIT_SHORTCUT)) {
 			
 			
 			if(inputs.length == 0 || inputs[0].isEmpty()) {		// should be the update command?¿
-				game.update();
+//				game.update();
 				view.showGame();
 			}
 			
@@ -59,7 +62,7 @@ public class Controller {
 					
 					
 				default:
-					view.showError(Messages.UNKNOWN_COMMAND);
+					view.showError(Messages.UNKNOWN_COMMAND.formatted(inputs[0]));
 					break;
 				
 				}
@@ -68,20 +71,7 @@ public class Controller {
 			
 			
 		}
-/*
-		String fin = "exit";
-		String[] command;
-		
-		do {
-			view.showGame();
-			command = view.getPrompt();
-		} while(!fin.equalsIgnoreCase(command[0]));
-		
-		*/
-		
-		
-		
-//		view.getPrompt();
+
 		
 		view.showEndMessage();
 	}

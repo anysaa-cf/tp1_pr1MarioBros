@@ -18,7 +18,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// Required to avoid issues with tests 
-        Locale.of("es", "ES"); // dsdsndhash
+        Locale.of("es", "ES"); 
 		
 		try {
 			

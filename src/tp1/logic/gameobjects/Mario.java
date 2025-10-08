@@ -14,6 +14,8 @@ public class Mario {
 	private boolean isSolid = false;	// property of being a solid object
 	private boolean big = false;		// when activated mario occupies the actual pos + (actual pos + 1(y - axis)) then it is drawn twice
 	private boolean alive = false;
+	private boolean isMobile = false;
+	
 	
 	private int numLivesLeft = 0;
 	
@@ -23,6 +25,7 @@ public class Mario {
 // 		isSolid = false, no need to write the same here
 		this.game = game;
 		alive = true;
+		isMobile = true;
 	}
 	
 	public String getIcon() {

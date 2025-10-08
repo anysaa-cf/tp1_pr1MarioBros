@@ -27,7 +27,7 @@ public class GameObjectContainer {
 		goombaObjects = new Goomba[goombaCounter];		
 		
 		this.marioCounter = marioCounter;
-		marioObjects = new Mario[marioCounter];			
+		marioObjects = new Mario[marioCounter];			// maybe quitar		
 		
 	}
 	

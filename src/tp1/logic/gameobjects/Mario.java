@@ -8,16 +8,19 @@ import tp1.view.Messages;
 public class Mario {
 
 	private Position pos;
-	private boolean isSolid = false;	// property of being a solid object
-	private boolean big = false;		// when activated mario occupies the actual pos + actual pos + 1(y - axis) then it is drawn twice
 	private Game game;
-	private int numLivesLeft = 0;
 	private Action action;
+
+	private boolean isSolid = false;	// property of being a solid object
+	private boolean big = false;		// when activated mario occupies the actual pos + (actual pos + 1(y - axis)) then it is drawn twice
 	private boolean alive = false;
+	
+	private int numLivesLeft = 0;
 	
 	public Mario(Game game, Position pos) {
 		this.pos = pos;
 //		this.action = action;
+// 		isSolid = false, no need to write the same here
 		this.game = game;
 		alive = true;
 	}

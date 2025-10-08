@@ -2,6 +2,7 @@ package tp1.control;
 
 import tp1.logic.Game;
 import tp1.view.GameView;
+import tp1.view.Messages;
 
 /**
  *  Accepts user input and coordinates the game execution logic
@@ -23,9 +24,64 @@ public class Controller {
 	 */
 	public void run() {
 		view.showWelcome();
-		
-		//TODO fill your code: The main loop that displays the game, asks the user for input, and executes the action.
 		view.showGame();
+		
+		String[] inputs;
+		inputs = view.getPrompt();		// reads Command> whatever
+		
+		if (inputs.length > 1) {		// checks if whatever is whatever+1
+			view.showError(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+		}
+		
+		inputs[0] = inputs[0].toLowerCase();		// identifies uppercase / lowercase and converts it to lowercase 
+		
+		// while the game has not finished (either by winning or losing) and the command is != exit or != e (shortcut)
+		while(!game.playerLoses() && !game.playerWins() && 
+				!inputs[0].equals(Messages.COMMAND_EXIT_NAME) && !inputs[0].equals(Messages.COMMAND_EXIT_SHORTCUT)) {
+			
+			
+			if(inputs.length == 0 || inputs[0].isEmpty()) {		// should be the update command?¿
+				game.update();
+				view.showGame();
+			}
+			
+			if(inputs.length == 1) {
+				switch(inputs[0]) {
+				case Messages.COMMAND_EXIT_NAME:
+				case Messages.COMMAND_EXIT_SHORTCUT:
+					break;		// if the first character is exit then go out of the while immediately?¿
+				
+				case Messages.COMMAND_HELP_NAME:
+				case Messages.COMMAND_HELP_SHORTCUT:
+					System.out.println(Messages.HELP);		
+					System.out.println();	
+					break;
+					
+					
+				default:
+					view.showError(Messages.UNKNOWN_COMMAND);
+					break;
+				
+				}
+				inputs = view.getPrompt();		// check if I can put it here without having an infinite loop
+			}
+			
+			
+		}
+/*
+		String fin = "exit";
+		String[] command;
+		
+		do {
+			view.showGame();
+			command = view.getPrompt();
+		} while(!fin.equalsIgnoreCase(command[0]));
+		
+		*/
+		
+		
+		
+//		view.getPrompt();
 		
 		view.showEndMessage();
 	}

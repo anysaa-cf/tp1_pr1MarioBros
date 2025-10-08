@@ -54,7 +54,6 @@ public class Messages {
 	public static final String INVALID_COMMAND = "Invalid command: %s";
 	public static final String INVALID_COMMAND_PARAMETERS = "Invalid command parameters";
 	public static final String ERROR_COMMAND_EXECUTE = "Command execute problem";
-
 	
 	public static final String HELP_AVAILABLE_COMMANDS = "Available commands:";
 	/* @formatter:off */
@@ -66,8 +65,34 @@ public class Messages {
 		"[e]xit: exits the game"
 	};
 	/* @formatter:on */
-
+	
 	public static final String HELP = String.join(LINE_SEPARATOR+"   ", HELP_LINES) + LINE_SEPARATOR;
+	
+	// COMMANDS CREATION
+	// [e]xit: end the execution of the game
+	public static final String COMMAND_EXIT_NAME = "exit";
+	public static final String COMMAND_EXIT_SHORTCUT = "e";
+	public static final String COMMAND_EXIT_DETAILS = "[e]xit";
+	public static final String COMMAND_EXIT_HELP = "exits the game";
+
+	// [h]elp: prints the help message
+	public static final String COMMAND_HELP_NAME = "help";
+	public static final String COMMAND_HELP_SHORTCUT = "h";
+	public static final String COMMAND_HELP_DETAILS = "[h]elp";
+	public static final String COMMAND_HELP_HELP = "prints this help message";
+	
+	// [r]eset [numLevel]: reset the game at the level indicated by the numLevel parameter if provided, else at the current level
+	public static final String COMMAND_RESET_NAME = "reset";
+	public static final String COMMAND_RESET_SHORTCUT = "r";
+	public static final String COMMAND_RESET_DETAILS = "[r]eset [numLevel]";
+	public static final String COMMAND_RESET_HELP = "reset the game to initial configuration if not numLevel else load the numLevel map";
+	
+	// [u]pdate: updates the game without carrying out any action chosen by the player
+	public static final String COMMAND_UPDATE_NAME = "update";
+	public static final String COMMAND_UPDATE_SHORTCUT = "u";
+	public static final String COMMAND_UPDATE_DETAILS = "[u]pdate";
+	public static final String COMMAND_UPDATE_HELP = "user does not perform any action";		
+
 
 //Symbols
 	public static final String EMPTY = "";

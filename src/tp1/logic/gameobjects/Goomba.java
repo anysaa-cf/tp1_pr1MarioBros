@@ -10,6 +10,7 @@ public class Goomba {
 	private boolean isMobile = false;
 	
 	public Goomba(Game game, Position pos) {
+		// isSolid = false, no need to write the same here
 		isMobile = true;
 		this.pos = pos;
 	}

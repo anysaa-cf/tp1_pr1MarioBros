@@ -59,7 +59,19 @@ public class Controller {
 					System.out.println(Messages.HELP);		
 					System.out.println();	
 					break;
+				
+				case Messages.COMMAND_RESET_NAME:
+				case Messages.COMMAND_RESET_SHORTCUT:
+					game.resetGame();
+					view.showGame();
+					break;
 					
+				case Messages.COMMAND_UPDATE_NAME:
+				case Messages.COMMAND_UPDATE_HELP:
+				case Messages.EMPTY:
+					game.update();
+					view.showGame();
+					break;
 					
 				default:
 					view.showError(Messages.UNKNOWN_COMMAND.formatted(inputs[0]));

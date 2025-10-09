@@ -1,9 +1,9 @@
 package tp1.logic;
 
+import tp1.logic.gameobjects.ExitDoor;
+import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
-import tp1.logic.gameobjects.Goomba;
-import tp1.logic.gameobjects.ExitDoor;
 import tp1.view.Messages;
 
 public class Game {
@@ -47,39 +47,21 @@ public class Game {
 		
 		// option 1: concatenation
 		if(gameObjects.areGroundsInPosition(pos)) {
-			str += Messages.LAND;
-//			return Messages.LAND;
+			str += Messages.LAND;				//	return Messages.LAND;
 		}
 		
 		if(gameObjects.areGoombasInPosition(pos)) {
-			str += Messages.GOOMBA;
-//			return Messages.GOOMBA;
+			str += Messages.GOOMBA;				//	return Messages.GOOMBA;
 		}
 		
 		if(gameObjects.areMariosInPosition(pos)) {
-			str += Messages.MARIO_RIGHT;
-//			return Messages.MARIO_RIGHT;
+			str += Messages.MARIO_RIGHT;		//	return Messages.MARIO_RIGHT;
 		}
 		
 		if(gameObjects.exitDoorInPosition(pos)) {
-			str += Messages.EXIT_DOOR;
-//			return Messages.EXIT_DOOR;
+			str += Messages.EXIT_DOOR;			//	return Messages.EXIT_DOOR;
 		}
 		
-		
-		
-		// option 2: if-else
-		/*
-		if(gameObjects.areGroundsInPosition(pos)) {
-			str = Messages.LAND;
-		} else if(gameObjects.areGoombasInPosition(pos)) {
-			str = Messages.GOOMBA;
-		} else if(gameObjects.areMariosInPosition(pos)) {
-			str = Messages.MARIO_RIGHT;
-		} else if(gameObjects.exitDoorInPosition(pos)) {
-			str = Messages.EXIT_DOOR;
-		}
-		*/
 		return str;
 	}
 
@@ -103,15 +85,16 @@ public class Game {
 
 	// creation of the update method
 	public void update() {
-		remainingTime--;		// time is reduced by 1 on each cycle
-		gameObjects.update();
+		remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
+		gameObjects.update();			// method getGameObjects() is not necessary
 		/*if (gameHasAction()) {
 			points are modified;
 		}*/
 	}
-	
+
+
 	@Override
-	public String toString() {
+	public String toString() {			// this is what the positionToString() does?¿
 		// TODO returns a textual representation of the object
 		return "TODO: Hola soy el game";
 	}
@@ -121,13 +104,16 @@ public class Game {
 		return false;
 	} 
 	
+	public void resetGame() {
+		initGame(nLevel);
+	}
 
 	private void initLevel0() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
 		
 		groundCounter = 200;
-		goombaCounter = 10;
+		goombaCounter = 1;		// in this map there is only one goomba?¿
 		marioCounter = 1;
 		
 		// 1. Mapa
@@ -168,5 +154,8 @@ public class Game {
 
 		gameObjects.add(new Goomba(this, new Position(0, 19)));
 	}
+
+
+
 	
 }

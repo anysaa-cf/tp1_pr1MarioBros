@@ -10,12 +10,11 @@ public class GameObjectContainer {
 	
 	private Goomba[] goombaObjects;
 	private ExitDoor exitDoor;		// there is just 1 exit door so no array needed
-	private Mario[] marioObjects;
+	private Mario marioObject;		// there is just 1 mario so no array needed
 	
 	// initialize the counters to 0 ?¿
 	private int groundCounter;
 	private int goombaCounter;
-	private int marioCounter;
 	
 	public GameObjectContainer(int groundCounter, int goombaCounter, int marioCounter) {
 		// arrays are created with each position in null by default
@@ -24,11 +23,7 @@ public class GameObjectContainer {
 		groundObjects = new Ground[groundCounter];		
 
 		this.goombaCounter = goombaCounter;
-		goombaObjects = new Goomba[goombaCounter];		
-		
-		this.marioCounter = marioCounter;
-		marioObjects = new Mario[marioCounter];			// maybe quitar		
-		
+		goombaObjects = new Goomba[goombaCounter];			
 	}
 	
 	public void add(Ground ground) {		
@@ -61,26 +56,15 @@ public class GameObjectContainer {
 	}
 	
 	public void add(Mario mario) {
-		// checks if the array has null positions and adds a mario there until it is completed
-		for(int i = 0; i < marioCounter; i++) {
-			if(marioObjects[i] == null) {
-				marioObjects[i] = mario;
-				return;
-			}
+		if(mario == null) {
+			this.marioObject = mario;
+			return;
 		}
 		
 	}
 	
 	public boolean areMariosInPosition(Position position) {
-		int i = 0;
-		boolean ok = false;
-		
-		while(i < marioCounter && ok == false && this.marioObjects[i] != null) {
-			ok = marioObjects[i].isMarioInPosition(position);
-			++i;
-		}
-		
-		return ok;
+		return this.marioObject != null && this.marioObject.isMarioInPosition(position);
 	}
 	
 	public boolean areGoombasInPosition(Position position) {
@@ -108,14 +92,12 @@ public class GameObjectContainer {
 	}
 	
 	public boolean exitDoorInPosition(Position position) {
-		return this.exitDoor != null && this.exitDoor.isExitDoorInPosition(position);		// add condition of this.exitDoor != null
+		return this.exitDoor != null && this.exitDoor.isExitDoorInPosition(position);		
 	}
 	
 
 	public void update() {		// update method calls each update from the corresponding gameObject
-		for(int i = 0; i < marioCounter; i++) {
-			marioObjects[i].update();
-		}
+		marioObject.update();
 		
 		for(int i = 0; i < goombaCounter; i++) {
 			goombaObjects[i].update();
@@ -124,6 +106,7 @@ public class GameObjectContainer {
 		for(int i = 0; i < groundCounter; i++) {
 			groundObjects[i].update();
 		}
+		
 		exitDoor.update();
 	}
 }

@@ -55,7 +55,7 @@ public class Mario {
 	 *  Implements the automatic update	
 	 */
 	public void update() {
-		//TODO fill your code
+		
 	}
 	
 	

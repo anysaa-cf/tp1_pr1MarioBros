@@ -9,47 +9,47 @@ public class Mario {
 
 	private Position pos;
 	private Game game;
-	private Action action;
+	private Action action = Action.STOP;
 
 	private boolean isSolid = false;	// property of being a solid object
 	private boolean big = false;		// when activated mario occupies the actual pos + (actual pos + 1(y - axis)) then it is drawn twice
-	private boolean alive = false;
-	private boolean isMobile = false;
+	private boolean alive = true;
+	private boolean isMobile = true;
 	
-	
-	private int numLivesLeft = 0;
+	private int numLivesLeft;
 	
 	public Mario(Game game, Position pos) {
 		this.pos = pos;
-//		this.action = action;
-// 		isSolid = false, no need to write the same here
 		this.game = game;
-		alive = true;
-		isMobile = true;
-	}
-	
-	public String getIcon() {
-		changeDirection();
-		
-		return Messages.MARIO_STOP;		// change
+		numLivesLeft = game.numLives();		// numLives = 3 at the beginning
 	}
 	
 	public void setDirection(Action action) {
 		this.action = action;
-		this.setDirection(action);
 	}
 	
-	public void changeDirection() {		// given an icon set the direction or given a direction set an icon?¿
-		// if direction is right then Messages.MARIO_RIGHT
-		// if direction is left then Messages.MARIO_LEFT
-		if(this.getIcon() == Messages.MARIO_LEFT) {
-			setDirection(Action.LEFT);
-		} else if(this.getIcon() == Messages.MARIO_RIGHT) {
-			setDirection(Action.RIGHT);
-		} else {
-			setDirection(Action.STOP);
+	public String getIcon() {
+		String icon;
+		
+		switch(action) {
+		case RIGHT:
+			icon = Messages.MARIO_RIGHT;
+			break;
+		case LEFT:
+			icon = Messages.MARIO_LEFT;
+			break;
+		case STOP:
+		case UP:
+		case DOWN:
+		default:
+			icon = Messages.MARIO_STOP;
 		}
+		
+		return icon;
 	}
+	
+	
+	
 	
 	/**
 	 *  Implements the automatic update	
@@ -58,13 +58,13 @@ public class Mario {
 		
 	}
 	
-	
-	// i dont like this function
-	public int marioDies() {		// mario dies when he is touched by a goomba or falls?¿
+	public void marioDies() {
 		if(alive) {
-			numLivesLeft = this.game.numLives();
+			numLivesLeft--;
+			if(numLivesLeft <= 0) {
+				alive = false;
+			}
 		}
-		return numLivesLeft--;			
 	}
 	
 	public boolean isMarioInPosition(Position position) {	// check if current mario position is in the position passed by argument

@@ -47,19 +47,22 @@ public class GameObjectContainer {
 		
 	}
 	
-	public void add(ExitDoor exit) {	// checks if there is no exitDoor and adds one?¿
-//		this.exitDoor = exit;
-		if(exitDoor == null) {
+	public void add(ExitDoor exit) {	// checks if there is no exitDoor and adds one
+		this.exitDoor = exit;
+		return;
+		/*if(exitDoor == null) {		// it is not that necessary
 			this.exitDoor = exit;
 			return;
-		}
+		}*/
 	}
 	
 	public void add(Mario mario) {
-		if(mario == null) {
+		this.marioObject = mario;
+		return;
+		/*if(mario == null) {
 			this.marioObject = mario;
 			return;
-		}
+		}*/
 		
 	}
 	

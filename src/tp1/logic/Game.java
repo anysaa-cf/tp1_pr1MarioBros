@@ -20,7 +20,7 @@ public class Game {
 	private int marioCounter;
 	
 	private GameObjectContainer gameObjects;
-	private Mario mario;
+//	private Mario mario;
 	
 	public Game(int nLevel) {
 		if(nLevel == 0 || nLevel == 1) {
@@ -78,8 +78,7 @@ public class Game {
 		return points;
 	}
 
-	public int numLives() {		// this will change over the course in the mario class?¿
-		// TODO Auto-generated method stub
+	public int numLives() {
 		return 3;
 	}
 
@@ -149,8 +148,9 @@ public class Game {
 		gameObjects.add(new ExitDoor(new Position(Game.DIM_Y-3, Game.DIM_X-1)));
 
 		// 3. Personajes
-		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
-		gameObjects.add(this.mario);
+//		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
+		Mario mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
+		gameObjects.add(mario);
 
 		gameObjects.add(new Goomba(this, new Position(0, 19)));
 	}

@@ -6,8 +6,8 @@ import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
 
 public class GameObjectContainer {
-	private Ground[] groundObjects;
 	
+	private Ground[] groundObjects;
 	private Goomba[] goombaObjects;
 	private ExitDoor exitDoor;		// there is just 1 exit door so no array needed
 	private Mario marioObject;		// there is just 1 mario so no array needed
@@ -16,14 +16,14 @@ public class GameObjectContainer {
 	private int groundCounter;
 	private int goombaCounter;
 	
-	public GameObjectContainer(int groundCounter, int goombaCounter, int marioCounter) {
+	public GameObjectContainer(int groundCounter, int goombaCounter) {
 		// arrays are created with each position in null by default
 		
 		this.groundCounter = groundCounter;
 		groundObjects = new Ground[groundCounter];		
 
 		this.goombaCounter = goombaCounter;
-		goombaObjects = new Goomba[goombaCounter];			
+		goombaObjects = new Goomba[goombaCounter];	
 	}
 	
 	public void add(Ground ground) {		

@@ -5,10 +5,9 @@ import tp1.view.Messages;
 
 public class ExitDoor {
 	private Position pos;
-	private boolean isSolid = false;	// property of being a solid object
+
 	
 	public ExitDoor(Position pos) {
-		// isSolid = false, no need to write the same here
 		this.pos = pos;
 	}
 	

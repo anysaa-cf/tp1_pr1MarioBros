@@ -6,11 +6,9 @@ import tp1.view.Messages;
 
 public class Goomba {
 	private Position pos;
-	private boolean isSolid = false;	// property of being a solid object
-	private boolean isMobile = false;
+	private boolean isMobile;
 	
 	public Goomba(Game game, Position pos) {
-		// isSolid = false, no need to write the same here
 		isMobile = true;
 		this.pos = pos;
 	}

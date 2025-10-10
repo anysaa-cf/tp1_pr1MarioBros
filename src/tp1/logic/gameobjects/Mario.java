@@ -11,7 +11,6 @@ public class Mario {
 	private Game game;
 	private Action action = Action.STOP;
 
-	private boolean isSolid = false;	// property of being a solid object
 	private boolean big = true;		
 	private boolean alive = true;
 	private boolean isMobile = true;

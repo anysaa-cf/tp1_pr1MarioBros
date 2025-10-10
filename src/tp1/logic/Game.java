@@ -14,11 +14,6 @@ public class Game {
 	private int remainingTime = 100;
 	private int points = 0;
 	private int nLevel = 0;
-
-	private int groundCounter;
-	private int goombaCounter;
-	private int marioCounter;
-	
 	private GameObjectContainer gameObjects;
 //	private Mario mario;
 	
@@ -122,13 +117,8 @@ public class Game {
 	private void initLevel0() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-		
-		groundCounter = 200;
-		goombaCounter = 1;		// in this map there is only one goomba?¿
-		marioCounter = 1;
-		
-		// 1. Mapa
-		gameObjects = new GameObjectContainer(groundCounter, goombaCounter, marioCounter);
+		gameObjects = new GameObjectContainer(200, 10);
+	
 		for(int col = 0; col < 15; col++) {
 			gameObjects.add(new Ground(new Position(13,col)));
 			gameObjects.add(new Ground(new Position(14,col)));		

@@ -5,10 +5,10 @@ import tp1.view.Messages;
 
 public class Ground {
 	private Position pos;
-	private boolean isSolid = false;	// property of being a solid object
+	private boolean isSolid;	// property of being a solid object
 	
 	public Ground(Position pos) {
-		isSolid = true;
+		this.isSolid = true;
 		this.pos = pos;
 	}
 	

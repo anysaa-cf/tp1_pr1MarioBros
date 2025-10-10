@@ -15,7 +15,6 @@ public class Game {
 	private int points = 0;
 	private int nLevel = 0;
 	private GameObjectContainer gameObjects;
-//	private Mario mario;
 	
 	public Game(int nLevel) {
 		if(nLevel == 0 || nLevel == 1) {

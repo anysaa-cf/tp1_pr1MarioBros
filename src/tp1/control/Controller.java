@@ -27,65 +27,56 @@ public class Controller {
 //		boolean exit = false;
 		
 		view.showWelcome();
-		view.showGame();
-		
 		String[] inputs;
-		inputs = view.getPrompt();		// reads Command> whatever
-		
-		if (inputs.length > 1) {		// checks if whatever is whatever+1
-			view.showError(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
-		}
-		
-		inputs[0] = inputs[0].toLowerCase();		// identifies uppercase / lowercase and converts it to lowercase 
-		
+	
 		// while the game has not finished (either by winning or losing) and the command is != exit or != e (shortcut)
-		while(!game.playerLoses() && !game.playerWins() &&
-				!inputs[0].equals(Messages.COMMAND_EXIT_NAME) && !inputs[0].equals(Messages.COMMAND_EXIT_SHORTCUT)) {
+		while(!game.playerLoses() && !game.playerWins()) {
 			
+			view.showGame();
 			
-			if(inputs.length == 0 || inputs[0].isEmpty()) {		// should be the update command?¿
-//				game.update();
-				view.showGame();
+			inputs = view.getPrompt();
+			
+			while (inputs.length > 1) {
+				view.showError(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+				inputs = view.getPrompt();
 			}
 			
-			if(inputs.length == 1) {
-				switch(inputs[0]) {
-				case Messages.COMMAND_EXIT_NAME:
-				case Messages.COMMAND_EXIT_SHORTCUT:
-					break;		// if the first character is exit then go out of the while immediately?¿
-				
-				case Messages.COMMAND_HELP_NAME:
-				case Messages.COMMAND_HELP_SHORTCUT:
-					System.out.println(Messages.HELP);		
-					System.out.println();	
-					break;
-				
-				case Messages.COMMAND_RESET_NAME:
-				case Messages.COMMAND_RESET_SHORTCUT:
-					game.resetGame();
-					view.showGame();
-					break;
-					
-				case Messages.COMMAND_UPDATE_NAME:
-				case Messages.COMMAND_UPDATE_HELP:
-				case Messages.EMPTY:
-					game.update();
-					view.showGame();
-					break;
-					
-				default:
-					view.showError(Messages.UNKNOWN_COMMAND.formatted(inputs[0]));
-					break;
-				
-				}
-				inputs = view.getPrompt();		// check if I can put it here without having an infinite loop
-			}
-			
-			
-		}
-
+			for(int i = 0; i < inputs.length; i++)
+				inputs[i] = inputs[i].toLowerCase(); // every letter is taken to lowercase so even words as "HeLp" are processed
 		
+			switch(inputs[0]) {
+			case Messages.COMMAND_EXIT_NAME:
+			case Messages.COMMAND_EXIT_SHORTCUT:
+				break;		// if the first character is exit then go out of the while immediately?¿
+	
+			case Messages.COMMAND_HELP_NAME:
+			case Messages.COMMAND_HELP_SHORTCUT:
+				System.out.println(Messages.HELP);		
+				System.out.println();	
+				break;
+	
+			case Messages.COMMAND_RESET_NAME:
+			case Messages.COMMAND_RESET_SHORTCUT:
+				game.resetGame();
+				view.showGame();
+				break;
+		
+			case Messages.COMMAND_UPDATE_NAME:
+			case Messages.COMMAND_UPDATE_HELP:
+			case Messages.EMPTY:
+				game.update();
+				view.showGame();
+				break;
+		
+			default:
+				view.showError(Messages.UNKNOWN_COMMAND.formatted(inputs[0]));
+				break;	
+			
+			}
+			
+			inputs = view.getPrompt();
+		}	
 		view.showEndMessage();
 	}
-
+	
 }

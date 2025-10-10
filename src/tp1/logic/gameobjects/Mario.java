@@ -12,7 +12,7 @@ public class Mario {
 	private Action action = Action.STOP;
 
 	private boolean isSolid = false;	// property of being a solid object
-	private boolean big = false;		// when activated mario occupies the actual pos + (actual pos + 1(y - axis)) then it is drawn twice
+	private boolean big = true;		
 	private boolean alive = true;
 	private boolean isMobile = true;
 	
@@ -69,5 +69,13 @@ public class Mario {
 	
 	public boolean isMarioInPosition(Position position) {	// check if current mario position is in the position passed by argument
 		return this.pos.equals(position);
+	}
+	
+	public Position getPosition() {
+		return pos;
+	}
+	
+	public boolean isBig() {
+		return big;
 	}
 }

@@ -112,4 +112,8 @@ public class GameObjectContainer {
 		
 		exitDoor.update();
 	}
+	
+	public Mario getMario() {
+		return marioObject;
+	}
 }

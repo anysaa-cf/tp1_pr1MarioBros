@@ -44,24 +44,36 @@ public class Game {
 		Position pos = new Position(row, col);
 		String str = Messages.EMPTY;
 		
-		
-		// option 1: concatenation
 		if(gameObjects.areGroundsInPosition(pos)) {
-			str += Messages.LAND;				//	return Messages.LAND;
+			str += Messages.LAND;				//	return Messages.LAND;	
 		}
 		
-		if(gameObjects.areGoombasInPosition(pos)) {
-			str += Messages.GOOMBA;				//	return Messages.GOOMBA;
+		else if(gameObjects.areGoombasInPosition(pos)) {
+			str += Messages.GOOMBA;				//	return Messages.GOOMBA;	
 		}
 		
-		if(gameObjects.areMariosInPosition(pos)) {
-			str += Messages.MARIO_RIGHT;		//	return Messages.MARIO_RIGHT;
-		}
+		else if(gameObjects.exitDoorInPosition(pos)) {
+			str += Messages.EXIT_DOOR;			//	return Messages.EXIT_DOOR;	
+		}		
 		
-		if(gameObjects.exitDoorInPosition(pos)) {
-			str += Messages.EXIT_DOOR;			//	return Messages.EXIT_DOOR;
+		else {
+			Mario mario = gameObjects.getMario();
+			
+			if(mario != null) {
+				Position marioPos = mario.getPosition();		// get the position of the existing mario
+				
+				if(mario.isBig()) {		// if big == true
+					// in each loop it checks where to paint a mario
+					if(pos.equals(marioPos) ||
+							pos.equals(new Position(marioPos.getRow() - 1, marioPos.getCol()))){
+						str = mario.getIcon();
+					}
+				}
+				else if(pos.equals(marioPos)) {
+					str = mario.getIcon();		// when big == false, it will only paint one mario
+				}
+			}
 		}
-		
 		return str;
 	}
 

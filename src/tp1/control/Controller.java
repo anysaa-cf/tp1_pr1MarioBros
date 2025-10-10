@@ -29,10 +29,11 @@ public class Controller {
 		view.showWelcome();
 		view.showGame();
 		
-		String[] inputs;
+		String[] inputs;	// for the commands
+		String[] inputs2;	// for the additional info that a command might have (reset or action)
 		inputs = view.getPrompt();		// reads Command> whatever
 		
-		if (inputs.length > 1) {		// checks if whatever is whatever+1
+		if (inputs.length > 1) {		
 			view.showError(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 		}
 		
@@ -62,7 +63,11 @@ public class Controller {
 				
 				case Messages.COMMAND_RESET_NAME:
 				case Messages.COMMAND_RESET_SHORTCUT:
-					game.resetGame();
+//	[r]eset [numLevel]: reset the game to initial configuration if not numLevel else load the numLevel map
+					int level;
+					level = Integer.parseInt(inputs[1]);	// convert the string level input into an int 
+					
+					game.resetGame(level);
 					view.showGame();
 					break;
 					

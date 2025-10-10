@@ -20,7 +20,6 @@ public class Game {
 	private int marioCounter;
 	
 	private GameObjectContainer gameObjects;
-//	private Mario mario;
 	
 	public Game(int nLevel) {
 		if(nLevel == 0 || nLevel == 1) {
@@ -45,15 +44,18 @@ public class Game {
 		String str = Messages.EMPTY;
 		
 		if(gameObjects.areGroundsInPosition(pos)) {
-			str += Messages.LAND;				//	return Messages.LAND;	
+//			str += Messages.LAND;				
+			return Messages.LAND;	
 		}
 		
 		else if(gameObjects.areGoombasInPosition(pos)) {
-			str += Messages.GOOMBA;				//	return Messages.GOOMBA;	
+//			str += Messages.GOOMBA;				
+			return Messages.GOOMBA;	
 		}
 		
 		else if(gameObjects.exitDoorInPosition(pos)) {
-			str += Messages.EXIT_DOOR;			//	return Messages.EXIT_DOOR;	
+//			str += Messages.EXIT_DOOR;			
+			return Messages.EXIT_DOOR;	
 		}		
 		
 		else {
@@ -63,7 +65,7 @@ public class Game {
 				Position marioPos = mario.getPosition();		// get the position of the existing mario
 				
 				if(mario.isBig()) {		// if big == true
-					// in each loop it checks where to paint a mario
+					// in each loopCell it checks where to paint a mario
 					if(pos.equals(marioPos) ||
 							pos.equals(new Position(marioPos.getRow() - 1, marioPos.getCol()))){
 						str = mario.getIcon();
@@ -115,10 +117,11 @@ public class Game {
 		return false;
 	} 
 	
-	public void resetGame() {
+	public void resetGame(int level) {
+		nLevel = level;
 		initGame(nLevel);
 	}
-
+	
 	private void initLevel0() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
@@ -127,7 +130,7 @@ public class Game {
 		goombaCounter = 1;		// in this map there is only one goomba?¿
 		marioCounter = 1;
 		
-		// 1. Mapa
+		// 1. Map
 		gameObjects = new GameObjectContainer(groundCounter, goombaCounter, marioCounter);
 		for(int col = 0; col < 15; col++) {
 			gameObjects.add(new Ground(new Position(13,col)));
@@ -147,7 +150,7 @@ public class Game {
 		gameObjects.add(new Ground(new Position(9,7)));
 		gameObjects.add(new Ground(new Position(5,6)));
 		
-		// Salto final
+		// Final jump
 		int tamX = 8, tamY= 8;
 		int posIniX = Game.DIM_X-3-tamX, posIniY = Game.DIM_Y-3;
 		
@@ -159,13 +162,62 @@ public class Game {
 
 		gameObjects.add(new ExitDoor(new Position(Game.DIM_Y-3, Game.DIM_X-1)));
 
-		// 3. Personajes
+		// 3. gameObjects
 //		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		Mario mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		gameObjects.add(mario);
 
 		gameObjects.add(new Goomba(this, new Position(0, 19)));
 	}
+	
+	// initLevel1()
+	/*private void initLevel1() {
+		this.nLevel = 0;
+		this.remainingTime = 100;
+		
+		groundCounter = 200;
+		goombaCounter = 3;		// in this map there is only one goomba?¿
+		marioCounter = 1;
+		
+		// 1. Map
+		gameObjects = new GameObjectContainer(groundCounter, goombaCounter, marioCounter);
+		for(int col = 0; col < 15; col++) {
+			gameObjects.add(new Ground(new Position(13,col)));
+			gameObjects.add(new Ground(new Position(14,col)));		
+		}
+
+		gameObjects.add(new Ground(new Position(Game.DIM_Y-3,9)));
+		gameObjects.add(new Ground(new Position(Game.DIM_Y-3,12)));
+		for(int col = 17; col < Game.DIM_X; col++) {
+			gameObjects.add(new Ground(new Position(Game.DIM_Y-2, col)));
+			gameObjects.add(new Ground(new Position(Game.DIM_Y-1, col)));		
+		}
+
+		gameObjects.add(new Ground(new Position(9,2)));
+		gameObjects.add(new Ground(new Position(9,5)));
+		gameObjects.add(new Ground(new Position(9,6)));
+		gameObjects.add(new Ground(new Position(9,7)));
+		gameObjects.add(new Ground(new Position(5,6)));
+		
+		// Final jump
+		int tamX = 8, tamY= 8;
+		int posIniX = Game.DIM_X-3-tamX, posIniY = Game.DIM_Y-3;
+		
+		for(int col = 0; col < tamX; col++) {
+			for (int fila = 0; fila < col+1; fila++) {
+				gameObjects.add(new Ground(new Position(posIniY- fila, posIniX+ col)));
+			}
+		}
+
+		gameObjects.add(new ExitDoor(new Position(Game.DIM_Y-3, Game.DIM_X-1)));
+
+		// 3. gameObjects
+//		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
+		Mario mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
+		gameObjects.add(mario);
+
+		gameObjects.add(new Goomba(this, new Position(0, 19)));
+	}*/
 
 
 

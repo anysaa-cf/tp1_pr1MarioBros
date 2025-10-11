@@ -93,6 +93,12 @@ public class Messages {
 	public static final String COMMAND_UPDATE_DETAILS = "[u]pdate";
 	public static final String COMMAND_UPDATE_HELP = "user does not perform any action";		
 
+	// [a]ction: carries out the action or actions chosen by the player, then updates the game
+	public static final String COMMAND_ACTION_NAME = "action";
+	public static final String COMMAND_ACTION_SHORTCUT = "a";
+	public static final String COMMAND_ACTION_DETAILS = "[a]ction [[R]IGHT | [L]EFT | [U]P | [D]OWN | [S]TOP]+";
+	public static final String COMMAND_ACTION_HELP = "user performs actions";		
+
 
 //Symbols
 	public static final String EMPTY = "";

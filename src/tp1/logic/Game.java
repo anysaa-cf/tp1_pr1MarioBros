@@ -110,7 +110,17 @@ public class Game {
 	} 
 	
 	public void resetGame() {
+		int resetTime = 100;
+		remainingTime = resetTime;
+		
 		initGame(nLevel);
+	}
+	
+	public void resetGameWithLevel(int level) {
+		int resetTime = 100;
+		remainingTime = resetTime;
+		
+		initGame(level);
 	}
 
 	private void initLevel0() {
@@ -136,7 +146,7 @@ public class Game {
 		gameObjects.add(new Ground(new Position(9,7)));
 		gameObjects.add(new Ground(new Position(5,6)));
 		
-		// Salto final
+		// Final jump
 		int tamX = 8, tamY= 8;
 		int posIniX = Game.DIM_X-3-tamX, posIniY = Game.DIM_Y-3;
 		
@@ -148,7 +158,7 @@ public class Game {
 
 		gameObjects.add(new ExitDoor(new Position(Game.DIM_Y-3, Game.DIM_X-1)));
 
-		// 3. Personajes
+		// 3. GameObjects
 //		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		Mario mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		gameObjects.add(mario);

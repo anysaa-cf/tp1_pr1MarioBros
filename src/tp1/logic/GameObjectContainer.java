@@ -4,6 +4,7 @@ import tp1.logic.gameobjects.ExitDoor;
 import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
+import tp1.view.Messages;
 
 public class GameObjectContainer {
 	
@@ -12,7 +13,6 @@ public class GameObjectContainer {
 	private ExitDoor exitDoor;		// there is just 1 exit door so no array needed
 	private Mario marioObject;		// there is just 1 mario so no array needed
 	
-	// initialize the counters to 0 ?¿
 	private int groundCounter;
 	private int goombaCounter;
 	
@@ -66,38 +66,40 @@ public class GameObjectContainer {
 		
 	}
 	
-	public boolean areMariosInPosition(Position position) {
-		return this.marioObject != null && this.marioObject.isMarioInPosition(position);
-	}
-	
-	public boolean areGoombasInPosition(Position position) {
-		int i = 0;
-		boolean ok = false;
+	public String positionToStr(Position pos) {
+		String icon = Messages.EMPTY;
 		
-		while(i < goombaCounter && ok == false && this.goombaObjects[i] != null) {
-			ok = goombaObjects[i].isGoombaInPosition(position);
-			++i;
+		// mario object
+		if(marioObject != null && marioObject.onPosition(pos)) {
+			icon = marioObject.getIcon();
+		} 
+		
+		// exitDoor object
+		else if(exitDoor != null && exitDoor.onPosition(pos)) {
+			icon = exitDoor.getIcon();
+		} 
+		
+		// goomba objects
+		else {
+			for(Goomba goomba : goombaObjects) {
+				if(goomba != null && goomba.onPosition(pos)) {
+					icon = goomba.getIcon();
+					break;		// once it has found a goomba on position, goes to the next element pending to check
+				}
+			}
 		}
 		
-		return ok;
-	}
-	
-	public boolean areGroundsInPosition(Position position) {
-		int i = 0;
-		boolean ok = false;
-		
-		while(i < groundCounter && ok == false && this.groundObjects[i] != null) {
-			ok = groundObjects[i].isGroundInPosition(position);
-			++i;
+		// ground objects that will always be painted in the display (at least for now)
+		for(Ground ground : groundObjects) {
+			if(ground != null && ground.onPosition(pos)) {
+				icon = ground.getIcon();
+				break;
+			}
 		}
 		
-		return ok;
+		
+		return icon;
 	}
-	
-	public boolean exitDoorInPosition(Position position) {
-		return this.exitDoor != null && this.exitDoor.isExitDoorInPosition(position);		
-	}
-	
 
 	public void update() {		// update method calls each update from the corresponding gameObject
 		marioObject.update();
@@ -113,7 +115,5 @@ public class GameObjectContainer {
 		exitDoor.update();
 	}
 	
-	public Mario getMario() {
-		return marioObject;
-	}
+
 }

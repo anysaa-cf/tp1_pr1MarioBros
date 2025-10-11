@@ -37,9 +37,6 @@ public class Mario {
 		case LEFT:
 			icon = Messages.MARIO_LEFT;
 			break;
-		case STOP:
-		case UP:
-		case DOWN:
 		default:
 			icon = Messages.MARIO_STOP;
 		}
@@ -66,15 +63,8 @@ public class Mario {
 		}
 	}
 	
-	public boolean isMarioInPosition(Position position) {	// check if current mario position is in the position passed by argument
-		return this.pos.equals(position);
-	}
-	
-	public Position getPosition() {
-		return pos;
-	}
-	
-	public boolean isBig() {
-		return big;
+	public boolean onPosition(Position position) {
+		return (this.pos.equals(position) || 
+				(big && this.pos.equals(new Position(position.getRow() - 1, position.getCol()))));
 	}
 }

@@ -17,7 +17,7 @@ public class Goomba {
 		return Messages.GOOMBA;		
 	}
 	
-	public boolean isGoombaInPosition(Position position) {	// check if current goomba position is in the position passed by argument
+	public boolean onPosition(Position position) {
 		return this.pos.equals(position);
 	}
 	

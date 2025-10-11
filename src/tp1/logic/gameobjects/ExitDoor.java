@@ -15,7 +15,7 @@ public class ExitDoor {
 		return Messages.EXIT_DOOR;		
 	}
 	
-	public boolean isExitDoorInPosition(Position position) {	// check if current exitDoor position is in the position passed by argument
+	public boolean onPosition(Position position) {
 		return this.pos.equals(position);
 	}
 	

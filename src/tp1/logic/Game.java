@@ -36,39 +36,7 @@ public class Game {
 	
 	public String positionToString(int col, int row) {		
 		Position pos = new Position(row, col);
-		String str = Messages.EMPTY;
-		
-		if(gameObjects.areGroundsInPosition(pos)) {
-			str += Messages.LAND;				//	return Messages.LAND;	
-		}
-		
-		else if(gameObjects.areGoombasInPosition(pos)) {
-			str += Messages.GOOMBA;				//	return Messages.GOOMBA;	
-		}
-		
-		else if(gameObjects.exitDoorInPosition(pos)) {
-			str += Messages.EXIT_DOOR;			//	return Messages.EXIT_DOOR;	
-		}		
-		
-		else {
-			Mario mario = gameObjects.getMario();
-			
-			if(mario != null) {
-				Position marioPos = mario.getPosition();		// get the position of the existing mario
-				
-				if(mario.isBig()) {		// if big == true
-					// in each loop it checks where to paint a mario
-					if(pos.equals(marioPos) ||
-							pos.equals(new Position(marioPos.getRow() - 1, marioPos.getCol()))){
-						str = mario.getIcon();
-					}
-				}
-				else if(pos.equals(marioPos)) {
-					str = mario.getIcon();		// when big == false, it will only paint one mario
-				}
-			}
-		}
-		return str;
+		return gameObjects.positionToStr(pos);
 	}
 
 	public boolean playerWins() {

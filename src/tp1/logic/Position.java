@@ -10,7 +10,7 @@ public class Position {
 	private final int col;
 	private final int row;
 	
-	public Position(int row, int col) {		// int col, int row or viceversa?¿
+	public Position(int row, int col) {		
 		this.row = row;
 		this.col = col;
 	}

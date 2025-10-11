@@ -16,7 +16,7 @@ public class Ground {
 		return Messages.LAND;
 	}
 	
-	public boolean isGroundInPosition(Position position) {	// check if current ground position is in the position passed by argument
+	public boolean onPosition(Position position) {
 		return this.pos.equals(position);
 	}
 	

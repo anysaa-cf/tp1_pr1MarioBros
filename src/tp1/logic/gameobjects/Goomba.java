@@ -1,5 +1,6 @@
 package tp1.logic.gameobjects;
 
+import tp1.logic.Action;
 import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.view.Messages;
@@ -7,10 +8,14 @@ import tp1.view.Messages;
 public class Goomba {
 	private Position pos;
 	private boolean isMobile;
+	private Game game;		// needs to interact with the general state of the game or with other objects
+	private Action action;
 	
 	public Goomba(Game game, Position pos) {
-		isMobile = true;
+		this.isMobile = true;
+		this.game = game;
 		this.pos = pos;
+		this.action = Action.RIGHT;			// initial movement from right to left
 	}
 	
 	public String getIcon() {
@@ -22,6 +27,53 @@ public class Goomba {
 	}
 	
 	public void update() {
+		Position posBelow = new Position(pos.getRow() + 1, pos.getCol());
 		
+		boolean groundBelow = game.getGameObjects().areGroundsInPosition(posBelow);
+		
+		if(!groundBelow) {	
+			if(!isInsideBounds(posBelow)) {			// goomba dies (for now) if it falls out of the map
+				goombaDies();
+				return;
+			} else {
+				pos = posBelow;			// if there is no ground below, it falls 1 cell		
+				return;
+			}
+			
+		} 
+		else {			// if there is ground it moves horizontally
+			int nextCol = pos.getCol() + action.getX();
+			int nextRow = pos.getRow();
+			Position nextPos = new Position(nextRow, nextCol);		// get the next position given the action
+			
+			boolean insideBounds = isInsideBounds(nextPos);
+			boolean groundInFront = game.getGameObjects().areGroundsInPosition(nextPos);
+			
+			if(insideBounds && !groundInFront) {
+				pos = nextPos;		// moves 1 cell
+			} else {
+				changeAction();		// turns around
+			}
+		}
+		
+	}
+
+	private boolean isInsideBounds(Position position) {
+		int row = position.getRow();
+		int col = position.getCol();
+		
+		return row >= 0 && row < Game.DIM_Y && col >= 0 && col < Game.DIM_X;
+	}
+
+	private void changeAction() {
+		if(action == Action.RIGHT) {
+			action = Action.LEFT;
+		} else if(action == Action.LEFT) {
+			action = Action.RIGHT;
+		}	
+	}
+
+	public void goombaDies() {
+		game.getGameObjects().removeGoomba(this);
 	}
 }

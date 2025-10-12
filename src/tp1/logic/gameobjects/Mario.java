@@ -38,7 +38,7 @@ public class Mario {
 			icon = Messages.MARIO_LEFT;
 			break;
 		default:
-			icon = Messages.MARIO_STOP;
+			icon = Messages.MARIO_STOP;		// by default mario's initial direction is set as left-to-right?¿
 		}
 		
 		return icon;

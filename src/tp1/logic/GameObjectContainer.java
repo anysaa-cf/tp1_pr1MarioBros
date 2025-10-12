@@ -34,6 +34,8 @@ public class GameObjectContainer {
 				return;
 			}
 		}
+		
+		// would it be okay to implement it using a for each to avoid using the counter?¿
 	}
 	
 	public void add(Goomba goomba) {
@@ -102,18 +104,43 @@ public class GameObjectContainer {
 	}
 
 	public void update() {		// update method calls each update from the corresponding gameObject
-		marioObject.update();
-		
-		for(int i = 0; i < goombaCounter; i++) {
-			goombaObjects[i].update();
+		if(marioObject != null) {
+			marioObject.update();			
 		}
 		
-		for(int i = 0; i < groundCounter; i++) {
-			groundObjects[i].update();
+		for(Goomba goomba : goombaObjects) {
+			if(goomba != null) {
+				goomba.update();
+			}
+		}
+
+		for(Ground ground : groundObjects) {
+			if(ground != null) {
+				ground.update();
+			}
 		}
 		
-		exitDoor.update();
+		if(exitDoor != null) {
+			exitDoor.update();			
+		}
+	}
+
+	public boolean areGroundsInPosition(Position position) {
+		for(Ground ground : groundObjects) {
+			if(ground != null && ground.onPosition(position)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
+	public void removeGoomba(Goomba goombaDead) {
+		for(int i = 0; i < goombaCounter; i++) {
+			if(goombaObjects[i] == goombaDead) {
+				goombaObjects[i] = null;
+				return;
+			}
+		}
+	}
 
 }

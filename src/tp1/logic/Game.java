@@ -58,11 +58,9 @@ public class Game {
 
 	// creation of the update method
 	public void update() {
+//		remainingTime--;
 		remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
-		gameObjects.update();			// method getGameObjects() is not necessary
-		/*if (gameHasAction()) {
-			points are modified;
-		}*/
+		gameObjects.update();			
 	}
 
 
@@ -132,6 +130,10 @@ public class Game {
 		gameObjects.add(mario);
 
 		gameObjects.add(new Goomba(this, new Position(0, 19)));
+	}
+
+	public GameObjectContainer getGameObjects() {
+		return gameObjects;
 	}
 
 

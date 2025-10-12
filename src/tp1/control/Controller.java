@@ -82,13 +82,19 @@ public class Controller {
 				// reset command: when numLevel is specified
 				case Messages.COMMAND_RESET_NAME:
 				case Messages.COMMAND_RESET_SHORTCUT:
-					int levelSpecified = Integer.parseInt(inputs[1]);
-					if(levelSpecified == 0 || levelSpecified == 1) {
-						game.resetGameWithLevel(levelSpecified);						
-						view.showGame();
-						break;					
+					
+					if(inputs[1].matches("[0-9]+")) {
+						int levelSpecified = Integer.parseInt(inputs[1]);
+						if(levelSpecified == 0 || levelSpecified == 1) {
+							game.resetGameWithLevel(levelSpecified);						
+							view.showGame();
+							break;					
+						} else {
+							view.showError(Messages.INVALID_LEVEL_NUMBER);
+						}						
 					} else {
-						view.showError(Messages.INVALID_LEVEL_NUMBER);
+						// if the player puts a string instead of a numLevel
+						view.showError(Messages.LEVEL_NOT_A_NUMBER);
 					}
 					
 				default:

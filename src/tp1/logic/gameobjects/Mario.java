@@ -8,18 +8,18 @@ import tp1.view.Messages;
 public class Mario {
 
 	private Position pos;
-	private Game game;
+//	private Game game;
 	private Action action = Action.STOP;
 
 	private boolean big = true;		
 	private boolean alive = true;
-	private boolean isMobile = true;
+//	private boolean isMobile = true;
 	
 	private int numLivesLeft;
 	
 	public Mario(Game game, Position pos) {
 		this.pos = pos;
-		this.game = game;
+//		this.game = game;
 		numLivesLeft = game.numLives();		// numLives = 3 at the beginning
 	}
 	

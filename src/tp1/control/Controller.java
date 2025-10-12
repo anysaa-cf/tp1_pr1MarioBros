@@ -25,16 +25,15 @@ public class Controller {
 	 * 
 	 */
 	public void run() {
+		boolean exit = false;
+		
 		view.showWelcome();
 		view.showGame();
 		
-		String[] inputs;	
-		inputs = view.getPrompt();	
-		
+		String[] inputs = view.getPrompt();	
 		inputs[0] = inputs[0].toLowerCase();	 
 		
-		while(!game.playerLoses() && !game.playerWins() &&
-				!inputs[0].equals(Messages.COMMAND_EXIT_NAME) && !inputs[0].equals(Messages.COMMAND_EXIT_SHORTCUT)) {
+		while(!game.playerLoses() && !game.playerWins() && !exit) {
 			
 			// input length == 0 if enter is pressed or 1 if the command name/shortcut is written
 			if(inputs.length <= 1) {
@@ -57,6 +56,7 @@ public class Controller {
 				// exit command:
 				case Messages.COMMAND_EXIT_NAME:
 				case Messages.COMMAND_EXIT_SHORTCUT:
+					exit = true;
 					break;
 					
 				// reset command: when no numLevel is specified
@@ -70,9 +70,7 @@ public class Controller {
 					view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", inputs)));	// shows the commands entered by the player
 					break;
 				}
-			}
-			
-			if(inputs.length > 1) {
+			} else {		// inputs.length > 1
 				switch(inputs[0]) {
 				// action command:
 				case Messages.COMMAND_ACTION_NAME:
@@ -90,7 +88,7 @@ public class Controller {
 						view.showGame();
 						break;					
 					} else {
-						view.showError(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER.formatted(String.join(" ", inputs)));
+						view.showError(Messages.INVALID_LEVEL_NUMBER);
 					}
 					
 				default:
@@ -98,16 +96,17 @@ public class Controller {
 					break;
 				}
 			}
-			
+				
+			if(!exit) {
 				inputs = view.getPrompt();	
 				inputs[0] = inputs[0].toLowerCase();
 			}
-			
-			
-			view.showEndMessage();
 		}
-
+				
+		view.showEndMessage();
 	}
+
+}
 
 
 

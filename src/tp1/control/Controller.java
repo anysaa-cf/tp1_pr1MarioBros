@@ -36,9 +36,10 @@ public class Controller {
 		while(!game.playerLoses() && !game.playerWins() &&
 				!inputs[0].equals(Messages.COMMAND_EXIT_NAME) && !inputs[0].equals(Messages.COMMAND_EXIT_SHORTCUT)) {
 			
+			// input length == 0 if enter is pressed or 1 if the command name/shortcut is written
 			if(inputs.length <= 1) {
 				switch(inputs[0]) {
-				// update command: input length == 0 if enter is pressed or 1 if the command name/shortcut is written
+				// update command: 
 				case Messages.COMMAND_UPDATE_NAME:
 				case Messages.COMMAND_UPDATE_SHORTCUT:
 				case Messages.EMPTY:

@@ -28,7 +28,6 @@ public class Goomba {
 	
 	public void update() {
 		Position posBelow = new Position(pos.getRow() + 1, pos.getCol());
-		
 		boolean groundBelow = game.getGameObjects().areGroundsInPosition(posBelow);
 		
 		if(!groundBelow) {	

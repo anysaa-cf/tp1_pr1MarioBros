@@ -8,7 +8,7 @@ import tp1.view.Messages;
 public class Mario {
 
 	private Position pos;
-//	private Game game;
+	private Game game;
 	private Action action = Action.RIGHT;
 
 	private boolean big = true;		
@@ -19,7 +19,7 @@ public class Mario {
 	
 	public Mario(Game game, Position pos) {
 		this.pos = pos;
-//		this.game = game;
+		this.game = game;
 		numLivesLeft = game.numLives();		// numLives = 3 at the beginning
 	}
 	
@@ -31,6 +31,12 @@ public class Mario {
 		String icon;
 		
 		switch(action) {
+		case UP: 
+			icon = Messages.MARIO_RIGHT;
+			break;
+		case DOWN: 
+			icon = Messages.MARIO_RIGHT;
+			break;
 		case RIGHT:
 			icon = Messages.MARIO_RIGHT;
 			break;
@@ -50,9 +56,42 @@ public class Mario {
 	/**
 	 *  Implements the automatic update	
 	 */
-	public void update() {
+	public void update(Action[] actionList) {
+		for(int i = 0; i < actionList.length; i++) {
+			Position nextPos = new Position(pos.getRow() + actionList[i].getX(), pos.getCol() + actionList[i].getY());
+			boolean groundBelow = game.getGameObjects().areGroundsInPosition(nextPos);
 		
-		
+			if(actionList.length == 0 && !groundBelow)
+				pos = nextPos;
+			else {
+				switch(actionList[i]) {
+				
+				case Action.RIGHT:
+					pos = nextPos;
+					break;
+					
+				case Action.LEFT:
+					pos = nextPos;
+					break;
+				
+				case Action.UP:
+					if(action != Action.UP)
+						pos = nextPos;
+					break;
+				
+				case Action.DOWN:
+					if(!groundBelow)
+						pos = nextPos;
+					break;
+					
+				case Action.STOP:
+					break;
+				}
+				if(action == Action.UP)
+					pos = new Position(pos.getRow() + action.DOWN.getX(), pos.getCol() + action.DOWN.getY());
+			}
+			this.action = actionList[i];
+		}
 	}
 	
 	public void marioDies() {
@@ -66,6 +105,6 @@ public class Mario {
 	
 	public boolean onPosition(Position position) {
 		return (this.pos.equals(position) || 
-				(big && this.pos.equals(new Position(position.getRow() - 1, position.getCol()))));
+				(big && this.pos.equals(new Position(position.getRow() + 1, position.getCol()))));
 	}
 }

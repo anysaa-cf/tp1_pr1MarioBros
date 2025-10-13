@@ -14,6 +14,7 @@ public class Controller {
 
 	private Game game;
 	private GameView view;
+	private Action[] actionList;
 
 	public Controller(Game game, GameView view) {
 		this.game = game;
@@ -44,7 +45,7 @@ public class Controller {
 				case Messages.COMMAND_UPDATE_NAME:
 				case Messages.COMMAND_UPDATE_SHORTCUT:
 				case Messages.EMPTY:
-					game.update();
+					game.update(actionList);
 					view.showGame();
 					break;
 						
@@ -97,7 +98,7 @@ public class Controller {
 				case Messages.COMMAND_ACTION_SHORTCUT:
 					
 					boolean ok = true;
-					Action[] actionList = new Action[inputs.length - 1];
+					this.actionList = new Action[inputs.length - 1];
 					int i = 1;
 					
 					while(ok && i < inputs.length) {
@@ -125,12 +126,18 @@ public class Controller {
 							actionList[i++ - 1] = Action.DOWN;
 							break;
 					
+							
+						case Messages.ACTION_STOP:
+						case Messages.ACTION_STOP_SHORTCUT:
+							actionList[i++ - 1] = Action.STOP;
+							break;
+							
 						default:
 							ok = false;
 							view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", inputs)));	// shows the commands entered by the player
 							break;
 						}
-						
+						game.update(actionList);
 					}
 						break;
 					

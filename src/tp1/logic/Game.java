@@ -57,10 +57,10 @@ public class Game {
 	}
 
 	// creation of the update method
-	public void update() {
+	public void update(Action[] actionList) {
 //		remainingTime--;
 		remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
-		gameObjects.update();			
+		gameObjects.update(actionList);			
 	}
 
 

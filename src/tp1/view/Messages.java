@@ -107,6 +107,8 @@ public class Messages {
 	public static final String ACTION_UP_SHORTCUT = "u";
 	public static final String ACTION_DOWN = "down";
 	public static final String ACTION_DOWN_SHORTCUT = "d";
+	public static final String ACTION_STOP = "stop";
+	public static final String ACTION_STOP_SHORTCUT = "s";
 
 //Symbols
 	public static final String EMPTY = "";

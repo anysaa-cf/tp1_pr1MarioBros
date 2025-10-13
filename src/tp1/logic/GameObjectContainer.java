@@ -103,9 +103,9 @@ public class GameObjectContainer {
 		return icon;
 	}
 
-	public void update(Action[] actionList) {		// update method calls each update from the corresponding gameObject
+	public void update(Action action) {		// update method calls each update from the corresponding gameObject
 		if(marioObject != null) {
-			marioObject.update(actionList);			
+			marioObject.update(action);			
 		}
 		
 		for(Goomba goomba : goombaObjects) {
@@ -131,7 +131,7 @@ public class GameObjectContainer {
 				return true;
 			}
 		}
-		return false;
+		return false;	
 	}
 	
 	public void removeGoomba(Goomba goombaDead) {

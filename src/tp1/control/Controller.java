@@ -14,13 +14,12 @@ public class Controller {
 
 	private Game game;
 	private GameView view;
-	private Action[] actionList;
+	private Action action;
 
 	public Controller(Game game, GameView view) {
 		this.game = game;
 		this.view = view;
 	}
-
 
 	/**
 	 * Runs the game logic, coordinate Model(game) and View(view)
@@ -32,9 +31,7 @@ public class Controller {
 		view.showWelcome();
 		view.showGame();
 		
-		String[] inputs = view.getPrompt();	
-		for(int i = 0; i < inputs.length; i++)
-			inputs[i] = inputs[i].toLowerCase();	 
+		String[] inputs = view.getPrompt();	 
 		
 		while(!game.playerLoses() && !game.playerWins() && !exit) {
 			
@@ -45,7 +42,7 @@ public class Controller {
 				case Messages.COMMAND_UPDATE_NAME:
 				case Messages.COMMAND_UPDATE_SHORTCUT:
 				case Messages.EMPTY:
-					game.update(actionList);
+					game.update(Action.STOP);
 					view.showGame();
 					break;
 						
@@ -73,7 +70,8 @@ public class Controller {
 					view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", inputs)));	// shows the commands entered by the player
 					break;
 				}
-			} else {		// inputs.length > 1
+			}
+			else {		// inputs.length > 1
 				switch(inputs[0]) {
 				
 				// reset command: when numLevel is specified
@@ -84,80 +82,37 @@ public class Controller {
 						int levelSpecified = Integer.parseInt(inputs[1]);
 						if(levelSpecified == 0 || levelSpecified == 1) {
 							game.resetGameWithLevel(levelSpecified);						
-							view.showGame();
-							break;					
-						} else {
+							view.showGame();				
+						} 
+						else
 							view.showError(Messages.INVALID_LEVEL_NUMBER);
-						}						
-					} else {
-						// if the player puts a string instead of a numLevel
-						view.showError(Messages.LEVEL_NOT_A_NUMBER);
-					}
+					}		
+					else 
+					// if the player puts a string instead of a numLevel
+					view.showError(Messages.LEVEL_NOT_A_NUMBER);
+						break;
 					
 				case Messages.COMMAND_ACTION_NAME:
 				case Messages.COMMAND_ACTION_SHORTCUT:
-					
-					boolean ok = true;
-					this.actionList = new Action[inputs.length - 1];
 					int i = 1;
-					
-					while(ok && i < inputs.length) {
-						
-						switch(inputs[i]) {
-					
-						case Messages.ACTION_RIGHT:
-						case Messages.ACTION_RIGHT_SHORTCUT:
-							actionList[i++ - 1] = Action.RIGHT;
-							break;
-							
-						
-						case Messages.ACTION_LEFT:
-						case Messages.ACTION_LEFT_SHORTCUT:
-							actionList[i++ - 1] = Action.LEFT;
-							break;
-						
-						case Messages.ACTION_UP:
-						case Messages.ACTION_UP_SHORTCUT:
-							actionList[i++ - 1] = Action.UP;
-							break;
-						
-						case Messages.ACTION_DOWN:
-						case Messages.ACTION_DOWN_SHORTCUT:
-							actionList[i++ - 1] = Action.DOWN;
-							break;
-					
-							
-						case Messages.ACTION_STOP:
-						case Messages.ACTION_STOP_SHORTCUT:
-							actionList[i++ - 1] = Action.STOP;
-							break;
-							
-						default:
-							ok = false;
-							view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", inputs)));	// shows the commands entered by the player
-							break;
-						}
-						game.update(actionList);
+					while(i < inputs.length) {
+						action = Action.parseActions(inputs[i++]);
+						game.update();
 					}
-						break;
-					
+					view.showGame();
+					break;
+				
 				default:
 					view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", inputs)));	// shows the commands entered by the player
-					break;
+						break;
 				}
-				view.showGame();
 			}
-				
 			if(!exit) {
 				inputs = view.getPrompt();	
-				for(int i = 0; i < inputs.length; i++)
-					inputs[i] = inputs[i].toLowerCase();
 			}
 		}
-				
 		view.showEndMessage();
 	}
-
 }
 
 

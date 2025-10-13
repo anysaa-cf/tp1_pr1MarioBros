@@ -5,6 +5,7 @@ import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
 import tp1.view.Messages;
+import tp1.logic.Action;
 
 public class Game {
 
@@ -57,10 +58,10 @@ public class Game {
 	}
 
 	// creation of the update method
-	public void update(Action[] actionList) {
+	public void update(Action action) {
 //		remainingTime--;
 		remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
-		gameObjects.update(actionList);			
+		gameObjects.update(action);			
 	}
 
 
@@ -135,8 +136,6 @@ public class Game {
 	public GameObjectContainer getGameObjects() {
 		return gameObjects;
 	}
-
-
 
 	
 }

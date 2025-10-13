@@ -160,7 +160,7 @@ public class ConsoleView extends GameView {
 	public String[] getPrompt() {
 		System.out.print(Messages.PROMPT);
 		String line = scanner.nextLine();
-		String[] words = line.trim().split("\\s+");
+		String[] words = line.toLowerCase().trim().split("\\s+");
 
         System.out.println(Messages.DEBUG.formatted(line));		
 

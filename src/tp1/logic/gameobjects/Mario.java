@@ -8,8 +8,8 @@ import tp1.view.Messages;
 public class Mario {
 
 	private Position pos;
+	private Action action;
 	private Game game;
-	private Action action = Action.RIGHT;
 
 	private boolean big = true;		
 	private boolean alive = true;
@@ -20,22 +20,19 @@ public class Mario {
 	public Mario(Game game, Position pos) {
 		this.pos = pos;
 		this.game = game;
+		this.action = Action.RIGHT;
 		numLivesLeft = game.numLives();		// numLives = 3 at the beginning
-	}
-	
-	public void setDirection(Action action) {
-		this.action = action;
 	}
 	
 	public String getIcon() {
 		String icon;
 		
-		switch(action) {
+		switch(this.action) {
 		case UP: 
-			icon = Messages.MARIO_RIGHT;
+			icon = Messages.MARIO_STOP;
 			break;
 		case DOWN: 
-			icon = Messages.MARIO_RIGHT;
+			icon = Messages.MARIO_STOP;
 			break;
 		case RIGHT:
 			icon = Messages.MARIO_RIGHT;
@@ -44,27 +41,20 @@ public class Mario {
 			icon = Messages.MARIO_LEFT;
 			break;
 		default:
-			icon = Messages.MARIO_STOP;		// by default mario's initial direction is set as left-to-right?¿
+			icon = Messages.MARIO_STOP;
+			break;
 		}
-		
 		return icon;
 	}
-	
-	
-	
-	
 	/**
 	 *  Implements the automatic update	
 	 */
-	public void update(Action[] actionList) {
-		for(int i = 0; i < actionList.length; i++) {
-			Position nextPos = new Position(pos.getRow() + actionList[i].getX(), pos.getCol() + actionList[i].getY());
-			boolean groundBelow = game.getGameObjects().areGroundsInPosition(nextPos);
-		
-			if(actionList.length == 0 && !groundBelow)
-				pos = nextPos;
-			else {
-				switch(actionList[i]) {
+	public void update(Action action) {
+			Position nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
+			boolean ground = game.getGameObjects().areGroundsInPosition(nextPos);
+			
+			if(!ground)
+				switch(action) {
 				
 				case Action.RIGHT:
 					pos = nextPos;
@@ -75,23 +65,16 @@ public class Mario {
 					break;
 				
 				case Action.UP:
-					if(action != Action.UP)
-						pos = nextPos;
+					pos = nextPos;
 					break;
 				
 				case Action.DOWN:
-					if(!groundBelow)
-						pos = nextPos;
+					pos = nextPos;	
 					break;
 					
 				case Action.STOP:
 					break;
 				}
-				if(action == Action.UP)
-					pos = new Position(pos.getRow() + action.DOWN.getX(), pos.getCol() + action.DOWN.getY());
-			}
-			this.action = actionList[i];
-		}
 	}
 	
 	public void marioDies() {

@@ -9,7 +9,7 @@ public class Mario {
 
 	private Position pos;
 //	private Game game;
-	private Action action = Action.STOP;
+	private Action action = Action.RIGHT;
 
 	private boolean big = true;		
 	private boolean alive = true;

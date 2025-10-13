@@ -3,6 +3,7 @@ package tp1.control;
 import tp1.logic.Game;
 import tp1.view.GameView;
 import tp1.view.Messages;
+import tp1.logic.Action;
 
 /**
  *  Accepts user input and coordinates the game execution logic
@@ -31,7 +32,8 @@ public class Controller {
 		view.showGame();
 		
 		String[] inputs = view.getPrompt();	
-		inputs[0] = inputs[0].toLowerCase();	 
+		for(int i = 0; i < inputs.length; i++)
+			inputs[i] = inputs[i].toLowerCase();	 
 		
 		while(!game.playerLoses() && !game.playerWins() && !exit) {
 			
@@ -72,12 +74,6 @@ public class Controller {
 				}
 			} else {		// inputs.length > 1
 				switch(inputs[0]) {
-				// action command:
-				case Messages.COMMAND_ACTION_NAME:
-				case Messages.COMMAND_ACTION_SHORTCUT:
-					System.out.println("performing actions");
-					view.showGame();
-					break;
 				
 				// reset command: when numLevel is specified
 				case Messages.COMMAND_RESET_NAME:
@@ -97,15 +93,58 @@ public class Controller {
 						view.showError(Messages.LEVEL_NOT_A_NUMBER);
 					}
 					
+				case Messages.COMMAND_ACTION_NAME:
+				case Messages.COMMAND_ACTION_SHORTCUT:
+					
+					boolean ok = true;
+					Action[] actionList = new Action[inputs.length - 1];
+					int i = 1;
+					
+					while(ok && i < inputs.length) {
+						
+						switch(inputs[i]) {
+					
+						case Messages.ACTION_RIGHT:
+						case Messages.ACTION_RIGHT_SHORTCUT:
+							actionList[i++ - 1] = Action.RIGHT;
+							break;
+							
+						
+						case Messages.ACTION_LEFT:
+						case Messages.ACTION_LEFT_SHORTCUT:
+							actionList[i++ - 1] = Action.LEFT;
+							break;
+						
+						case Messages.ACTION_UP:
+						case Messages.ACTION_UP_SHORTCUT:
+							actionList[i++ - 1] = Action.UP;
+							break;
+						
+						case Messages.ACTION_DOWN:
+						case Messages.ACTION_DOWN_SHORTCUT:
+							actionList[i++ - 1] = Action.DOWN;
+							break;
+					
+						default:
+							ok = false;
+							view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", inputs)));	// shows the commands entered by the player
+							break;
+						}
+						
+					}
+						break;
+					
 				default:
 					view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", inputs)));	// shows the commands entered by the player
 					break;
 				}
+				view.showGame();
 			}
 				
 			if(!exit) {
 				inputs = view.getPrompt();	
-				inputs[0] = inputs[0].toLowerCase();
+				for(int i = 0; i < inputs.length; i++)
+					inputs[i] = inputs[i].toLowerCase();
 			}
 		}
 				

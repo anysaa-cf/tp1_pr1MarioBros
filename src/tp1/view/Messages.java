@@ -98,7 +98,15 @@ public class Messages {
 	public static final String COMMAND_ACTION_SHORTCUT = "a";
 	public static final String COMMAND_ACTION_DETAILS = "[a]ction [[R]IGHT | [L]EFT | [U]P | [D]OWN | [S]TOP]+";
 	public static final String COMMAND_ACTION_HELP = "user performs actions";		
-
+	
+	public static final String ACTION_RIGHT = "right";
+	public static final String ACTION_RIGHT_SHORTCUT = "r";
+	public static final String ACTION_LEFT = "left";
+	public static final String ACTION_LEFT_SHORTCUT = "l";
+	public static final String ACTION_UP = "up";
+	public static final String ACTION_UP_SHORTCUT = "u";
+	public static final String ACTION_DOWN = "down";
+	public static final String ACTION_DOWN_SHORTCUT = "d";
 
 //Symbols
 	public static final String EMPTY = "";

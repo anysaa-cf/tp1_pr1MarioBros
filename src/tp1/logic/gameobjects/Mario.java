@@ -52,6 +52,7 @@ public class Mario {
 	 */
 	public void update() {
 		
+		
 	}
 	
 	public void marioDies() {

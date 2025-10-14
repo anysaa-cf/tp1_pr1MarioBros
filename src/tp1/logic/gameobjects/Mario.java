@@ -1,5 +1,6 @@
 package tp1.logic.gameobjects;
 
+import tp1.logic.ActionList;
 import tp1.logic.Action;
 import tp1.logic.Game;
 import tp1.logic.Position;
@@ -8,7 +9,8 @@ import tp1.view.Messages;
 public class Mario {
 
 	private Position pos;
-	private Action action;
+	private Action lastAction;
+	private ActionList actionList;
 	private Game game;
 
 	private boolean big = true;		
@@ -20,14 +22,15 @@ public class Mario {
 	public Mario(Game game, Position pos) {
 		this.pos = pos;
 		this.game = game;
-		this.action = Action.RIGHT;
+		this.lastAction = Action.RIGHT;
+		this.actionList = new ActionList();
 		numLivesLeft = game.numLives();		// numLives = 3 at the beginning
 	}
 	
 	public String getIcon() {
 		String icon;
 		
-		switch(this.action) {
+		switch(lastAction) {
 		case UP: 
 			icon = Messages.MARIO_STOP;
 			break;
@@ -49,7 +52,11 @@ public class Mario {
 	/**
 	 *  Implements the automatic update	
 	 */
-	public void update(Action action) {
+	public void update() {
+		while(actionList.size() > 0) {
+			Action action = this.actionList.getAction();
+			if(actionList.size() == 0)
+				lastAction = action;
 			Position nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
 			boolean ground = game.getGameObjects().areGroundsInPosition(nextPos);
 			
@@ -75,6 +82,7 @@ public class Mario {
 				case Action.STOP:
 					break;
 				}
+		}
 	}
 	
 	public void marioDies() {
@@ -96,5 +104,8 @@ public class Mario {
 	public boolean onPosition(Position position) {
 		return (this.pos.equals(position) || 
 				(big && this.pos.equals(new Position(position.getRow() + 1, position.getCol()))));
+	}
+	public void addAction(Action action) {
+		this.actionList.addAction(action);
 	}
 }

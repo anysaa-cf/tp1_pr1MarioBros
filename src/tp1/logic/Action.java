@@ -1,8 +1,6 @@
 package tp1.logic;
 
-import tp1.view.ViewInterface;
 import tp1.view.Messages;
-import tp1.logic.gameobjects.Mario;
 
 /**
  * Represents the allowed actions in the game
@@ -36,38 +34,39 @@ public enum Action {
 		case Messages.ACTION_RIGHT:
 		case Messages.ACTION_RIGHT_SHORTCUT:
 			if(aux1++ < 5 && aux2 == 0) // no opposite actions can be executed in the same cycle
-				return RIGHT;
+				return Action.RIGHT;
 			break;
 			
 		case Messages.ACTION_LEFT:
 		case Messages.ACTION_LEFT_SHORTCUT:
 			if(aux2++ < 5 && aux1 == 0)
-				return LEFT;
+				return Action.LEFT;
 			break;
 		
 		case Messages.ACTION_UP:
 		case Messages.ACTION_UP_SHORTCUT:
 			if(aux3++ < 5 && aux4 == 0)
-				return UP;
+				return Action.UP;
 			break;
 			
 		case Messages.ACTION_DOWN:
 		case Messages.ACTION_DOWN_SHORTCUT:
 			if(aux4++ < 5 && aux3 == 0)
-				return DOWN;
+				return Action.DOWN;
 			break;
 		
 				
 		case Messages.ACTION_STOP:
 		case Messages.ACTION_STOP_SHORTCUT:
 			if(aux5++ < 5)
-				return STOP;
+				return Action.STOP;
 			break;
 				
 		default:
 		}
 		return null;
 	}
+	
 }
 	
 	

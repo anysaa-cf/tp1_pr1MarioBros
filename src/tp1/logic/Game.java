@@ -58,10 +58,10 @@ public class Game {
 	}
 
 	// creation of the update method
-	public void update(Action action) {
+	public void update() {
 //		remainingTime--;
 		remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
-		gameObjects.update(action);			
+		gameObjects.update();			
 	}
 
 
@@ -185,6 +185,8 @@ public class Game {
 	public GameObjectContainer getGameObjects() {
 		return gameObjects;
 	}
-
 	
+	public void addAction(Action action) {
+		gameObjects.addAction(action);
+	}
 }

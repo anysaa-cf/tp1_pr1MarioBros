@@ -4,6 +4,7 @@ import tp1.logic.Game;
 import tp1.view.GameView;
 import tp1.view.Messages;
 import tp1.logic.Action;
+import tp1.logic.ActionList;
 
 /**
  *  Accepts user input and coordinates the game execution logic
@@ -43,7 +44,7 @@ public class Controller {
 				case Messages.COMMAND_UPDATE_NAME:
 				case Messages.COMMAND_UPDATE_SHORTCUT:
 				case Messages.EMPTY:
-					game.update(Action.STOP);
+					game.update();
 					view.showGame();
 					break;
 						
@@ -98,8 +99,9 @@ public class Controller {
 					int i = 1;
 					while(i < inputs.length) {
 						action = Action.parseActions(inputs[i++]);
-						game.update(action);
+						game.addAction(action);
 					}
+					game.update();
 					view.showGame();
 					break;
 				

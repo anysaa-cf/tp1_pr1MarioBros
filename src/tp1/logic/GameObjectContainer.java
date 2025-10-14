@@ -102,6 +102,7 @@ public class GameObjectContainer {
 	}
 
 	public void update() {		// update method calls each update from the corresponding gameObject
+		while(!marioObject.actionListIsEmpty()) {
 		if(marioObject != null) {
 			marioObject.update();			
 		}
@@ -120,6 +121,7 @@ public class GameObjectContainer {
 		
 		if(exitDoor != null) {
 			exitDoor.update();			
+		}
 		}
 	}
 
@@ -143,4 +145,6 @@ public class GameObjectContainer {
 	public void addAction(Action action) {
 		marioObject.addAction(action);
 	}
+	
+	
 }

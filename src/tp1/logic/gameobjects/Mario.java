@@ -12,6 +12,8 @@ public class Mario {
 	private Action lastAction;
 	private ActionList actionList;
 	private Game game;
+	private int rightC, leftC, upC, downC;
+	
 
 	private boolean big = true;		
 	private boolean alive = true;
@@ -25,6 +27,7 @@ public class Mario {
 		this.lastAction = Action.RIGHT;
 		this.actionList = new ActionList();
 		numLivesLeft = game.numLives();		// numLives = 3 at the beginning
+		rightC = leftC = upC = downC = 0;
 	}
 	
 	public String getIcon() {
@@ -53,7 +56,7 @@ public class Mario {
 	 *  Implements the automatic update	
 	 */
 	public void update() {
-		while(actionList.size() > 0) {
+			restartC();
 			Action action = this.actionList.getAction();
 			if(actionList.size() == 0)
 				lastAction = action;
@@ -82,7 +85,6 @@ public class Mario {
 				case Action.STOP:
 					break;
 				}
-		}
 	}
 	
 	public void marioDies() {
@@ -106,6 +108,49 @@ public class Mario {
 				(big && this.pos.equals(new Position(position.getRow() + 1, position.getCol()))));
 	}
 	public void addAction(Action action) {
-		this.actionList.addAction(action);
+		if(updateC(action))
+			this.actionList.addAction(action);
 	}
+	
+	public boolean actionListIsEmpty() {
+		return actionList.isEmpty();
+	}
+	
+	 public boolean updateC(Action action) {
+		 boolean ok = false;
+		 switch(action) {
+		 
+		 	case RIGHT:
+		 		if(leftC == 0 && rightC < ActionList.maxActions)
+		 			ok = true;
+		 			rightC++;
+		 		break;
+		 	
+		 	case LEFT:
+		 		if(rightC == 0 && leftC < ActionList.maxActions)
+		 			ok = true;
+		 			leftC++;
+				 break;
+			
+		 	case UP:
+		 		if(downC == 0 && upC < ActionList.maxActions)
+		 			ok = true;
+		 			upC++;
+				 break;
+				 
+		 	case DOWN:
+		 		if(upC == 0 && downC < ActionList.maxActions)
+		 			ok = true;
+		 			downC++;
+				 break;
+				 
+		 	default:
+		 		break;
+		 }
+		 return ok;
+	 }
+	 
+	 public void restartC() {
+		 rightC = leftC = upC = downC = 0;
+	 }
 }

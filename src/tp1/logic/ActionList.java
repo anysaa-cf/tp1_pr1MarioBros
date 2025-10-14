@@ -6,6 +6,7 @@ public class ActionList {
 	private int first;
 	private int end;
 	private int size;
+	public static final int maxActions = 4;
 	
 	public ActionList() {
 		actionList = new Action[20];
@@ -28,7 +29,7 @@ public class ActionList {
 	            return;
 	        }
 	        
-	        end = (end + 1) % actionList.length;  
+	        end = (end + 1) % actionList.length;  //cycle path of indexes (from 0 to last index, and then, again 0)
 	        actionList[end] = action;
 	        size++;	
 	 }
@@ -39,7 +40,7 @@ public class ActionList {
 	        }
 
 	        Action action = actionList[first];
-	        first = (first + 1) % actionList.length;  
+	        first = (first + 1) % actionList.length;  //cycle path of indexes
 	        size--;
 	        return action;
 	    }

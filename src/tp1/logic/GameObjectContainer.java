@@ -12,11 +12,12 @@ public class GameObjectContainer {
 	private Goomba[] goombaObjects;
 	private ExitDoor exitDoor;		// there is just 1 exit door so no array needed
 	private Mario marioObject;		// there is just 1 mario so no array needed
+	private Game game;
 	
 	private int groundCounter;
 	private int goombaCounter;
 	
-	public GameObjectContainer(int groundCounter, int goombaCounter) {
+	public GameObjectContainer(int groundCounter, int goombaCounter, Game game) {
 		// arrays are created with each position in null by default
 		
 		this.groundCounter = groundCounter;
@@ -24,6 +25,8 @@ public class GameObjectContainer {
 
 		this.goombaCounter = goombaCounter;
 		goombaObjects = new Goomba[goombaCounter];	
+		
+		this.game = game;
 	}
 	
 	public void add(Ground ground) {		
@@ -107,6 +110,10 @@ public class GameObjectContainer {
 			if(marioObject != null) {
 				marioObject.update();			
 			}
+			
+			if(marioObject.interactWith(exitDoor)) {
+				game.marioExited();
+			}
 	
 			for(Goomba goomba : goombaObjects) {
 				if(goomba != null) {
@@ -125,9 +132,13 @@ public class GameObjectContainer {
 			}
 		}
 		else { // there is action
-			while(!marioObject.actionListIsEmpty()) {
+			while(!game.playerWins() && !game.playerLoses() && !marioObject.actionListIsEmpty()) {
 				if(marioObject != null) {
 					marioObject.update();			
+				}
+				
+				if(marioObject.interactWith(exitDoor)) {
+					game.marioExited();
 				}
 		
 				for(Goomba goomba : goombaObjects) {

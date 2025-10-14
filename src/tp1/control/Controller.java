@@ -32,10 +32,12 @@ public class Controller {
 		view.showWelcome();
 		view.showGame();
 		
-		String[] inputs = view.getPrompt();	
-		inputs[0] = inputs[0].toLowerCase();
+		
 		
 		while(!game.playerLoses() && !game.playerWins() && !exit) {
+			
+			String[] inputs = view.getPrompt();	
+			inputs[0] = inputs[0].toLowerCase();
 			
 			// input length == 0 if enter is pressed or 1 if the command name/shortcut is written
 			if(inputs.length <= 1) {
@@ -109,10 +111,6 @@ public class Controller {
 					view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", inputs)));	// shows the commands entered by the player
 						break;
 				}
-			}
-			if(!exit) {
-				inputs = view.getPrompt();	
-				inputs[0] = inputs[0].toLowerCase();
 			}
 		}
 		view.showEndMessage();

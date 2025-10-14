@@ -12,16 +12,24 @@ public class Game {
 	public static final int DIM_X = 30;
 	public static final int DIM_Y = 15;
 
-	private int remainingTime = 100;
-	private int points = 0;
-	private int nLevel = 0;
+	private int remainingTime;
+	private int points;
+	private int nLevel;
+	private int lifes;
 	private GameObjectContainer gameObjects;
+	private boolean win;
+	private boolean lose;
 	
 	public Game(int nLevel) {
 		if(nLevel == 0 || nLevel == 1) {
 			this.nLevel = nLevel;
 			initGame(nLevel);			
 		}
+		this.remainingTime = 100;
+		this.points = 0;
+		this.nLevel = 0;
+		this.lifes = 3;
+		this.win = this.lose = false;
 	}
 	
 	public void initGame(int nLevel) {		// selection of the level
@@ -41,8 +49,14 @@ public class Game {
 	}
 
 	public boolean playerWins() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return this.win;
+	}
+	
+
+	public boolean playerLoses() {
+	
+		return this.lose;
 	}
 
 	public int remainingTime() {
@@ -54,7 +68,7 @@ public class Game {
 	}
 
 	public int numLives() {
-		return 3;
+		return lifes;
 	}
 
 	// creation of the update method
@@ -70,11 +84,6 @@ public class Game {
 		// TODO returns a textual representation of the object
 		return "TODO: Hola soy el game";
 	}
-
-	public boolean playerLoses() {
-		// TODO Auto-generated method stub
-		return false;
-	} 
 	
 	private void resetGame(int level) {
 		this.remainingTime = 100;
@@ -92,7 +101,7 @@ public class Game {
 	private void initLevel0() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-		gameObjects = new GameObjectContainer(200, 1);
+		gameObjects = new GameObjectContainer(200, 1, this);
 	
 		for(int col = 0; col < 15; col++) {
 			gameObjects.add(new Ground(new Position(13,col)));
@@ -135,7 +144,7 @@ public class Game {
 	private void initLevel1() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-		gameObjects = new GameObjectContainer(200, 7);
+		gameObjects = new GameObjectContainer(200, 7, this);
 	
 		for(int col = 0; col < 15; col++) {
 			gameObjects.add(new Ground(new Position(13,col)));
@@ -188,5 +197,11 @@ public class Game {
 	
 	public void addAction(Action action) {
 		gameObjects.addAction(action);
+	}
+	
+	public void marioExited() {
+		this.points = remainingTime * 10;
+		this.win = true;
+		
 	}
 }

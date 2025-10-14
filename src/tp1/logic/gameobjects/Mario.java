@@ -165,4 +165,8 @@ public class Mario {
 	 public void restartC() {
 		 rightC = leftC = upC = downC = 0;
 	 }
+	 
+	 public boolean interactWith(ExitDoor other) {
+		 return other.onPosition(this.pos);
+	 }
 }

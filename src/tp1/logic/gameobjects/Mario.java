@@ -182,7 +182,7 @@ public class Mario {
 				 if(big) {
 					 big = false;
 				 } else {
-					 marioDies();
+					 numLivesLeft--;
 				 }
 			 }
 			 

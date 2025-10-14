@@ -102,6 +102,7 @@ public class GameObjectContainer {
 	}
 
 	public void update() {		// update method calls each update from the corresponding gameObject
+		marioObject.restartC(); // re start counters of actions for next update
 		while(!marioObject.actionListIsEmpty()) {
 		if(marioObject != null) {
 			marioObject.update();			

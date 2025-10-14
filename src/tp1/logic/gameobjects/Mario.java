@@ -56,10 +56,7 @@ public class Mario {
 	 *  Implements the automatic update	
 	 */
 	public void update() {
-			restartC();
 			Action action = this.actionList.getAction();
-			if(actionList.size() == 0)
-				lastAction = action;
 			Position nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
 			boolean ground = game.getGameObjects().areGroundsInPosition(nextPos);
 			
@@ -82,9 +79,10 @@ public class Mario {
 					pos = nextPos;	
 					break;
 					
-				case Action.STOP:
+				default:
 					break;
 				}
+			lastAction = action;
 	}
 	
 	public void marioDies() {

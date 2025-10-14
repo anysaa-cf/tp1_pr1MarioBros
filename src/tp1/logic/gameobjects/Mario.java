@@ -15,7 +15,7 @@ public class Mario {
 	private int rightC, leftC, upC, downC;
 	
 
-	private boolean big = true;		
+	private boolean big = false;		
 	private boolean alive = true;
 //	private boolean isMobile = true;
 	
@@ -61,7 +61,8 @@ public class Mario {
 			if(actionList.isEmpty()) {
 				nextPos = new Position(pos.getRow() + lastAction.getX(), pos.getCol() + lastAction.getY());
 				ground = game.getGameObjects().areGroundsInPosition(nextPos);
-				if(!ground && isInsideBounds(nextPos))
+				
+				if(!ground && isInsideBounds(nextPos) && game.getGameObjects().areGoombasInPosition(nextPos))
 					pos = nextPos; // automatic movement if there is no ground taken the last Action movement
 			}
 			else {
@@ -167,6 +168,10 @@ public class Mario {
 	 }
 	 
 	 public boolean interactWith(ExitDoor other) {
-		 return other.onPosition(this.pos);
+		 return other.onPosition(this.pos);			// check if exitDoor and mario are on the same position
+	 }
+	 
+	 public boolean interactWith(Goomba other) {
+		 return other.onPosition(this.pos);			// check if goomba and mario are on the same position
 	 }
 }

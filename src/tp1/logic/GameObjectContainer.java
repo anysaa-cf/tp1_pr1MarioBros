@@ -168,6 +168,15 @@ public class GameObjectContainer {
 		}
 		return false;	
 	}
+
+	public boolean areGoombasInPosition(Position position) {
+		for(Goomba goomba: goombaObjects) {
+			if(goomba != null && goomba.onPosition(position)) {
+				return true;
+			}
+		}
+		return false;	
+	}
 	
 	public void removeGoomba(Goomba goombaDead) {
 		for(int i = 0; i < goombaCounter; i++) {

@@ -15,7 +15,7 @@ public class Game {
 	private int remainingTime;
 	private int points;
 	private int nLevel;
-	private int lifes;
+	private int lives;
 	private GameObjectContainer gameObjects;
 	private boolean win;
 	private boolean lose;
@@ -28,7 +28,7 @@ public class Game {
 		this.remainingTime = 100;
 		this.points = 0;
 		this.nLevel = 0;
-		this.lifes = 3;
+		this.lives = 3;
 		this.win = this.lose = false;
 	}
 	
@@ -49,13 +49,11 @@ public class Game {
 	}
 
 	public boolean playerWins() {
-		
 		return this.win;
 	}
 	
 
 	public boolean playerLoses() {
-	
 		return this.lose;
 	}
 
@@ -68,12 +66,11 @@ public class Game {
 	}
 
 	public int numLives() {
-		return lifes;
+		return lives;
 	}
 
 	// creation of the update method
 	public void update() {
-//		remainingTime--;
 		remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
 		gameObjects.update();			
 	}
@@ -202,6 +199,5 @@ public class Game {
 	public void marioExited() {
 		this.points = remainingTime * 10;
 		this.win = true;
-		
 	}
 }

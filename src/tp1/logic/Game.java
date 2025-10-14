@@ -201,8 +201,16 @@ public class Game {
 		this.win = true;
 	}
 
-	public void doInteractionsFrom(Mario mario) {
+	public void doInteractionsFrom(Mario mario) {		// delegates the doInteractionsFrom() to the container
 		gameObjects.doInteractionsFrom(mario);
 		
+	}
+
+	public void marioDies() {
+		this.win = false;
+	}
+
+	public void addPoints(int newPoints) {
+		this.points += newPoints;
 	}
 }

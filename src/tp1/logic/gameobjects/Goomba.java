@@ -11,7 +11,6 @@ public class Goomba {
 	private Game game;		// needs to interact with the general state of the game or with other objects
 	private Action action;
 	
-	private int points = 0;
 	private boolean alive = true;
 	
 	public Goomba(Game game, Position pos) {
@@ -74,7 +73,6 @@ public class Goomba {
 	}
 
 	public void goombaDies() {
-		points += game.points() + 100;		// when it dies 100 points are added to the player's score?¿
 		game.getGameObjects().removeGoomba(this);
 	}
 

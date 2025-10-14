@@ -15,7 +15,7 @@ public class Mario {
 	private int rightC, leftC, upC, downC;
 	
 
-	private boolean big = false;		
+	private boolean big = true;		
 	private boolean alive = true;
 //	private boolean isMobile = true;
 	
@@ -104,6 +104,7 @@ public class Mario {
 			numLivesLeft--;
 			if(numLivesLeft <= 0) {
 				alive = false;
+				game.marioDies();
 			}
 		}
 	}
@@ -182,7 +183,7 @@ public class Mario {
 				 if(big) {
 					 big = false;
 				 } else {
-					 numLivesLeft--;
+					 marioDies();
 				 }
 			 }
 			 
@@ -203,9 +204,7 @@ public class Mario {
 		}
 	}
 	
-	public int addPoints(int points) {
-		points += game.points();
-		
-		return points;
+	public void addPoints(int newPoints) {
+		game.addPoints(newPoints);
 	}
 }

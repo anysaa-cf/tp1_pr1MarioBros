@@ -53,7 +53,7 @@ public class Mario {
 			Position nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
 			boolean ground = game.getGameObjects().areGroundsInPosition(nextPos);
 			
-			if(!ground)
+			if(!ground && isInsideBounds(nextPos))
 				switch(action) {
 				
 				case Action.RIGHT:
@@ -84,6 +84,13 @@ public class Mario {
 				alive = false;
 			}
 		}
+	}
+	
+	private boolean isInsideBounds(Position position) {
+		int row = position.getRow();
+		int col = position.getCol();
+		
+		return row >= 0 && row < Game.DIM_Y && col >= 0 && col < Game.DIM_X;
 	}
 	
 	public boolean onPosition(Position position) {

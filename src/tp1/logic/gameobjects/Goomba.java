@@ -33,10 +33,8 @@ public class Goomba {
 		if(!groundBelow) {	
 			if(!isInsideBounds(posBelow)) {			// goomba dies (for now) if it falls out of the map
 				goombaDies();
-				return; //==> no needed
 			} else {
 				pos = posBelow;			// if there is no ground below, it falls 1 cell		
-				return; //==> no needed
 			}
 			
 		} 

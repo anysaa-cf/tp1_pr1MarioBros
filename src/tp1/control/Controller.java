@@ -31,7 +31,8 @@ public class Controller {
 		view.showWelcome();
 		view.showGame();
 		
-		String[] inputs = view.getPrompt();	 
+		String[] inputs = view.getPrompt();	
+		inputs[0] = inputs[0].toLowerCase();
 		
 		while(!game.playerLoses() && !game.playerWins() && !exit) {
 			
@@ -109,6 +110,7 @@ public class Controller {
 			}
 			if(!exit) {
 				inputs = view.getPrompt();	
+				inputs[0] = inputs[0].toLowerCase();
 			}
 		}
 		view.showEndMessage();

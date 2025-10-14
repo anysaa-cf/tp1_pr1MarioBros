@@ -168,15 +168,6 @@ public class GameObjectContainer {
 		}
 		return false;	
 	}
-
-	public boolean areGoombasInPosition(Position position) {
-		for(Goomba goomba: goombaObjects) {
-			if(goomba != null && goomba.onPosition(position)) {
-				return true;
-			}
-		}
-		return false;	
-	}
 	
 	public void removeGoomba(Goomba goombaDead) {
 		for(int i = 0; i < goombaCounter; i++) {
@@ -188,6 +179,14 @@ public class GameObjectContainer {
 	}
 	public void addAction(Action action) {
 		marioObject.addAction(action);
+	}
+
+	public void doInteractionsFrom(Mario mario) {
+		for(Goomba goomba : goombaObjects) {
+			if(goomba != null) {
+				mario.interactWith(goomba);
+			}
+		}
 	}
 	
 	

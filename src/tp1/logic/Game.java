@@ -200,4 +200,9 @@ public class Game {
 		this.points = remainingTime * 10;
 		this.win = true;
 	}
+
+	public void doInteractionsFrom(Mario mario) {
+		gameObjects.doInteractionsFrom(mario);
+		
+	}
 }

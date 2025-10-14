@@ -58,17 +58,18 @@ public class Mario {
 	public void update() {
 		Position nextPos;
 		boolean ground;
-			if(actionList.isEmpty()) {
+		
+			if(actionList.isEmpty()) {		// no more actions -> automatic movement
 				nextPos = new Position(pos.getRow() + lastAction.getX(), pos.getCol() + lastAction.getY());
-				ground = game.getGameObjects().areGroundsInPosition(nextPos);
+				 ground = game.getGameObjects().areGroundsInPosition(nextPos);
 				
-				if(!ground && isInsideBounds(nextPos) && game.getGameObjects().areGoombasInPosition(nextPos))
+				if(!ground && isInsideBounds(nextPos))
 					pos = nextPos; // automatic movement if there is no ground taken the last Action movement
 			}
-			else {
+			else {		// actions -> movement declared by the player
 				Action action = this.actionList.getAction();
 				nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
-				ground = game.getGameObjects().areGroundsInPosition(nextPos);
+				 ground = game.getGameObjects().areGroundsInPosition(nextPos);
 			
 				if(!ground && isInsideBounds(nextPos))
 					switch(action) {
@@ -94,6 +95,8 @@ public class Mario {
 					}
 				lastAction = action;
 			}
+			
+			game.doInteractionsFrom(this);
 	}
 	
 	public void marioDies() {
@@ -172,6 +175,31 @@ public class Mario {
 	 }
 	 
 	 public boolean interactWith(Goomba other) {
-		 return other.onPosition(this.pos);			// check if goomba and mario are on the same position
+		 if (other.onPosition(this.pos))	{		// check if goomba and mario are on the same position
+			 boolean falling = isFalling();
+			 
+			 if(!falling) {
+				 if(big) {
+					 big = false;
+				 } else {
+					 marioDies();
+				 }
+			 }
+			 
+			 other.receiveInteraction(this);
+			 return true;
+		 }
+		 return false;
 	 }
+
+	private boolean isFalling() {
+		Position posBelow = new Position(pos.getRow() + 1, pos.getCol());
+		return !game.getGameObjects().areGroundsInPosition(posBelow);
+	}
+	
+	public int addPoints(int points) {
+		points += game.points();
+		
+		return points;
+	}
 }

@@ -194,7 +194,13 @@ public class Mario {
 
 	private boolean isFalling() {
 		Position posBelow = new Position(pos.getRow() + 1, pos.getCol());
-		return !game.getGameObjects().areGroundsInPosition(posBelow);
+		boolean ground = game.getGameObjects().areGroundsInPosition(posBelow);
+		
+		if(ground) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public int addPoints(int points) {

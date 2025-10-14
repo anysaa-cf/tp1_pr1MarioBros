@@ -97,7 +97,7 @@ public class Controller {
 					int i = 1;
 					while(i < inputs.length) {
 						action = Action.parseActions(inputs[i++]);
-						game.update();
+						game.update(action);
 					}
 					view.showGame();
 					break;

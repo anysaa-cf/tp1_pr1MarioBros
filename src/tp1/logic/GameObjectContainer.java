@@ -34,8 +34,6 @@ public class GameObjectContainer {
 				return;
 			}
 		}
-		
-		// would it be okay to implement it using a for each to avoid using the counter?¿
 	}
 	
 	public void add(Goomba goomba) {
@@ -142,10 +140,7 @@ public class GameObjectContainer {
 			}
 		}
 	}
-	
-	/*public Mario getMario(Mario marioObject) {
-		return marioObject; //just in case
-	}*/
+
 	
 
 }

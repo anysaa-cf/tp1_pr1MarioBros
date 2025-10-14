@@ -99,14 +99,23 @@ public class Messages {
 	public static final String COMMAND_ACTION_DETAILS = "[a]ction [[R]IGHT | [L]EFT | [U]P | [D]OWN | [S]TOP]+";
 	public static final String COMMAND_ACTION_HELP = "user performs actions";		
 	
+	// action right
 	public static final String ACTION_RIGHT = "right";
 	public static final String ACTION_RIGHT_SHORTCUT = "r";
+	
+	// action left
 	public static final String ACTION_LEFT = "left";
 	public static final String ACTION_LEFT_SHORTCUT = "l";
+	
+	// action up
 	public static final String ACTION_UP = "up";
 	public static final String ACTION_UP_SHORTCUT = "u";
+	
+	// action down
 	public static final String ACTION_DOWN = "down";
 	public static final String ACTION_DOWN_SHORTCUT = "d";
+	
+	// action stop
 	public static final String ACTION_STOP = "stop";
 	public static final String ACTION_STOP_SHORTCUT = "s";
 

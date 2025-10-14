@@ -66,7 +66,7 @@ public class Game {
 
 
 	@Override
-	public String toString() {			// this is what the positionToString() does?¿
+	public String toString() {		
 		// TODO returns a textual representation of the object
 		return "TODO: Hola soy el game";
 	}
@@ -76,18 +76,17 @@ public class Game {
 		return false;
 	} 
 	
+	private void resetGame(int level) {
+		this.remainingTime = 100;
+		initGame(level);
+	}
+	
 	public void resetGame() {
-		int resetTime = 100;
-		remainingTime = resetTime;
-		
-		initGame(nLevel);
+		resetGame(nLevel);		// resets to actual level
 	}
 	
 	public void resetGameWithLevel(int level) {
-		int resetTime = 100;
-		remainingTime = resetTime;
-		
-		initGame(level);
+		resetGame(level);		// resets to the provided level
 	}
 
 	private void initLevel0() {

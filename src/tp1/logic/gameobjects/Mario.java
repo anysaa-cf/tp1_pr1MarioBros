@@ -56,33 +56,43 @@ public class Mario {
 	 *  Implements the automatic update	
 	 */
 	public void update() {
-			Action action = this.actionList.getAction();
-			Position nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
-			boolean ground = game.getGameObjects().areGroundsInPosition(nextPos);
+		Position nextPos;
+		boolean ground;
+			if(actionList.isEmpty()) {
+				nextPos = new Position(pos.getRow() + lastAction.getX(), pos.getCol() + lastAction.getY());
+				ground = game.getGameObjects().areGroundsInPosition(nextPos);
+				if(!ground && isInsideBounds(nextPos))
+					pos = nextPos; // automatic movement if there is no ground taken the last Action movement
+			}
+			else {
+				Action action = this.actionList.getAction();
+				nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
+				ground = game.getGameObjects().areGroundsInPosition(nextPos);
 			
-			if(!ground && isInsideBounds(nextPos))
-				switch(action) {
+				if(!ground && isInsideBounds(nextPos))
+					switch(action) {
 				
-				case Action.RIGHT:
-					pos = nextPos;
-					break;
+					case Action.RIGHT:
+						pos = nextPos;
+						break;
 					
-				case Action.LEFT:
-					pos = nextPos;
-					break;
+					case Action.LEFT:
+						pos = nextPos;
+						break;
 				
-				case Action.UP:
-					pos = nextPos;
-					break;
+					case Action.UP:
+						pos = nextPos;
+						break;
 				
-				case Action.DOWN:
-					pos = nextPos;	
-					break;
+					case Action.DOWN:
+						pos = nextPos;	
+						break;
 					
-				default:
-					break;
-				}
-			lastAction = action;
+					default:
+						break;
+					}
+				lastAction = action;
+			}
 	}
 	
 	public void marioDies() {
@@ -141,6 +151,10 @@ public class Mario {
 		 			ok = true;
 		 			downC++;
 				 break;
+			
+		 	case STOP:
+		 		ok = true; // infinite stops
+		 		break;
 				 
 		 	default:
 		 		break;

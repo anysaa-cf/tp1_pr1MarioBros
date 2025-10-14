@@ -103,26 +103,49 @@ public class GameObjectContainer {
 
 	public void update() {		// update method calls each update from the corresponding gameObject
 		marioObject.restartC(); // re start counters of actions for next update
-		while(!marioObject.actionListIsEmpty()) {
-		if(marioObject != null) {
-			marioObject.update();			
-		}
-		
-		for(Goomba goomba : goombaObjects) {
-			if(goomba != null) {
-				goomba.update();
+		if(marioObject.actionListIsEmpty()) { // if there is no action
+			if(marioObject != null) {
+				marioObject.update();			
 			}
-		}
+	
+			for(Goomba goomba : goombaObjects) {
+				if(goomba != null) {
+					goomba.update();
+				}
+			}
 
-		for(Ground ground : groundObjects) {
-			if(ground != null) {
-				ground.update();
+			for(Ground ground : groundObjects) {
+				if(ground != null) {
+					ground.update();
+				}
+			}
+	
+			if(exitDoor != null) {
+				exitDoor.update();			
 			}
 		}
+		else { // there is action
+			while(!marioObject.actionListIsEmpty()) {
+				if(marioObject != null) {
+					marioObject.update();			
+				}
 		
-		if(exitDoor != null) {
-			exitDoor.update();			
-		}
+				for(Goomba goomba : goombaObjects) {
+					if(goomba != null) {
+						goomba.update();
+					}
+				}
+
+				for(Ground ground : groundObjects) {
+					if(ground != null) {
+						ground.update();
+					}
+				}
+		
+				if(exitDoor != null) {
+					exitDoor.update();			
+				}
+			}
 		}
 	}
 

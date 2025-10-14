@@ -59,7 +59,7 @@ public class Controller {
 					exit = true;
 					break;
 					
-				// reset command: when no numLevel is specified
+				// reset command: when no numLevel is specified 
 				case Messages.COMMAND_RESET_NAME:
 				case Messages.COMMAND_RESET_SHORTCUT:
 					game.resetGame();

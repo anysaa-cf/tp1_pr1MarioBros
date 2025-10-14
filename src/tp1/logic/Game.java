@@ -30,7 +30,7 @@ public class Game {
 			initLevel0();
 			break;
 		case 1:
-			// initLevel1();
+			initLevel1();
 			break;
 		}
 	}
@@ -92,7 +92,7 @@ public class Game {
 	private void initLevel0() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-		gameObjects = new GameObjectContainer(200, 10);
+		gameObjects = new GameObjectContainer(200, 1);
 	
 		for(int col = 0; col < 15; col++) {
 			gameObjects.add(new Ground(new Position(13,col)));
@@ -130,6 +130,56 @@ public class Game {
 		gameObjects.add(mario);
 
 		gameObjects.add(new Goomba(this, new Position(0, 19)));
+	}
+	
+	private void initLevel1() {
+		this.nLevel = 0;
+		this.remainingTime = 100;
+		gameObjects = new GameObjectContainer(200, 7);
+	
+		for(int col = 0; col < 15; col++) {
+			gameObjects.add(new Ground(new Position(13,col)));
+			gameObjects.add(new Ground(new Position(14,col)));		
+		}
+
+		gameObjects.add(new Ground(new Position(Game.DIM_Y-3,9)));
+		gameObjects.add(new Ground(new Position(Game.DIM_Y-3,12)));
+		for(int col = 17; col < Game.DIM_X; col++) {
+			gameObjects.add(new Ground(new Position(Game.DIM_Y-2, col)));
+			gameObjects.add(new Ground(new Position(Game.DIM_Y-1, col)));		
+		}
+
+		gameObjects.add(new Ground(new Position(9,2)));
+		gameObjects.add(new Ground(new Position(9,5)));
+		gameObjects.add(new Ground(new Position(9,6)));
+		gameObjects.add(new Ground(new Position(9,7)));
+		gameObjects.add(new Ground(new Position(5,6)));
+		
+		// Final jump
+		int tamX = 8, tamY= 8;
+		int posIniX = Game.DIM_X-3-tamX, posIniY = Game.DIM_Y-3;
+		
+		for(int col = 0; col < tamX; col++) {
+			for (int fila = 0; fila < col+1; fila++) {
+				gameObjects.add(new Ground(new Position(posIniY- fila, posIniX+ col)));
+			}
+		}
+
+		gameObjects.add(new ExitDoor(new Position(Game.DIM_Y-3, Game.DIM_X-1)));
+
+		// 3. GameObjects
+//		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
+		Mario mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
+		gameObjects.add(mario);
+
+		gameObjects.add(new Goomba(this, new Position(0, 19)));
+		gameObjects.add(new Goomba(this, new Position(4, 6)));
+		gameObjects.add(new Goomba(this, new Position(12, 6)));
+		gameObjects.add(new Goomba(this, new Position(12, 8)));
+		gameObjects.add(new Goomba(this, new Position(10, 10)));
+		gameObjects.add(new Goomba(this, new Position(12, 11)));
+		gameObjects.add(new Goomba(this, new Position(12, 14)));
+		
 	}
 
 	public GameObjectContainer getGameObjects() {

@@ -41,8 +41,8 @@ public class Goomba {
 			
 		} 
 		else {			// if there is ground it moves horizontally
-			int nextCol = pos.getCol() + action.getX();
-			int nextRow = pos.getRow();
+			int nextCol = pos.getCol() + action.getY();
+			int nextRow = pos.getRow() + action.getX();
 			Position nextPos = new Position(nextRow, nextCol);		// get the next position given the action
 			
 			boolean insideBounds = isInsideBounds(nextPos);

@@ -179,15 +179,16 @@ public class Mario {
 		 if (other.onPosition(this.pos))	{		// check if goomba and mario are on the same position
 			 boolean falling = isFalling();
 			 
-			 if(!falling) {
+			 if(falling) {		// if mario is falling and a goomba is below him, the goomba dies
+				 other.receiveInteraction(this);				 
+			 } else {
+				 // mario collides laterally with a goomba
 				 if(big) {
 					 big = false;
 				 } else {
 					 marioDies();
 				 }
 			 }
-			 
-			 other.receiveInteraction(this);
 			 return true;
 		 }
 		 return false;

@@ -79,6 +79,8 @@ public class Goomba {
 	public boolean receiveInteraction(Mario other) {
 		this.alive = false;
 		other.addPoints(100);
+		this.goombaDies();
+		
 		return true;
 	}
 }

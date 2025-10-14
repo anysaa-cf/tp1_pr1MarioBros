@@ -17,7 +17,7 @@ public class Goomba {
 		this.isMobile = true;
 		this.game = game;
 		this.pos = pos;
-		this.action = Action.RIGHT;			// initial movement from right to left
+		this.action = Action.LEFT;			// initial movement from right to left
 	}
 	
 	public String getIcon() {
@@ -29,6 +29,7 @@ public class Goomba {
 	}
 	
 	public void update() {
+		if(this.alive) {
 		Position posBelow = new Position(pos.getRow() + 1, pos.getCol());
 		boolean groundBelow = game.getGameObjects().areGroundsInPosition(posBelow);
 		
@@ -53,6 +54,7 @@ public class Goomba {
 			} else {
 				changeAction();		// turns around
 			}
+		}
 		}
 		
 	}

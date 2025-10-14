@@ -21,15 +21,15 @@ public class Game {
 	private boolean lose;
 	
 	public Game(int nLevel) {
-		if(nLevel == 0 || nLevel == 1) {
-			this.nLevel = nLevel;
-			initGame(nLevel);			
-		}
 		this.remainingTime = 100;
 		this.points = 0;
 		this.nLevel = 0;
 		this.lives = 3;
 		this.win = this.lose = false;
+		if(nLevel == 0 || nLevel == 1) {
+			this.nLevel = nLevel;
+			initGame(nLevel);			
+		}
 	}
 	
 	public void initGame(int nLevel) {		// selection of the level
@@ -43,6 +43,10 @@ public class Game {
 		}
 	}
 	
+	public void hit() {
+		lives--;
+	}
+	
 	public String positionToString(int col, int row) {		
 		Position pos = new Position(row, col);
 		return gameObjects.positionToStr(pos);
@@ -51,7 +55,6 @@ public class Game {
 	public boolean playerWins() {
 		return this.win;
 	}
-	
 
 	public boolean playerLoses() {
 		return this.lose;
@@ -135,7 +138,7 @@ public class Game {
 		Mario mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		gameObjects.add(mario);
 
-		gameObjects.add(new Goomba(this, new Position(0, 19)));
+		gameObjects.add(new Goomba(this, new Position(12, 2)));
 	}
 	
 	private void initLevel1() {
@@ -207,7 +210,7 @@ public class Game {
 	}
 
 	public void marioDies() {
-		this.win = false;
+		this.lose = true;
 	}
 
 	public void addPoints(int newPoints) {

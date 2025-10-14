@@ -19,14 +19,11 @@ public class Mario {
 	private boolean alive = true;
 //	private boolean isMobile = true;
 	
-	private int numLivesLeft;
-	
 	public Mario(Game game, Position pos) {
 		this.pos = pos;
 		this.game = game;
 		this.lastAction = Action.RIGHT;
 		this.actionList = new ActionList();
-		numLivesLeft = game.numLives();		// numLives = 3 at the beginning
 		rightC = leftC = upC = downC = 0;
 	}
 	
@@ -94,15 +91,14 @@ public class Mario {
 						break;
 					}
 				lastAction = action;
-			}
-			
+			}	
 			game.doInteractionsFrom(this);
 	}
 	
 	public void marioDies() {
 		if(alive) {
-			numLivesLeft--;
-			if(numLivesLeft <= 0) {
+			game.hit();
+			if(game.numLives() <= 0) {
 				alive = false;
 				game.marioDies();
 			}
@@ -175,34 +171,29 @@ public class Mario {
 		 return other.onPosition(this.pos);			// check if exitDoor and mario are on the same position
 	 }
 	 
-	 public boolean interactWith(Goomba other) {
+	 public void interactWith(Goomba other) {
 		 if (other.onPosition(this.pos))	{		// check if goomba and mario are on the same position
 			 boolean falling = isFalling();
 			 
-			 if(falling) {		// if mario is falling and a goomba is below him, the goomba dies
+			 if(falling)		// if mario is falling and a goomba is below him, the goomba dies
 				 other.receiveInteraction(this);				 
-			 } else {
-				 // mario collides laterally with a goomba
-				 if(big) {
+			 else {				 	// mario collides laterally with a goomba
+				 if(big)
 					 big = false;
-				 } else {
+				 else 
 					 marioDies();
-				 }
 			 }
-			 return true;
 		 }
-		 return false;
 	 }
 
 	private boolean isFalling() {
-		Position posBelow = new Position(pos.getRow() + 1, pos.getCol());
-		boolean ground = game.getGameObjects().areGroundsInPosition(posBelow);
+		Position nextPos = new Position(pos.getRow() + 1, pos.getCol());
+		boolean ground = game.getGameObjects().areGroundsInPosition(nextPos);
 		
-		if(ground) {
+		if(ground && lastAction != Action.DOWN)
 			return false;
-		} else {
+		else
 			return true;
-		}
 	}
 	
 	public void addPoints(int newPoints) {

@@ -121,15 +121,7 @@ public class GameObjectContainer {
 				}
 			}
 
-			for(Ground ground : groundObjects) {
-				if(ground != null) {
-					ground.update();
-				}
-			}
-	
-			if(exitDoor != null) {
-				exitDoor.update();			
-			}
+			doInteractionsFrom(marioObject);
 		}
 		else { // there is action
 			while(!game.playerWins() && !game.playerLoses() && !marioObject.actionListIsEmpty()) {
@@ -146,16 +138,8 @@ public class GameObjectContainer {
 						goomba.update();
 					}
 				}
-
-				for(Ground ground : groundObjects) {
-					if(ground != null) {
-						ground.update();
-					}
-				}
-		
-				if(exitDoor != null) {
-					exitDoor.update();			
-				}
+				
+				doInteractionsFrom(marioObject);
 			}
 		}
 	}
@@ -177,6 +161,12 @@ public class GameObjectContainer {
 			}
 		}
 	}
+	
+	public void removeMario() {
+		marioObject = null;
+
+	}
+	
 	public void addAction(Action action) {
 		marioObject.addAction(action);
 	}
@@ -188,6 +178,4 @@ public class GameObjectContainer {
 			}
 		}
 	}
-	
-	
 }

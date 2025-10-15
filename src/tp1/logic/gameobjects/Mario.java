@@ -31,8 +31,6 @@ public class Mario {
 		
 		switch(lastAction) {
 		case UP: 
-			icon = Messages.MARIO_STOP;
-			break;
 		case DOWN: 
 			icon = Messages.MARIO_STOP;
 			break;

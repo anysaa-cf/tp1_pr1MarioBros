@@ -33,32 +33,32 @@ public enum Action {
 		
 		case Messages.ACTION_RIGHT:
 		case Messages.ACTION_RIGHT_SHORTCUT:
-			if(aux1++ < 5 && aux2 == 0) // no opposite actions can be executed in the same cycle
+			if(aux1++ <= ActionList.maxActions && aux2 == 0) // no opposite actions can be executed in the same cycle
 				return Action.RIGHT;
 			break;
 			
 		case Messages.ACTION_LEFT:
 		case Messages.ACTION_LEFT_SHORTCUT:
-			if(aux2++ < 5 && aux1 == 0)
+			if(aux2++ <= ActionList.maxActions && aux1 == 0)
 				return Action.LEFT;
 			break;
 		
 		case Messages.ACTION_UP:
 		case Messages.ACTION_UP_SHORTCUT:
-			if(aux3++ < 5 && aux4 == 0)
+			if(aux3++ <= ActionList.maxActions && aux4 == 0)
 				return Action.UP;
 			break;
 			
 		case Messages.ACTION_DOWN:
 		case Messages.ACTION_DOWN_SHORTCUT:
-			if(aux4++ < 5 && aux3 == 0)
+			if(aux4++ <= ActionList.maxActions && aux3 == 0)
 				return Action.DOWN;
 			break;
 		
 				
 		case Messages.ACTION_STOP:
 		case Messages.ACTION_STOP_SHORTCUT:
-			if(aux5++ < 5)
+			if(aux5++ <= ActionList.maxActions)
 				return Action.STOP;
 			break;
 				

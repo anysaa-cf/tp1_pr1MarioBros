@@ -17,7 +17,7 @@ public class Goomba {
 		this.isMobile = true;
 		this.game = game;
 		this.pos = pos;
-		this.action = Action.LEFT;			// initial movement from right to left
+		this.action = Action.RIGHT;			// initial movement from right to left
 	}
 	
 	public String getIcon() {

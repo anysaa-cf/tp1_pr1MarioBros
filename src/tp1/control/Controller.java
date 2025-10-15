@@ -101,8 +101,12 @@ public class Controller {
 				case Messages.COMMAND_ACTION_SHORTCUT:
 					int i = 1;
 					while(i < inputs.length) {
-						action = Action.parseActions(inputs[i++]);
-						game.addAction(action);
+						action = Action.parseActions(inputs[i]);
+						if(action != null)
+							game.addAction(action);
+						else
+							view.showError(Messages.UNKNOWN_ACTION.formatted(String.join(" ", inputs[i])));
+						i++;
 					}
 					game.update();
 					view.showGame();

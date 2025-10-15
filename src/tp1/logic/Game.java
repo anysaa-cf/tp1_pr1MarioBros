@@ -138,7 +138,7 @@ public class Game {
 		Mario mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		gameObjects.add(mario);
 
-		gameObjects.add(new Goomba(this, new Position(12, 2)));
+		gameObjects.add(new Goomba(this, new Position(0, 19)));
 	}
 	
 	private void initLevel1() {

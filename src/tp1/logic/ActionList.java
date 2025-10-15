@@ -6,7 +6,7 @@ public class ActionList {
 	private int first;
 	private int end;
 	private int size;
-	public static final int maxActions = 14;
+	public static final int maxActions = 4;
 	
 	public ActionList() {
 		actionList = new Action[20];

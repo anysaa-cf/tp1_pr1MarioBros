@@ -13,7 +13,6 @@ public class Mario {
 	private ActionList actionList;
 	private Game game;
 	private int rightC, leftC, upC, downC;
-	
 
 	private boolean big = true;		
 	private boolean alive = true;
@@ -49,9 +48,7 @@ public class Mario {
 		}
 		return icon;
 	}
-	/**
-	 *  Implements the automatic update	
-	 */
+
 	public void update() {
 		Position nextPos;
 		boolean ground;
@@ -60,7 +57,7 @@ public class Mario {
 				nextPos = new Position(pos.getRow() + lastAction.getX(), pos.getCol() + lastAction.getY());
 				 ground = game.getGameObjects().areGroundsInPosition(nextPos);
 				
-				if(!ground && isInsideBounds(nextPos))
+				if(!ground && game.isInsideBounds(nextPos))
 					pos = nextPos; // automatic movement if there is no ground taken the last Action movement
 			}
 			else {		// actions -> movement declared by the player
@@ -68,7 +65,7 @@ public class Mario {
 				nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
 				 ground = game.getGameObjects().areGroundsInPosition(nextPos);
 			
-				if(!ground && isInsideBounds(nextPos))
+				if(!ground && game.isInsideBounds(nextPos))
 					switch(action) {
 				
 					case Action.RIGHT:
@@ -103,13 +100,6 @@ public class Mario {
 				game.marioDies();
 			}
 		}
-	}
-	
-	private boolean isInsideBounds(Position position) {
-		int row = position.getRow();
-		int col = position.getCol();
-		
-		return row >= 0 && row < Game.DIM_Y && col >= 0 && col < Game.DIM_X;
 	}
 	
 	public boolean onPosition(Position position) {
@@ -175,9 +165,9 @@ public class Mario {
 		 if (other.onPosition(this.pos))	{		// check if goomba and mario are on the same position
 			 boolean falling = isFalling();
 			 
-			 if(falling)		// if mario is falling and a goomba is below him, the goomba dies
+			 if(falling)	// if mario is falling and a goomba is below him, the goomba dies
 				 other.receiveInteraction(this);				 
-			 else {				 	// mario collides laterally with a goomba
+			 else {			// mario collides laterally with a goomba
 				 if(big)
 					 big = false;
 				 else 

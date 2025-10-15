@@ -53,20 +53,11 @@ public class GameObjectContainer {
 	public void add(ExitDoor exit) {	// checks if there is no exitDoor and adds one
 		this.exitDoor = exit;
 		return;
-		/*if(exitDoor == null) {		// it is not that necessary
-			this.exitDoor = exit;
-			return;
-		}*/
 	}
 	
 	public void add(Mario mario) {
 		this.marioObject = mario;
 		return;
-		/*if(mario == null) {
-			this.marioObject = mario;
-			return;
-		}*/
-		
 	}
 	
 	public String positionToStr(Position pos) {
@@ -100,12 +91,12 @@ public class GameObjectContainer {
 			}
 		}
 		
-		
 		return icon;
 	}
 
 	public void update() {		// update method calls each update from the corresponding gameObject
 		marioObject.restartC(); // re start counters of actions for next update
+		
 		if(marioObject.actionListIsEmpty()) { // if there is no action
 			if(marioObject != null) {
 				marioObject.update();			
@@ -163,8 +154,7 @@ public class GameObjectContainer {
 	}
 	
 	public void removeMario() {
-		marioObject = null;
-
+		marioObject = null;	
 	}
 	
 	public void addAction(Action action) {

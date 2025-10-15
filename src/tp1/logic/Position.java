@@ -19,12 +19,10 @@ public class Position {
 		return row;
 	}
 
-
 	public int getCol() {
 		return col;
 	}
 
-	
 	public boolean equals(Position position) {
 		return this.col == position.col && this.row == position.row;
 	}

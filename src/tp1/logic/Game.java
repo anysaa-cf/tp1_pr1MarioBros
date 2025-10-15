@@ -188,7 +188,6 @@ public class Game {
 		gameObjects.add(new Goomba(this, new Position(10, 10)));
 		gameObjects.add(new Goomba(this, new Position(12, 11)));
 		gameObjects.add(new Goomba(this, new Position(12, 14)));
-		
 	}
 
 	public GameObjectContainer getGameObjects() {
@@ -215,5 +214,12 @@ public class Game {
 
 	public void addPoints(int newPoints) {
 		this.points += newPoints;
+	}
+	
+	public boolean isInsideBounds(Position position) {
+		int row = position.getRow();
+		int col = position.getCol();
+		
+		return row >= 0 && row < Game.DIM_Y && col >= 0 && col < Game.DIM_X;
 	}
 }

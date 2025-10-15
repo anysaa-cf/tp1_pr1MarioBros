@@ -30,40 +30,31 @@ public class Goomba {
 	
 	public void update() {
 		if(this.alive) {
-		Position posBelow = new Position(pos.getRow() + 1, pos.getCol());
-		boolean groundBelow = game.getGameObjects().areGroundsInPosition(posBelow);
-		
-		if(!groundBelow) {	
-			if(!isInsideBounds(posBelow)) {			// goomba dies (for now) if it falls out of the map
-				goombaDies();
-			} else {
-				pos = posBelow;			// if there is no ground below, it falls 1 cell		
+			Position posBelow = new Position(pos.getRow() + 1, pos.getCol());
+			boolean groundBelow = game.getGameObjects().areGroundsInPosition(posBelow);
+			
+			if(!groundBelow) {	
+				if(!game.isInsideBounds(posBelow)) {			// goomba dies (for now) if it falls out of the map
+					goombaDies();
+				} else {
+					pos = posBelow;						// if there is no ground below, it falls 1 cell		
+				}
+				
+			} else {			// if there is ground it moves horizontally
+				int nextCol = pos.getCol() + action.getY();
+				int nextRow = pos.getRow() + action.getX();
+				Position nextPos = new Position(nextRow, nextCol);		// get the next position given the action
+				
+				boolean insideBounds = game.isInsideBounds(nextPos);
+				boolean groundInFront = game.getGameObjects().areGroundsInPosition(nextPos);
+				
+				if(insideBounds && !groundInFront) {
+					pos = nextPos;		// moves 1 cell
+				} else {
+					changeAction();		// turns around
+				}
 			}
-			
-		} 
-		else {			// if there is ground it moves horizontally
-			int nextCol = pos.getCol() + action.getY();
-			int nextRow = pos.getRow() + action.getX();
-			Position nextPos = new Position(nextRow, nextCol);		// get the next position given the action
-			
-			boolean insideBounds = isInsideBounds(nextPos);
-			boolean groundInFront = game.getGameObjects().areGroundsInPosition(nextPos);
-			
-			if(insideBounds && !groundInFront) {
-				pos = nextPos;		// moves 1 cell
-			} else {
-				changeAction();		// turns around
-			}
-		}
-		}
-		
-	}
-
-	private boolean isInsideBounds(Position position) {
-		int row = position.getRow();
-		int col = position.getCol();
-		
-		return row >= 0 && row < Game.DIM_Y && col >= 0 && col < Game.DIM_X;
+		}	
 	}
 
 	private void changeAction() {

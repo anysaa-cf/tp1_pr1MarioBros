@@ -37,7 +37,8 @@ public class Controller {
 		while(!game.playerLoses() && !game.playerWins() && !exit) {
 			
 			String[] inputs = view.getPrompt();	
-			inputs[0] = inputs[0].toLowerCase();
+			for(int i = 0; i < inputs.length; i++)
+				inputs[i] = inputs[i].toLowerCase();
 			
 			// input length == 0 if enter is pressed or 1 if the command name/shortcut is written
 			if(inputs.length <= 1) {

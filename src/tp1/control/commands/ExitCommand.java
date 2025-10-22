@@ -22,5 +22,20 @@ public class ExitCommand extends NoParamsCommand{
 		// if it needs to close something, it can close it and finish.
 	    game.exit(); 	
 	}
+	protected boolean matchCommand(String command) {
+		boolean ok = false;
+				
+		return ok;
+	}
+		  
+	public Command parse(String[] commands) {
+		Command command = null;
+			  
+		return command;
+	}
+
+	public String helpText() {
+		return DETAILS + ": " + HELP;
+	}
 
 }

@@ -30,7 +30,7 @@ public class Controller {
 
 		view.showGame();
 		
-		while ( !game.isFinished()) {
+		while (!game.isFinished()) {
 			String[] words = view.getPrompt();
 			Command command = CommandGenerator.parse(words);
 

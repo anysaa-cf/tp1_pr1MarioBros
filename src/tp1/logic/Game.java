@@ -19,13 +19,14 @@ public class Game {
 	private GameObjectContainer gameObjects;
 	private boolean win;
 	private boolean lose;
+	private boolean exit;
 	
 	public Game(int nLevel) {
 		this.remainingTime = 100;
 		this.points = 0;
 		this.nLevel = 0;
 		this.lives = 3;
-		this.win = this.lose = false;
+		this.win = this.lose = this.exit = false;
 		if(nLevel == 0 || nLevel == 1) {
 			this.nLevel = nLevel;
 			initGame(nLevel);			
@@ -77,12 +78,15 @@ public class Game {
 		remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
 		gameObjects.update();			
 	}
+	
+	public boolean isFinished() {
 
-
-	@Override
-	public String toString() {		
-		// TODO returns a textual representation of the object
-		return "TODO: Hola soy el game";
+		return (playerWins() ? true : playerLoses() ? true : this.exit ? true : false);
+	}
+	
+	public void exit() {
+		
+		this.exit = true;
 	}
 	
 	private void resetGame(int level) {

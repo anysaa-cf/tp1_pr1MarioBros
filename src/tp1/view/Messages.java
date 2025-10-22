@@ -67,6 +67,7 @@ public class Messages {
 	/* @formatter:on */
 	
 	public static final String HELP = String.join(LINE_SEPARATOR+"   ", HELP_LINES) + LINE_SEPARATOR;
+	public static final String COMMAND_HELP_TEXT = "%s: %s";
 	
 	// COMMANDS CREATION
 	// [e]xit: end the execution of the game
@@ -90,7 +91,7 @@ public class Messages {
 	// [u]pdate: updates the game without carrying out any action chosen by the player
 	public static final String COMMAND_UPDATE_NAME = "update";
 	public static final String COMMAND_UPDATE_SHORTCUT = "u";
-	public static final String COMMAND_UPDATE_DETAILS = "[u]pdate";
+	public static final String COMMAND_UPDATE_DETAILS = "[u]pdate | \"\"";
 	public static final String COMMAND_UPDATE_HELP = "user does not perform any action";		
 
 	// [a]ction: carries out the action or actions chosen by the player, then updates the game
@@ -127,4 +128,8 @@ public class Messages {
 	public static final String MARIO_RIGHT = "🧍";//"🧍➡️";
 	public static final String MARIO_LEFT = "🚶";//"⬅️🚶";
 	public static final String GOOMBA = "🐻";
+	
+	public static final String MUSHROOM = "🍄";
+	public static final String BOX = MyStringUtils.repeat("?",ConsoleView.CELL_SIZE);
+	public static final String EMPTY_BOX = MyStringUtils.repeat("0",ConsoleView.CELL_SIZE);
 }

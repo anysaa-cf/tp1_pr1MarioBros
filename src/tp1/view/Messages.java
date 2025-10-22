@@ -4,7 +4,7 @@ import tp1.util.MyStringUtils;
 
 public class Messages {
 	
-	public static final String VERSION = "1.0";
+	public static final String VERSION = "2.X";
 
 	public static final String GAME_NAME = "MarioBross";
 
@@ -46,11 +46,13 @@ public class Messages {
 
 //Commands
 	public static final String UNKNOWN_COMMAND = "Unknown command: %s";
-	public static final String UNKNOWN_ACTION = "Unknown action: \"%s\"";
-	public static final String ILLEGAL_ACTION = "Illegal action: \"%s\"";
+	public static final String INVALID_GAME_OBJECT = "Invalid game object: %s";
+	
 	// Errores de commandos:
 	public static final String COMMAND_PARAMETERS_MISSING = "Missing parameters";
 	public static final String COMMAND_INCORRECT_PARAMETER_NUMBER = "Incorrect parameter number";
+	public static final String UNKNOWN_ACTION = "Unknown action: \"%s\"";
+	public static final String ILLEGAL_ACTION = "Illegal action: \"%s\"";
 	public static final String INVALID_COMMAND = "Invalid command: %s";
 	public static final String INVALID_COMMAND_PARAMETERS = "Invalid command parameters";
 	public static final String ERROR_COMMAND_EXECUTE = "Command execute problem";

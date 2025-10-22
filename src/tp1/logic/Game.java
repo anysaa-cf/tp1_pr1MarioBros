@@ -79,11 +79,11 @@ public class Game {
 	}
 
 
-	@Override
+	/*@Override
 	public String toString() {		
 		// TODO returns a textual representation of the object
 		return "TODO: Hola soy el game";
-	}
+	}*/
 	
 	private void resetGame(int level) {
 		this.remainingTime = 100;
@@ -205,7 +205,6 @@ public class Game {
 
 	public void doInteractionsFrom(Mario mario) {		// delegates the doInteractionsFrom() to the container
 		gameObjects.doInteractionsFrom(mario);
-		
 	}
 
 	public void marioDies() {
@@ -221,5 +220,10 @@ public class Game {
 		int col = position.getCol();
 		
 		return row >= 0 && row < Game.DIM_Y && col >= 0 && col < Game.DIM_X;
+	}
+	
+	public boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -1,4 +1,4 @@
-package tp1.logic;
+package tp1.control.commands;
 
 public abstract class NoParamsCommand extends AbstractCommands{
 

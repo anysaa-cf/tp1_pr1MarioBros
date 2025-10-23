@@ -1,63 +1,25 @@
 package tp1.logic;
 
-import tp1.logic.gameobjects.ExitDoor;
+import java.util.ArrayList;
+import java.util.List;
+
+import tp1.logic.gameobjects.GameItem;
 import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
 import tp1.view.Messages;
 
 public class GameObjectContainer {
-	
-	private Ground[] groundObjects;
-	private Goomba[] goombaObjects;
-	private ExitDoor exitDoor;		// there is just 1 exit door so no array needed
-	private Mario marioObject;		// there is just 1 mario so no array needed
 	private Game game;
+	private List<GameItem> gameObjects;		// private List<GameObject> ?¿
 	
-	private int groundCounter;
-	private int goombaCounter;
-	
-	public GameObjectContainer(int groundCounter, int goombaCounter, Game game) {
-		// arrays are created with each position in null by default
-		
-		this.groundCounter = groundCounter;
-		groundObjects = new Ground[groundCounter];		
-
-		this.goombaCounter = goombaCounter;
-		goombaObjects = new Goomba[goombaCounter];	
-		
+	public GameObjectContainer(int groundCounter, int goombaCounter, Game game) {	// maybe it does not receive the game as argument?¿
+		gameObjects = new ArrayList<GameItem>();	
 		this.game = game;
 	}
 	
-	public void add(Ground ground) {		
-		// checks if the array has null positions and adds a ground there until it is completed
-		for(int i = 0; i < groundCounter; i++) {
-			if(groundObjects[i] == null) {
-				groundObjects[i] = ground;
-				return;
-			}
-		}
-	}
-	
-	public void add(Goomba goomba) {
-		// checks if the array has null positions and adds a goomba there until it is completed
-		for(int i = 0; i < goombaCounter; i++) {
-			if(goombaObjects[i] == null) {
-				goombaObjects[i] = goomba;
-				return;
-			}
-		}
-		
-	}
-	
-	public void add(ExitDoor exit) {	// checks if there is no exitDoor and adds one
-		this.exitDoor = exit;
-		return;
-	}
-	
-	public void add(Mario mario) {
-		this.marioObject = mario;
-		return;
+	public void add(GameItem object) {	
+		gameObjects.add(object);
 	}
 	
 	public String positionToStr(Position pos) {

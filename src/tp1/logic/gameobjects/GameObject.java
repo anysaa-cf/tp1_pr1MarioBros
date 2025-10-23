@@ -4,7 +4,7 @@ import tp1.logic.Action;
 import tp1.logic.Game;
 import tp1.logic.Position;
 
-public abstract class GameObject {
+public abstract class GameObject implements GameItem{
 	private Position pos; // If you can, make it private.
 	private boolean isAlive;
 	protected Game game; 

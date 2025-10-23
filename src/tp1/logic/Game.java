@@ -7,7 +7,7 @@ import tp1.logic.gameobjects.Mario;
 import tp1.view.Messages;
 import tp1.logic.Action;
 
-public class Game {
+public class Game implements GameModel, GameStatus, GameWorld {
 
 	public static final int DIM_X = 30;
 	public static final int DIM_Y = 15;
@@ -89,7 +89,7 @@ public class Game {
 		this.exit = true;
 	}
 	
-	private void resetGame(int level) {
+	public void resetGame(int level) {
 		this.remainingTime = 100;
 		initGame(level);
 	}
@@ -108,22 +108,22 @@ public class Game {
 		gameObjects = new GameObjectContainer(200, 1, this);
 	
 		for(int col = 0; col < 15; col++) {
-			gameObjects.add(new Ground(new Position(13,col)));
-			gameObjects.add(new Ground(new Position(14,col)));		
+			gameObjects.add(new Ground(this, new Position(13,col)));
+			gameObjects.add(new Ground(this, new Position(14,col)));		
 		}
 
-		gameObjects.add(new Ground(new Position(Game.DIM_Y-3,9)));
-		gameObjects.add(new Ground(new Position(Game.DIM_Y-3,12)));
+		gameObjects.add(new Ground(this, new Position(Game.DIM_Y-3,9)));
+		gameObjects.add(new Ground(this, new Position(Game.DIM_Y-3,12)));
 		for(int col = 17; col < Game.DIM_X; col++) {
-			gameObjects.add(new Ground(new Position(Game.DIM_Y-2, col)));
-			gameObjects.add(new Ground(new Position(Game.DIM_Y-1, col)));		
+			gameObjects.add(new Ground(this, new Position(Game.DIM_Y-2, col)));
+			gameObjects.add(new Ground(this, new Position(Game.DIM_Y-1, col)));		
 		}
 
-		gameObjects.add(new Ground(new Position(9,2)));
-		gameObjects.add(new Ground(new Position(9,5)));
-		gameObjects.add(new Ground(new Position(9,6)));
-		gameObjects.add(new Ground(new Position(9,7)));
-		gameObjects.add(new Ground(new Position(5,6)));
+		gameObjects.add(new Ground(this, new Position(9,2)));
+		gameObjects.add(new Ground(this, new Position(9,5)));
+		gameObjects.add(new Ground(this, new Position(9,6)));
+		gameObjects.add(new Ground(this, new Position(9,7)));
+		gameObjects.add(new Ground(this, new Position(5,6)));
 		
 		// Final jump
 		int tamX = 8, tamY= 8;
@@ -131,11 +131,11 @@ public class Game {
 		
 		for(int col = 0; col < tamX; col++) {
 			for (int fila = 0; fila < col+1; fila++) {
-				gameObjects.add(new Ground(new Position(posIniY- fila, posIniX+ col)));
+				gameObjects.add(new Ground(this, new Position(posIniY- fila, posIniX+ col)));
 			}
 		}
 
-		gameObjects.add(new ExitDoor(new Position(Game.DIM_Y-3, Game.DIM_X-1)));
+		gameObjects.add(new ExitDoor(this, new Position(Game.DIM_Y-3, Game.DIM_X-1)));
 
 		// 3. GameObjects
 //		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
@@ -151,22 +151,22 @@ public class Game {
 		gameObjects = new GameObjectContainer(200, 7, this);
 	
 		for(int col = 0; col < 15; col++) {
-			gameObjects.add(new Ground(new Position(13,col)));
-			gameObjects.add(new Ground(new Position(14,col)));		
+			gameObjects.add(new Ground(this, new Position(13,col)));
+			gameObjects.add(new Ground(this, new Position(14,col)));		
 		}
 
-		gameObjects.add(new Ground(new Position(Game.DIM_Y-3,9)));
-		gameObjects.add(new Ground(new Position(Game.DIM_Y-3,12)));
+		gameObjects.add(new Ground(this, new Position(Game.DIM_Y-3,9)));
+		gameObjects.add(new Ground(this, new Position(Game.DIM_Y-3,12)));
 		for(int col = 17; col < Game.DIM_X; col++) {
-			gameObjects.add(new Ground(new Position(Game.DIM_Y-2, col)));
-			gameObjects.add(new Ground(new Position(Game.DIM_Y-1, col)));		
+			gameObjects.add(new Ground(this, new Position(Game.DIM_Y-2, col)));
+			gameObjects.add(new Ground(this, new Position(Game.DIM_Y-1, col)));		
 		}
 
-		gameObjects.add(new Ground(new Position(9,2)));
-		gameObjects.add(new Ground(new Position(9,5)));
-		gameObjects.add(new Ground(new Position(9,6)));
-		gameObjects.add(new Ground(new Position(9,7)));
-		gameObjects.add(new Ground(new Position(5,6)));
+		gameObjects.add(new Ground(this, new Position(9,2)));
+		gameObjects.add(new Ground(this, new Position(9,5)));
+		gameObjects.add(new Ground(this, new Position(9,6)));
+		gameObjects.add(new Ground(this, new Position(9,7)));
+		gameObjects.add(new Ground(this, new Position(5,6)));
 		
 		// Final jump
 		int tamX = 8, tamY= 8;
@@ -174,11 +174,11 @@ public class Game {
 		
 		for(int col = 0; col < tamX; col++) {
 			for (int fila = 0; fila < col+1; fila++) {
-				gameObjects.add(new Ground(new Position(posIniY- fila, posIniX+ col)));
+				gameObjects.add(new Ground(this, new Position(posIniY- fila, posIniX+ col)));
 			}
 		}
 
-		gameObjects.add(new ExitDoor(new Position(Game.DIM_Y-3, Game.DIM_X-1)));
+		gameObjects.add(new ExitDoor(this, new Position(Game.DIM_Y-3, Game.DIM_X-1)));
 
 		// 3. GameObjects
 //		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
@@ -209,7 +209,6 @@ public class Game {
 
 	public void doInteractionsFrom(Mario mario) {		// delegates the doInteractionsFrom() to the container
 		gameObjects.doInteractionsFrom(mario);
-		
 	}
 
 	public void marioDies() {

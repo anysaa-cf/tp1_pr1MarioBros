@@ -79,13 +79,11 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		gameObjects.update();			
 	}
 	
-	public boolean isFinished() {
-
+	public boolean isFinished() {		// checkear! función turbofea
 		return (!playerWins() ? true : !playerLoses() ? true : !this.exit ? true : false);
 	}
 	
 	public void exit() {
-		
 		this.exit = true;
 	}
 	

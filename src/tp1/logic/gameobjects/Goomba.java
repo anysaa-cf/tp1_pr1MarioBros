@@ -5,7 +5,7 @@ import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
-public class Goomba {
+public class Goomba extends GameObject {
 	private Position pos;
 	private boolean isMobile;
 	private Game game;		// needs to interact with the general state of the game or with other objects
@@ -14,6 +14,7 @@ public class Goomba {
 	private boolean alive = true;
 	
 	public Goomba(Game game, Position pos) {
+		super(game, pos);
 		this.isMobile = true;
 		this.game = game;
 		this.pos = pos;

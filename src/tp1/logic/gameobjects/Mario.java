@@ -6,7 +6,7 @@ import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
-public class Mario {
+public class Mario extends GameObject{
 
 	private Position pos;
 	private Action lastAction;
@@ -19,6 +19,7 @@ public class Mario {
 //	private boolean isMobile = true;
 	
 	public Mario(Game game, Position pos) {
+		super(game, pos);
 		this.pos = pos;
 		this.game = game;
 		this.lastAction = Action.RIGHT;

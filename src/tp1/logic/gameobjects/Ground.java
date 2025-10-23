@@ -1,13 +1,15 @@
 package tp1.logic.gameobjects;
 
+import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
-public class Ground {
+public class Ground extends GameObject {
 	private Position pos;
 	private boolean isSolid;	// property of being a solid object
 	
-	public Ground(Position pos) {
+	public Ground(Game game, Position pos) {
+		super(game, pos);
 		this.isSolid = true;
 		this.pos = pos;
 	}

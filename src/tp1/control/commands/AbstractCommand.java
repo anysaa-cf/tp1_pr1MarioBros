@@ -1,7 +1,5 @@
 package tp1.control.commands;
 
-import tp1.logic.Game;
-import tp1.view.GameView;
 import tp1.view.Messages;
 
 public abstract class AbstractCommand implements Command {
@@ -24,7 +22,7 @@ public abstract class AbstractCommand implements Command {
 	protected String getDetails() { return details; }
 	protected String getHelp() { return help; }
 
-	protected boolean matchCommandName(String name) {
+	protected boolean matchCommandName(String name) {	// equalsIgnoreCase() ignores case differences (uppercase vs lowercase)
 		return getShortcut().equalsIgnoreCase(name) || 
 			   getName().equalsIgnoreCase(name);
 	}

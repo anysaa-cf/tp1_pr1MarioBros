@@ -17,22 +17,10 @@ public class HelpCommand extends NoParamsCommand {
 	
 	@Override
 	public void execute(Game game, GameView view) {
-		
+		view.showMessage(Messages.HELP);		// contains available command and the line separator
 		view.showMessage(CommandGenerator.commandHelp());
 	}
-		  
-	protected boolean matchCommand(String command) {
-		boolean ok = false;
-				
-		return ok;
-	}
-		  
-	public Command parse(String[] commands) {
-		Command command = null;
-			  
-		return command;
-	}
-		
+	
 	public String helpText() {
 		return DETAILS + ": " + HELP;
 	}

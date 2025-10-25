@@ -4,8 +4,6 @@ import tp1.logic.gameobjects.ExitDoor;
 import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
-import tp1.view.Messages;
-import tp1.logic.Action;
 
 public class Game implements GameModel, GameStatus, GameWorld {
 
@@ -79,8 +77,8 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		gameObjects.update();			
 	}
 	
-	public boolean isFinished() {		// checkear! función turbofea
-		return (!playerWins() ? true : !playerLoses() ? true : !this.exit ? true : false);
+	public boolean isFinished() {		
+		return playerWins() || playerLoses() || this.exit;
 	}
 	
 	public void exit() {

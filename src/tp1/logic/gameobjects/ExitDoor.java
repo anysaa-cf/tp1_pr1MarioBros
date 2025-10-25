@@ -6,7 +6,9 @@ import tp1.view.Messages;
 
 public class ExitDoor extends GameObject {
 	private Position pos;
-	
+	/*private Game game;
+	 * private boolean alive = false;
+	 */
 	public ExitDoor(Game game,Position pos) {
 		super(game, pos);
 		this.pos = pos;
@@ -16,7 +18,8 @@ public class ExitDoor extends GameObject {
 		return Messages.EXIT_DOOR;		
 	}
 	
-	public boolean onPosition(Position position) {
+	// I have changed the onPosition(Position position) to isInPosition(Position p)
+	public boolean isInPosition(Position position) {
 		return this.pos.equals(position);
 	}
 	

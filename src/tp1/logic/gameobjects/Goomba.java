@@ -5,7 +5,7 @@ import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
-public class Goomba extends GameObject {
+public class Goomba extends MovingObject {
 	private Position pos;
 	private boolean isMobile;
 	private Game game;		// needs to interact with the general state of the game or with other objects
@@ -25,7 +25,8 @@ public class Goomba extends GameObject {
 		return Messages.GOOMBA;		
 	}
 	
-	public boolean onPosition(Position position) {
+	// I have changed the onPosition(Position position) to isInPosition(Position p)
+	public boolean isInPosition(Position position) {
 		return this.pos.equals(position);
 	}
 	

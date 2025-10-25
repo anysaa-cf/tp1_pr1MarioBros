@@ -101,7 +101,8 @@ public class Mario extends GameObject{
 		}
 	}
 	
-	public boolean onPosition(Position position) {
+	// I have changed the onPosition(Position position) to isInPosition(Position p)
+	public boolean isInPosition(Position position) {		
 		return (this.pos.equals(position) || 
 				(big && this.pos.equals(new Position(position.getRow() + 1, position.getCol()))));
 	}

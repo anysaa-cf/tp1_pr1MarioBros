@@ -13,15 +13,31 @@ public class GameObjectContainer {
 	private Game game;
 	private List<GameItem> gameObjects;		// private List<GameObject> ?¿
 	
-	public GameObjectContainer(int groundCounter, int goombaCounter, Game game) {	// maybe it does not receive the game as argument?¿
+	public GameObjectContainer() {	
 		gameObjects = new ArrayList<GameItem>();	
-		this.game = game;
 	}
 	
-	public void add(GameItem object) {	
+	public void add(GameItem object) {	// adding every object to the container without knowing which object is
 		gameObjects.add(object);
 	}
 	
+	public String positionToStr(Position pos) {
+		String icon = Messages.EMPTY;
+		
+		for(GameItem o: gameObjects) {
+			if(o.isInPosition(pos)) {
+				icon += o.getIcon();
+			}
+		}
+		return icon;
+	}
+	
+	public void update() {
+		for(GameItem o : gameObjects) {
+			o.update();
+		}
+	}
+	/*
 	public String positionToStr(Position pos) {
 		String icon = Messages.EMPTY;
 		
@@ -129,5 +145,5 @@ public class GameObjectContainer {
 				mario.interactWith(goomba);
 			}
 		}
-	}
+	}*/
 }

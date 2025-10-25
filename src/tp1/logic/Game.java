@@ -101,7 +101,8 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private void initLevel0() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-		gameObjects = new GameObjectContainer(200, 1, this);
+//		gameObjects = new GameObjectContainer(200, 1, this);
+		gameObjects = new GameObjectContainer();
 	
 		for(int col = 0; col < 15; col++) {
 			gameObjects.add(new Ground(this, new Position(13,col)));
@@ -144,7 +145,8 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private void initLevel1() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-		gameObjects = new GameObjectContainer(200, 7, this);
+//		gameObjects = new GameObjectContainer(200, 7, this);
+		gameObjects = new GameObjectContainer();
 	
 		for(int col = 0; col < 15; col++) {
 			gameObjects.add(new Ground(this, new Position(13,col)));

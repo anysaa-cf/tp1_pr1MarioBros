@@ -4,8 +4,8 @@ import tp1.logic.Action;
 import tp1.logic.Game;
 import tp1.logic.Position;
 
-public abstract class GameObject implements GameItem{
-	private Position pos; // If you can, make it private.
+public abstract class GameObject implements GameItem {
+	private Position pos; // If you can, make it private.	protected Position pos;
 	private boolean isAlive;
 	protected Game game; 
 	
@@ -17,6 +17,7 @@ public abstract class GameObject implements GameItem{
 	
 	public boolean isInPosition(Position p) {
 		// TODO fill your code here, it should depends on the status of the object
+		
 		return false;
 	}
  	

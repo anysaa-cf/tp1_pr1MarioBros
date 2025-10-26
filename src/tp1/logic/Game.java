@@ -46,9 +46,8 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		lives--;
 	}
 	
-	public String positionToString(int col, int row) {		
-		Position pos = new Position(row, col);
-		return gameObjects.positionToStr(pos);
+	public String positionToString(int col, int row) {
+		return gameObjects.positionToString(col, row);
 	}
 
 	public boolean playerWins() {

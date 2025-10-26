@@ -21,7 +21,8 @@ public class GameObjectContainer {
 		gameObjects.add(object);
 	}
 	
-	public String positionToStr(Position pos) {
+	public String positionToString(int col, int row) {
+		Position pos = new Position(row, col);		// Position pos = new Position(col, row)?¿ 
 		String icon = Messages.EMPTY;
 		
 		for(GameItem o: gameObjects) {
@@ -30,6 +31,21 @@ public class GameObjectContainer {
 			}
 		}
 		return icon;
+	}
+	
+	public boolean isSolid(Position pos) {
+		boolean solid = false;
+		for(GameItem o : gameObjects) {
+			if(o.isInPosition(pos) && o.isSolid(pos) && o.isAlive(pos)) {
+				solid = true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean areGroundsInPosition(Position pos) {
+		Position below = new Position(pos.getRow() + Action.DOWN.getX(), pos.getCol() + Action.DOWN.getY());
+		return isSolid(below);
 	}
 	
 	public void update() {

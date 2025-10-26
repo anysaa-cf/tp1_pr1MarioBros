@@ -7,4 +7,6 @@ public interface GameItem {
 	public void update();
 	public boolean isInPosition(Position p);
 	public String getIcon();
+	public boolean isSolid(Position pos);
+	public boolean isAlive(Position pos);
 }

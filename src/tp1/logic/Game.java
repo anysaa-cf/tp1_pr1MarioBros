@@ -81,7 +81,7 @@ public class Game {
 	
 	public boolean isFinished() {
 
-		return (playerWins() ? true : playerLoses() ? true : this.exit ? true : false);
+		return (!playerWins() ? true : !playerLoses() ? true : !this.exit ? true : false);
 	}
 	
 	public void exit() {

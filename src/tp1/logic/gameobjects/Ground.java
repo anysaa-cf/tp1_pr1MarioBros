@@ -29,4 +29,17 @@ public class Ground extends GameObject {
 	public void update() {
 		
 	}
+
+	// do not implement this functions?¿
+	@Override
+	public boolean isSolid(Position pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAlive(Position pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

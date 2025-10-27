@@ -39,7 +39,7 @@ public class Goomba extends MovingObject {
 				if(!game.isInsideBounds(posBelow)) {			// goomba dies (for now) if it falls out of the map
 					goombaDies();
 				} else {
-					pos = posBelow;						// if there is no ground below, it falls 1 cell		
+					pos = posBelow;								// if there is no ground below, it falls 1 cell		
 				}
 				
 			} else {			// if there is ground it moves horizontally
@@ -68,7 +68,7 @@ public class Goomba extends MovingObject {
 	}
 
 	public void goombaDies() {
-		game.getGameObjects().removeGoomba(this);
+//		game.getGameObjects().removeGoomba(this);
 	}
 
 	public boolean receiveInteraction(Mario other) {

@@ -9,4 +9,5 @@ public interface GameItem {
 	public String getIcon();
 	public boolean isSolid(Position pos);
 	public boolean isAlive(Position pos);
+	
 }

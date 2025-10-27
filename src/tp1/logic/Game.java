@@ -100,7 +100,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private void initLevel0() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-//		gameObjects = new GameObjectContainer(200, 1, this);
 		gameObjects = new GameObjectContainer();
 	
 		for(int col = 0; col < 15; col++) {
@@ -134,7 +133,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		gameObjects.add(new ExitDoor(this, new Position(Game.DIM_Y-3, Game.DIM_X-1)));
 
 		// 3. GameObjects
-//		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		Mario mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		gameObjects.add(mario);
 
@@ -144,7 +142,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private void initLevel1() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-//		gameObjects = new GameObjectContainer(200, 7, this);
 		gameObjects = new GameObjectContainer();
 	
 		for(int col = 0; col < 15; col++) {
@@ -178,7 +175,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		gameObjects.add(new ExitDoor(this, new Position(Game.DIM_Y-3, Game.DIM_X-1)));
 
 		// 3. GameObjects
-//		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		Mario mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		gameObjects.add(mario);
 
@@ -196,7 +192,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public void addAction(Action action) {
-		gameObjects.addAction(action);
+//		gameObjects.addAction(action);
 	}
 	
 	public void marioExited() {
@@ -205,7 +201,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public void doInteractionsFrom(Mario mario) {		// delegates the doInteractionsFrom() to the container
-		gameObjects.doInteractionsFrom(mario);
+//		gameObjects.doInteractionsFrom(mario);
 	}
 
 	public void marioDies() {

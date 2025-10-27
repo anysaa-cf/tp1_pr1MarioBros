@@ -54,39 +54,7 @@ public class GameObjectContainer {
 		}
 	}
 	/*
-	public String positionToStr(Position pos) {
-		String icon = Messages.EMPTY;
-		
-		// mario object
-		if(marioObject != null && marioObject.onPosition(pos)) {
-			icon = marioObject.getIcon();
-		} 
-		
-		// exitDoor object
-		else if(exitDoor != null && exitDoor.onPosition(pos)) {
-			icon = exitDoor.getIcon();
-		} 
-		
-		// goomba objects
-		else {
-			for(Goomba goomba : goombaObjects) {
-				if(goomba != null && goomba.onPosition(pos)) {
-					icon = goomba.getIcon();
-					break;		// once it has found a goomba on position, goes to the next element pending to check
-				}
-			}
-		}
-		
-		// ground objects that will always be painted in the display (at least for now)
-		for(Ground ground : groundObjects) {
-			if(ground != null && ground.onPosition(pos)) {
-				icon = ground.getIcon();
-				break;
-			}
-		}
-		
-		return icon;
-	}
+	
 
 	public void update() {		// update method calls each update from the corresponding gameObject
 		marioObject.restartC(); // re start counters of actions for next update

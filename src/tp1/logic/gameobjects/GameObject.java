@@ -24,16 +24,17 @@ public abstract class GameObject implements GameItem {
 		return isAlive;
 	}
 	
-	
 	public void dead(){
 		this.isAlive = false;
 	}
 	
 	// TODO implement and decide, Which one is abstract?
+	
 	// public boolean isSolid()
 	public boolean isSolid() {
 		return isAlive;
 	}
+	
 	// public void update()
 	
 	public abstract String getIcon();

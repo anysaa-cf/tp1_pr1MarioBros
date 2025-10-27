@@ -6,7 +6,7 @@ import tp1.logic.Position;
 
 // contains the methods implementing basic movements (behavior and state of the objects)
 // to be used by its subclasses mario and goomba
-public abstract class MovingObject extends GameObject{
+public abstract class MovingObject extends GameObject {
 	private Action action;
 	boolean isFalling = false;
 

@@ -186,10 +186,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		gameObjects.add(new Goomba(this, new Position(12, 11)));
 		gameObjects.add(new Goomba(this, new Position(12, 14)));
 	}
-
-	public GameObjectContainer getGameObjects() {
-		return gameObjects;
-	}
 	
 	public void addAction(Action action) {
 //		gameObjects.addAction(action);

@@ -14,7 +14,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private int remainingTime;
 	private int points;
 	private int nLevel;
-	private int lives;
+	private Mario mario; // Mario is an object in the game, said by the professor	 // private int lives;
 	private GameObjectContainer gameObjects;
 	private boolean win;
 	private boolean lose;
@@ -24,7 +24,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		this.remainingTime = 100;
 		this.points = 0;
 		this.nLevel = 0;
-		this.lives = 3;
 		this.win = this.lose = this.exit = false;
 		if(nLevel == 0 || nLevel == 1) {
 			this.nLevel = nLevel;
@@ -44,7 +43,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public void hit() {
-		lives--;
+		mario.marioDies();
 	}
 	
 	public String positionToString(int col, int row) {
@@ -68,7 +67,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public int numLives() {
-		return lives;
+		return 0;
 	}
 
 	// creation of the update method
@@ -190,7 +189,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public void addAction(Action action) {
-//		gameObjects.addAction(action);
+		mario.addAction(action);
 	}
 	
 	public void marioExited() {

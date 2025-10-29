@@ -6,8 +6,8 @@ import tp1.view.Messages;
 
 public class CommandGenerator {
 
-	private static final List<Command> availableCommands = Arrays.asList(
-			//new ActionCommand(),
+	private static final List<Command> availableCommands = Arrays.asList( // these are all the possible actions that are going to be parsed by parse method in here
+			new ActionCommand(),
 			new UpdateCommand(),
 			new HelpCommand(),
 			new ExitCommand()

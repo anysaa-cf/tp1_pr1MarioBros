@@ -12,6 +12,7 @@ public class Mario extends MovingObject {
 	private Action lastAction;
 	private ActionList actionList;
 	private Game game;
+	private int life; // added recently, now that there is a Mario object in game, we can have life attribute here 
 	private int rightC, leftC, upC, downC;
 
 	private boolean big = true;		
@@ -24,6 +25,7 @@ public class Mario extends MovingObject {
 		this.game = game;
 		this.lastAction = Action.RIGHT;
 		this.actionList = new ActionList();
+		life = 3;
 		rightC = leftC = upC = downC = 0;
 	}
 	
@@ -92,12 +94,9 @@ public class Mario extends MovingObject {
 	}
 	
 	public void marioDies() {
-		if(alive) {
-			game.hit();
-			if(game.numLives() <= 0) {
-				alive = false;
-				game.marioDies();
-			}
+		if(alive && life <= 0) {
+			alive = false;
+			game.marioDies();
 		}
 	}
 	

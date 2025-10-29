@@ -51,46 +51,7 @@ public class Mario extends MovingObject {
 	}
 
 	public void update() {
-		Position nextPos;
-		boolean ground;
-		
-			if(actionList.isEmpty()) {		// no more actions -> automatic movement
-				nextPos = new Position(pos.getRow() + lastAction.getX(), pos.getCol() + lastAction.getY());
-				 ground = game.getGameObjects().areGroundsInPosition(nextPos);
-				
-				if(!ground && game.isInsideBounds(nextPos))
-					pos = nextPos; // automatic movement if there is no ground taken the last Action movement
-			}
-			else {		// actions -> movement declared by the player
-				Action action = this.actionList.getAction();
-				nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
-				 ground = game.getGameObjects().areGroundsInPosition(nextPos);
-			
-				if(!ground && game.isInsideBounds(nextPos))
-					switch(action) {
-				
-					case Action.RIGHT:
-						pos = nextPos;
-						break;
-					
-					case Action.LEFT:
-						pos = nextPos;
-						break;
-				
-					case Action.UP:
-						pos = nextPos;
-						break;
-				
-					case Action.DOWN:
-						pos = nextPos;	
-						break;
-					
-					default:
-						break;
-					}
-				lastAction = action;
-			}	
-			game.doInteractionsFrom(this);
+		move();
 	}
 	
 	public void marioDies() {
@@ -177,7 +138,7 @@ public class Mario extends MovingObject {
 
 	private boolean isFalling() {
 		Position nextPos = new Position(pos.getRow() + 1, pos.getCol());
-		boolean ground = game.getGameObjects().areGroundsInPosition(nextPos);
+		boolean ground = true; 																							//TODO, REVISAR !!!
 		
 		if(ground && lastAction != Action.DOWN)
 			return false;
@@ -189,16 +150,46 @@ public class Mario extends MovingObject {
 		game.addPoints(newPoints);
 	}
 
-	// do not implement this functions?¿
-	@Override
-	public boolean isSolid(Position pos) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isAlive(Position pos) {
-		// TODO Auto-generated method stub
-		return false;
+	protected void move() {
+		Position nextPos;
+		boolean ground;
+		
+			if(actionList.isEmpty()) {		// no more actions -> automatic movement
+				nextPos = new Position(pos.getRow() + lastAction.getX(), pos.getCol() + lastAction.getY());
+				 ground = true; 																						//TODO, REVISAR !!!
+				
+				if(!ground && game.isInsideBounds(nextPos))
+					pos = nextPos; // automatic movement if there is no ground taken the last Action movement
+			}
+			else {		// actions -> movement declared by the player
+				Action action = this.actionList.getAction();
+				nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
+				 ground = true; 																						//TODO, REVISAR !!!
+			
+				if(!ground && game.isInsideBounds(nextPos))
+					switch(action) {
+				
+					case Action.RIGHT:
+						pos = nextPos;
+						break;
+					
+					case Action.LEFT:
+						pos = nextPos;
+						break;
+				
+					case Action.UP:
+						pos = nextPos;
+						break;
+				
+					case Action.DOWN:
+						pos = nextPos;	
+						break;
+					
+					default:
+						break;
+					}
+				lastAction = action;
+			}	
+			game.doInteractionsFrom(this);
 	}
 }

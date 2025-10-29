@@ -6,14 +6,13 @@ import tp1.view.Messages;
 
 public class Ground extends GameObject {
 	private Position pos;
-	private boolean isSolid;	// property of being a solid object
+	//private boolean isSolid;	already in GameObject// property of being a solid object
 	/*private Game game;
 	 * private boolean alive = false;
 	 */
 	
 	public Ground(Game game, Position pos) {
-		super(game, pos);
-		this.isSolid = true;
+		super(game, pos, true);
 		this.pos = pos;
 	}
 	
@@ -27,19 +26,15 @@ public class Ground extends GameObject {
 	}
 	
 	public void update() {
+	
+	}
+
+	/*public boolean isSolid() {
+		return this.isSolid;
+	}*/ //already in GameObject
+
+	public boolean isAlive() {
 		
-	}
-
-	// do not implement this functions?¿
-	@Override
-	public boolean isSolid(Position pos) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isAlive(Position pos) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

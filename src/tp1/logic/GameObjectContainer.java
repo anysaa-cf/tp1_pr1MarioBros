@@ -11,7 +11,7 @@ import tp1.view.Messages;
 
 public class GameObjectContainer {
 	private Game game;
-	private List<GameItem> gameObjects;		// private List<GameObject> ?¿
+	private List<GameItem> gameObjects;		// private List<GameObject> 
 	
 	public GameObjectContainer() {	
 		gameObjects = new ArrayList<GameItem>();	

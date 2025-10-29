@@ -6,8 +6,6 @@ import tp1.view.GameView;
 public interface Command {
 
 	public void execute(Game game, GameView view);	  
-	
 	public Command parse(String[] commandWords);
-
 	public String helpText();
 }

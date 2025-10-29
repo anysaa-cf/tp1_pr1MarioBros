@@ -2,22 +2,19 @@ package tp1.control.commands;
 
 import java.util.Arrays;
 import java.util.List;
-
 import tp1.view.Messages;
 
 public class CommandGenerator {
 
 	private static final List<Command> availableCommands = Arrays.asList(
-			//TODO fill with your code
-			// new UpdateCommand(),
+			//new ActionCommand(),
+			new UpdateCommand(),
 			new HelpCommand(),
 			new ExitCommand()
 	);
 
 	public static Command parse(String[] commandWords) {	
-		if(commandWords[0].equals("")) {				// case in which the user does not enter any text
-			return availableCommands.getFirst();		// put as the first command the updateCommand
-		}
+
 		for (Command c: availableCommands) {
 			Command command = c.parse(commandWords);
 			if(command != null) {

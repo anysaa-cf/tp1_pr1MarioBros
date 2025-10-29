@@ -14,9 +14,15 @@ public class CommandGenerator {
 			new ExitCommand()
 	);
 
-	public static Command parse(String[] commandWords) {		
+	public static Command parse(String[] commandWords) {	
+		if(commandWords[0].equals("")) {				// case in which the user does not enter any text
+			return availableCommands.getFirst();		// put as the first command the updateCommand
+		}
 		for (Command c: availableCommands) {
-			//TODO fill with your code
+			Command command = c.parse(commandWords);
+			if(command != null) {
+				return command;
+			}
 		}
 		return null;
 	}
@@ -27,7 +33,7 @@ public class CommandGenerator {
 		commands.append(Messages.HELP_AVAILABLE_COMMANDS).append(Messages.LINE_SEPARATOR);
 		
 		for (Command c: availableCommands) {
-			//TODO fill with your code
+			c.helpText();		// helpText() method for each of the commands
 		}
 		
 		return commands.toString();

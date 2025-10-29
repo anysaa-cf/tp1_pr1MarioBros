@@ -6,7 +6,7 @@ import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
-public class Mario {
+public class Mario extends MovingObject {
 
 	private Position pos;
 	private Action lastAction;
@@ -19,6 +19,7 @@ public class Mario {
 //	private boolean isMobile = true;
 	
 	public Mario(Game game, Position pos) {
+		super(game, pos);
 		this.pos = pos;
 		this.game = game;
 		this.lastAction = Action.RIGHT;
@@ -100,7 +101,8 @@ public class Mario {
 		}
 	}
 	
-	public boolean onPosition(Position position) {
+	// I have changed the onPosition(Position position) to isInPosition(Position p)
+	public boolean isInPosition(Position position) {		
 		return (this.pos.equals(position) || 
 				(big && this.pos.equals(new Position(position.getRow() + 1, position.getCol()))));
 	}
@@ -156,11 +158,11 @@ public class Mario {
 	 }
 	 
 	 public boolean interactWith(ExitDoor other) {
-		 return other.onPosition(this.pos);			// check if exitDoor and mario are on the same position
+		 return other.isInPosition(this.pos);			// check if exitDoor and mario are on the same position
 	 }
 	 
 	 public void interactWith(Goomba other) {
-		 if (other.onPosition(this.pos))	{		// check if goomba and mario are on the same position
+		 if (other.isInPosition(this.pos))	{		// check if goomba and mario are on the same position
 			 boolean falling = isFalling();
 			 
 			 if(falling)	// if mario is falling and a goomba is below him, the goomba dies
@@ -186,5 +188,18 @@ public class Mario {
 	
 	public void addPoints(int newPoints) {
 		game.addPoints(newPoints);
+	}
+
+	// do not implement this functions?¿
+	@Override
+	public boolean isSolid(Position pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAlive(Position pos) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

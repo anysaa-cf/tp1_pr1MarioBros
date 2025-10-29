@@ -5,8 +5,7 @@ import tp1.view.GameView;
 import tp1.view.Messages;
 
 public class ExitCommand extends NoParamsCommand{
-
-	// Forman parte de atributos de estado
+	
 	private static final String NAME = Messages.COMMAND_EXIT_NAME;
 	private static final String SHORTCUT = Messages.COMMAND_EXIT_SHORTCUT;
 	private static final String DETAILS = Messages.COMMAND_EXIT_DETAILS;
@@ -21,17 +20,6 @@ public class ExitCommand extends NoParamsCommand{
 		// You should let the game know that you are leaving so that 
 		// if it needs to close something, it can close it and finish.
 	    game.exit(); 	
-	}
-	protected boolean matchCommand(String command) {
-		boolean ok = false;
-				
-		return ok;
-	}
-		  
-	public Command parse(String[] commands) {
-		Command command = null;
-			  
-		return command;
 	}
 
 	public String helpText() {

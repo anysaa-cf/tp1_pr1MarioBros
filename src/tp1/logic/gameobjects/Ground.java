@@ -1,13 +1,18 @@
 package tp1.logic.gameobjects;
 
+import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
-public class Ground {
+public class Ground extends GameObject {
 	private Position pos;
 	private boolean isSolid;	// property of being a solid object
+	/*private Game game;
+	 * private boolean alive = false;
+	 */
 	
-	public Ground(Position pos) {
+	public Ground(Game game, Position pos) {
+		super(game, pos);
 		this.isSolid = true;
 		this.pos = pos;
 	}
@@ -16,11 +21,25 @@ public class Ground {
 		return Messages.LAND;
 	}
 	
-	public boolean onPosition(Position position) {
+	// I have changed the onPosition(Position position) to isInPosition(Position p)
+	public boolean isInPosition(Position position) {
 		return this.pos.equals(position);
 	}
 	
 	public void update() {
 		
+	}
+
+	// do not implement this functions?¿
+	@Override
+	public boolean isSolid(Position pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAlive(Position pos) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

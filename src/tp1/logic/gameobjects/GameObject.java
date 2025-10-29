@@ -4,9 +4,10 @@ import tp1.logic.Action;
 import tp1.logic.Game;
 import tp1.logic.Position;
 
-public abstract class GameObject {
-	protected Position pos; // If you can, make it private.
+public abstract class GameObject implements GameItem {
+	private Position pos; // If you can, make it private.	protected Position pos;
 	private boolean isAlive;
+	private boolean isSolid;
 	protected Game game; 
 	
 	public GameObject(Game game, Position pos) {
@@ -16,8 +17,7 @@ public abstract class GameObject {
 	}
 	
 	public boolean isInPosition(Position p) {
-		// TODO fill your code here, it should depends on the status of the object
-		return false;
+		return pos.equals(p);
 	}
  	
 	public boolean isAlive() {
@@ -29,7 +29,12 @@ public abstract class GameObject {
 	}
 	
 	// TODO implement and decide, Which one is abstract?
+	
 	// public boolean isSolid()
+	public boolean isSolid() {
+		return isAlive;
+	}
+	
 	// public void update()
 	
 	public abstract String getIcon();

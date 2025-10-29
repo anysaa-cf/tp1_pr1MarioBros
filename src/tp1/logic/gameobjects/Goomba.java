@@ -5,7 +5,7 @@ import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
-public class Goomba {
+public class Goomba extends MovingObject {
 	private Position pos;
 	private boolean isMobile;
 	private Game game;		// needs to interact with the general state of the game or with other objects
@@ -14,6 +14,7 @@ public class Goomba {
 	private boolean alive = true;
 	
 	public Goomba(Game game, Position pos) {
+		super(game, pos);
 		this.isMobile = true;
 		this.game = game;
 		this.pos = pos;
@@ -24,7 +25,8 @@ public class Goomba {
 		return Messages.GOOMBA;		
 	}
 	
-	public boolean onPosition(Position position) {
+	// I have changed the onPosition(Position position) to isInPosition(Position p)
+	public boolean isInPosition(Position position) {
 		return this.pos.equals(position);
 	}
 	
@@ -37,7 +39,7 @@ public class Goomba {
 				if(!game.isInsideBounds(posBelow)) {			// goomba dies (for now) if it falls out of the map
 					goombaDies();
 				} else {
-					pos = posBelow;						// if there is no ground below, it falls 1 cell		
+					pos = posBelow;								// if there is no ground below, it falls 1 cell		
 				}
 				
 			} else {			// if there is ground it moves horizontally
@@ -66,7 +68,7 @@ public class Goomba {
 	}
 
 	public void goombaDies() {
-		game.getGameObjects().removeGoomba(this);
+//		game.getGameObjects().removeGoomba(this);
 	}
 
 	public boolean receiveInteraction(Mario other) {
@@ -75,5 +77,18 @@ public class Goomba {
 		this.goombaDies();
 		
 		return true;
+	}
+
+	// do not implement this functions?¿
+	@Override
+	public boolean isSolid(Position pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAlive(Position pos) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

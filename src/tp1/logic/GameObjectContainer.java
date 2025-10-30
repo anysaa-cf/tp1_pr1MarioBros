@@ -36,7 +36,7 @@ public class GameObjectContainer {
 	public boolean isSolid(Position pos) {
 		boolean solid = false;
 		for(GameItem o : gameObjects) {
-			if(o.isInPosition(pos) && o.isSolid(pos) && o.isAlive(pos)) {
+			if(o.isInPosition(pos) && o.isSolid(pos) && o.isAlive(pos)) {		// they need argument or not?¿
 				solid = true;
 			}
 		}
@@ -50,7 +50,7 @@ public class GameObjectContainer {
 	
 	public void update() {
 		for(GameItem o : gameObjects) {
-			o.update();
+			o.update();			// update needs to be also in the gameitem?¿
 		}
 	}
 	/*

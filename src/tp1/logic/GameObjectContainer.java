@@ -2,22 +2,16 @@ package tp1.logic;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import tp1.logic.gameobjects.GameItem;
-import tp1.logic.gameobjects.Goomba;
-import tp1.logic.gameobjects.Ground;
-import tp1.logic.gameobjects.Mario;
 import tp1.view.Messages;
 
 public class GameObjectContainer {
-	private Game game;
-	private List<GameItem> gameObjects;		// private List<GameObject> 
+	private static List<GameObject> gameObjects;
 	
 	public GameObjectContainer() {	
-		gameObjects = new ArrayList<GameItem>();	
+		gameObjects = new ArrayList<GameObject>();
 	}
 	
-	public void add(GameItem object) {	// adding every object to the container without knowing which object is
+	public void add(GameObject object) {	// adding every object to the container without knowing which object is
 		gameObjects.add(object);
 	}
 	
@@ -25,7 +19,7 @@ public class GameObjectContainer {
 		Position pos = new Position(row, col);		// Position pos = new Position(col, row)?¿ 
 		String icon = Messages.EMPTY;
 		
-		for(GameItem o: gameObjects) {
+		for(GameObject o: gameObjects) {
 			if(o.isInPosition(pos)) {
 				icon += o.getIcon();
 			}
@@ -33,14 +27,14 @@ public class GameObjectContainer {
 		return icon;
 	}
 	
-	public boolean isSolid(Position pos) {
+	public static boolean isSolid(Position pos) {
 		boolean solid = false;
-		for(GameItem o : gameObjects) {
-			if(o.isInPosition(pos) && o.isSolid(pos) && o.isAlive(pos)) {		// they need argument or not?¿
+		for(GameObject o : gameObjects) {
+			if(o.isInPosition(pos) && o.isSolid() && o.isAlive()) {		// they need argument or not?¿
 				solid = true;
 			}
 		}
-		return false;
+		return solid;
 	}
 	
 	public boolean areGroundsInPosition(Position pos) {
@@ -49,7 +43,7 @@ public class GameObjectContainer {
 	}
 	
 	public void update() {
-		for(GameItem o : gameObjects) {
+		for(GameObject o : gameObjects) {
 			o.update();			// update needs to be also in the gameitem?¿
 		}
 	}

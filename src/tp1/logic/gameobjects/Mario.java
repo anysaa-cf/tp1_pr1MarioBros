@@ -3,30 +3,25 @@ package tp1.logic.gameobjects;
 import tp1.logic.ActionList;
 import tp1.logic.Action;
 import tp1.logic.Game;
+import tp1.logic.GameObjectContainer;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
 public class Mario extends MovingObject {
 
-	private Position pos;
 	private Action lastAction;
 	private ActionList actionList;
-	private Game game;
 	private int life; // added recently, now that there is a Mario object in game, we can have life attribute here 
 	private int rightC, leftC, upC, downC;
-
-	private boolean big = true;		
-	private boolean alive = true;
-//	private boolean isMobile = true;
+	private boolean big;		
 	
 	public Mario(Game game, Position pos) {
-		super(game, pos);
-		this.pos = pos;
-		this.game = game;
+		super(game, pos, Action.RIGHT);
 		this.lastAction = Action.RIGHT;
 		this.actionList = new ActionList();
-		life = 3;
-		rightC = leftC = upC = downC = 0;
+		this.big = true;
+		this.life = 3;
+		this.rightC = this.leftC = this.upC = this.downC = 0;
 	}
 	
 	public String getIcon() {
@@ -55,17 +50,19 @@ public class Mario extends MovingObject {
 	}
 	
 	public void marioDies() {
-		if(alive && life <= 0) {
-			alive = false;
+		if(life <= 0) {
+			objectDies();
 			game.marioDies();
 		}
+		else {
+			if(big)
+				this.big = false;
+			else
+				this.life--;
+		}
+			
 	}
 	
-	// I have changed the onPosition(Position position) to isInPosition(Position p)
-	public boolean isInPosition(Position position) {		
-		return (this.pos.equals(position) || 
-				(big && this.pos.equals(new Position(position.getRow() + 1, position.getCol()))));
-	}
 	public void addAction(Action action) {
 		if(updateC(action))
 			this.actionList.addAction(action);
@@ -116,35 +113,6 @@ public class Mario extends MovingObject {
 	 public void restartC() {
 		 rightC = leftC = upC = downC = 0;
 	 }
-	 
-	 public boolean interactWith(ExitDoor other) {
-		 return other.isInPosition(this.pos);			// check if exitDoor and mario are on the same position
-	 }
-	 
-	 public void interactWith(Goomba other) {
-		 if (other.isInPosition(this.pos))	{		// check if goomba and mario are on the same position
-			 boolean falling = isFalling();
-			 
-			 if(falling)	// if mario is falling and a goomba is below him, the goomba dies
-				 other.receiveInteraction(this);				 
-			 else {			// mario collides laterally with a goomba
-				 if(big)
-					 big = false;
-				 else 
-					 marioDies();
-			 }
-		 }
-	 }
-
-	private boolean isFalling() {
-		Position nextPos = new Position(pos.getRow() + 1, pos.getCol());
-		boolean ground = true; 																							//TODO, REVISAR !!!
-		
-		if(ground && lastAction != Action.DOWN)
-			return false;
-		else
-			return true;
-	}
 	
 	public void addPoints(int newPoints) {
 		game.addPoints(newPoints);
@@ -155,34 +123,34 @@ public class Mario extends MovingObject {
 		boolean ground;
 		
 			if(actionList.isEmpty()) {		// no more actions -> automatic movement
-				nextPos = new Position(pos.getRow() + lastAction.getX(), pos.getCol() + lastAction.getY());
-				 ground = true; 																						//TODO, REVISAR !!!
+				nextPos = new Position(getRow() + lastAction.getX(), getCol() + lastAction.getY());
+				 ground = GameObjectContainer.isSolid(nextPos); 																						//TODO, REVISAR !!!
 				
 				if(!ground && game.isInsideBounds(nextPos))
-					pos = nextPos; // automatic movement if there is no ground taken the last Action movement
+					updatePos(nextPos); // automatic movement if there is no ground taken the last Action movement
 			}
 			else {		// actions -> movement declared by the player
 				Action action = this.actionList.getAction();
-				nextPos = new Position(pos.getRow() + action.getX(), pos.getCol() + action.getY());
-				 ground = true; 																						//TODO, REVISAR !!!
+				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());
+				 ground = GameObjectContainer.isSolid(nextPos); 																						//TODO, REVISAR !!!
 			
 				if(!ground && game.isInsideBounds(nextPos))
 					switch(action) {
 				
 					case Action.RIGHT:
-						pos = nextPos;
+						updatePos(nextPos);
 						break;
 					
 					case Action.LEFT:
-						pos = nextPos;
+						updatePos(nextPos);
 						break;
 				
 					case Action.UP:
-						pos = nextPos;
+						updatePos(nextPos);
 						break;
 				
 					case Action.DOWN:
-						pos = nextPos;	
+						updatePos(nextPos);	
 						break;
 					
 					default:

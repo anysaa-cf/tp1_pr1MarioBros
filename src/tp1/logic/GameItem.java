@@ -1,6 +1,9 @@
-package tp1.logic.gameobjects;
+package tp1.logic;
 
-import tp1.logic.Position;
+import tp1.logic.gameobjects.ExitDoor;
+import tp1.logic.gameobjects.Goomba;
+import tp1.logic.gameobjects.Ground;
+import tp1.logic.gameobjects.Mario;
 
 public interface GameItem {
 	

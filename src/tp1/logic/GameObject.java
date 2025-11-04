@@ -1,11 +1,9 @@
-package tp1.logic.gameobjects;
+package tp1.logic;
 
-import tp1.logic.Action;
-import tp1.logic.Game;
-import tp1.logic.Position;
+import tp1.logic.gameobjects.*;
 
 public abstract class GameObject implements GameItem {
-	private Position pos; // If you can, make it private.	protected Position pos;
+	private Position pos; 
 	private boolean isSolid;
 	protected Game game; 
 	
@@ -15,11 +13,21 @@ public abstract class GameObject implements GameItem {
 		this.isSolid = bool;
 	}
 	
+	public void updatePos(Position pos) {
+		this.pos = pos;
+	}
+	
+	public int getRow() {
+		return pos.getRow();
+	}
+	
+	public int getCol() {
+		return pos.getCol();
+	}
+	
 	public boolean isInPosition(Position p) {
 		return pos.equals(p);
 	}
-	
-	// TODO implement and decide, Which one is abstract?
 	
 	public boolean isSolid() {
 		return isSolid;

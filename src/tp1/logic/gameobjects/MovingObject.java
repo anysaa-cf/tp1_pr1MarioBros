@@ -7,7 +7,7 @@ import tp1.logic.GameObject;
 import tp1.logic.Position;
 
 public abstract class MovingObject extends GameObject {
-	private Action action;
+	protected Action action;
 	private boolean isAlive;
 	boolean isFalling;
 
@@ -26,7 +26,7 @@ public abstract class MovingObject extends GameObject {
 		isAlive = false;
 	}
 	
-	private boolean isFalling() {
+	public boolean isFalling() {
 		Position nextPos = new Position(getRow() + 1, getCol());
 		boolean ground = GameObjectContainer.isSolid(nextPos);
 		

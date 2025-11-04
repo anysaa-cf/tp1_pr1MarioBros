@@ -135,29 +135,34 @@ public class Mario extends MovingObject {
 				 ground = GameObjectContainer.isSolid(nextPos); 																						//TODO, REVISAR !!!
 			
 				if(!ground && game.isInsideBounds(nextPos))
-					switch(action) {
-				
-					case Action.RIGHT:
-						updatePos(nextPos);
-						break;
-					
-					case Action.LEFT:
-						updatePos(nextPos);
-						break;
-				
-					case Action.UP:
-						updatePos(nextPos);
-						break;
-				
-					case Action.DOWN:
-						updatePos(nextPos);	
-						break;
-					
-					default:
-						break;
-					}
+					processAction(action, nextPos);
 				lastAction = action;
 			}	
 			game.doInteractionsFrom(this);
 	}
+	
+	public void processAction(Action action, Position nextPos) {
+		switch(action) {
+		
+		case Action.RIGHT:
+			updatePos(nextPos);
+			break;
+		
+		case Action.LEFT:
+			updatePos(nextPos);
+			break;
+
+		case Action.UP:
+			updatePos(nextPos);
+			break;
+
+		case Action.DOWN:
+			updatePos(nextPos);	
+			break;
+		
+		default:
+			break;
+		}
+	}
+
 }

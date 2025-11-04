@@ -30,16 +30,11 @@ public class GameObjectContainer {
 	public static boolean isSolid(Position pos) {
 		boolean solid = false;
 		for(GameObject o : gameObjects) {
-			if(o.isInPosition(pos) && o.isSolid() && o.isAlive()) {		// they need argument or not?¿
+			if(o.isInPosition(pos) && o.isSolid()) {		// they need argument or not?¿
 				solid = true;
 			}
 		}
 		return solid;
-	}
-	
-	public boolean areGroundsInPosition(Position pos) {
-		Position below = new Position(pos.getRow() + Action.DOWN.getX(), pos.getCol() + Action.DOWN.getY());
-		return isSolid(below);
 	}
 	
 	public void update() {

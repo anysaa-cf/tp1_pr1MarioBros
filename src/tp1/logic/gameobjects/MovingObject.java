@@ -9,7 +9,7 @@ import tp1.logic.Position;
 public abstract class MovingObject extends GameObject {
 	protected Action action;
 	private boolean isAlive;
-	boolean isFalling;
+	private boolean isFalling;
 
 	public MovingObject(Game game, Position pos, Action action) {
 		super(game, pos, false);

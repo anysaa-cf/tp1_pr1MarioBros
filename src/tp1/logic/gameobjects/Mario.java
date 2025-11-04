@@ -9,7 +9,6 @@ import tp1.view.Messages;
 
 public class Mario extends MovingObject {
 
-	private Action lastAction;
 	private ActionList actionList;
 	private int life; // added recently, now that there is a Mario object in game, we can have life attribute here 
 	private int rightC, leftC, upC, downC;
@@ -17,7 +16,6 @@ public class Mario extends MovingObject {
 	
 	public Mario(Game game, Position pos) {
 		super(game, pos, Action.RIGHT);
-		this.lastAction = Action.RIGHT;
 		this.actionList = new ActionList();
 		this.big = true;
 		this.life = 3;
@@ -27,7 +25,7 @@ public class Mario extends MovingObject {
 	public String getIcon() {
 		String icon;
 		
-		switch(lastAction) {
+		switch(action) {
 		case UP: 
 		case DOWN: 
 			icon = Messages.MARIO_STOP;
@@ -64,7 +62,7 @@ public class Mario extends MovingObject {
 	}
 	
 	public void addAction(Action action) {
-		if(updateC(action))
+		if(updateC(action)) 
 			this.actionList.addAction(action);
 	}
 	
@@ -77,27 +75,31 @@ public class Mario extends MovingObject {
 		 switch(action) {
 		 
 		 	case RIGHT:
-		 		if(leftC == 0 && rightC < ActionList.maxActions)
+		 		if(leftC == 0 && rightC < ActionList.maxActions) {
 		 			ok = true;
 		 			rightC++;
+		 		}
 		 		break;
 		 	
 		 	case LEFT:
-		 		if(rightC == 0 && leftC < ActionList.maxActions)
+		 		if(rightC == 0 && leftC < ActionList.maxActions) {
 		 			ok = true;
 		 			leftC++;
+		 		}
 				 break;
 			
 		 	case UP:
-		 		if(downC == 0 && upC < ActionList.maxActions)
+		 		if(downC == 0 && upC < ActionList.maxActions) {
 		 			ok = true;
 		 			upC++;
+		 		}
 				 break;
 				 
 		 	case DOWN:
-		 		if(upC == 0 && downC < ActionList.maxActions)
+		 		if(upC == 0 && downC < ActionList.maxActions) {
 		 			ok = true;
 		 			downC++;
+		 		}
 				 break;
 			
 		 	case STOP:
@@ -123,8 +125,8 @@ public class Mario extends MovingObject {
 		boolean ground;
 		
 			if(actionList.isEmpty()) {		// no more actions -> automatic movement
-				nextPos = new Position(getRow() + lastAction.getX(), getCol() + lastAction.getY());
-				 ground = GameObjectContainer.isSolid(nextPos); 																						//TODO, REVISAR !!!
+				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());
+				 ground = GameObjectContainer.isSolid(nextPos); 																						
 				
 				if(!ground && game.isInsideBounds(nextPos))
 					updatePos(nextPos); // automatic movement if there is no ground taken the last Action movement
@@ -132,13 +134,14 @@ public class Mario extends MovingObject {
 			else {		// actions -> movement declared by the player
 				Action action = this.actionList.getAction();
 				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());
-				 ground = GameObjectContainer.isSolid(nextPos); 																						//TODO, REVISAR !!!
+				 ground = GameObjectContainer.isSolid(nextPos); 																						
 			
 				if(!ground && game.isInsideBounds(nextPos))
 					processAction(action, nextPos);
-				lastAction = action;
-			}	
-			game.doInteractionsFrom(this);
+				this.action = action;
+			}
+			if(actionList.isEmpty())
+				restartC();
 	}
 	
 	public void processAction(Action action, Position nextPos) {

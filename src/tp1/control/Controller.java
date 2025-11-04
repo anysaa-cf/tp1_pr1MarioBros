@@ -37,6 +37,7 @@ public class Controller {
 				command.execute(game, view);
 			else 
 				view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", words)));
+			view.showGame();
 		}
 		view.showEndMessage();
 	}

@@ -2,6 +2,8 @@ package tp1.logic;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import tp1.logic.gameobjects.Mario;
 import tp1.view.Messages;
 
 public class GameObjectContainer {
@@ -30,7 +32,7 @@ public class GameObjectContainer {
 	public boolean isSolid(Position pos) {
 		boolean solid = false;
 		for(GameObject o : gameObjects) {
-			if(o.isInPosition(pos) && o.isSolid()) {		// they need argument or not?¿
+			if(o.isInPosition(pos) && o.isSolid()) {		
 				solid = true;
 			}
 		}
@@ -41,5 +43,13 @@ public class GameObjectContainer {
 		for(GameObject o : gameObjects) {
 			o.update();			// update needs to be also in the gameitem?¿
 		}
+	}
+
+	public void doInteractionsFrom(Mario mario) {
+		for(GameObject o : gameObjects) {
+			mario.interactWith(o);
+			o.interactWith(mario);
+		}
+		
 	}
 }

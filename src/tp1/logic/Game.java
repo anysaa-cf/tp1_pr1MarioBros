@@ -195,7 +195,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public void doInteractionsFrom(Mario mario) {		// delegates the doInteractionsFrom() to the container
-//		gameObjects.doInteractionsFrom(mario);
+		gameObjects.doInteractionsFrom(mario);
 	}
 
 	public void marioDies() {

@@ -78,7 +78,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public boolean isFinished() {
-
 		return (!playerWins() ? false : !playerLoses() ? false : !this.exit ? false : true);
 	}
 	

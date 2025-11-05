@@ -23,7 +23,7 @@ public class ActionCommand extends AbstractCommand{
 	public Command parse(String[] commandWords) { // here we recognize what action is
 		if(matchCommandName(commandWords[0])) { // if the first command is action
 			for(int i = 1; i < commandWords.length; i++) { // from 0 to actionList length in order to read all the commands remaining from action command
-				Action aux = Action.parseActionClass(commandWords[i]); // parse the action command into and action type
+				Action aux = Action.parseActionClass(commandWords[i]); // parse the action command into an action type
 				if(aux != null) // if it's actually a valid command for actions
 					ACTION.addAction(aux); // keep that command already being an action type and increase the counter for the next action space
 			}

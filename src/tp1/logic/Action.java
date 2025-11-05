@@ -17,7 +17,6 @@ public enum Action {
 	private int y;
 	private String abrev;
 	
-	
 	private Action(int x, int y, String c) {
 		this.x=x;
 		this.y=y;

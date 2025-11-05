@@ -43,7 +43,10 @@ public class Mario extends MovingObject {
 	}
 
 	public void update() {
-		move();
+		while(!actionList.isEmpty()) {
+			move();
+			game.tryInteractionsFrom();
+		}
 	}
 	
 	public void marioDies() {

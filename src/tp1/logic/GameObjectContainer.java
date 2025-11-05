@@ -2,8 +2,6 @@ package tp1.logic;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import tp1.logic.gameobjects.Mario;
 import tp1.view.Messages;
 
 public class GameObjectContainer {
@@ -45,10 +43,10 @@ public class GameObjectContainer {
 		}
 	}
 
-	public void doInteractionsFrom(Mario mario) {
+	public void tryInteractionsFrom(GameItem object) {
 		for(GameObject o : gameObjects) {
-			mario.interactWith(o);
-			o.interactWith(mario);
+			object.interactWith(o);
+			o.interactWith(object);
 		}
 		
 	}

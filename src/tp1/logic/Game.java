@@ -71,10 +71,8 @@ public class Game implements GameModel, GameStatus, GameWorld {
 
 	// creation of the update method
 	public void update() {
-		while(!mario.actionListIsEmpty()) {
 			remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
 			gameObjects.update();
-		}
 	}
 	
 	public boolean isSolid(Position pos) {
@@ -194,8 +192,8 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		this.win = true;
 	}
 
-	public void doInteractionsFrom(Mario mario) {		// delegates the doInteractionsFrom() to the container
-		gameObjects.doInteractionsFrom(mario);
+	public void tryInteractionsFrom(GameItem object) {		// delegates the doInteractionsFrom() to the container
+		gameObjects.tryInteractionsFrom(object);
 	}
 
 	public void marioDies() {

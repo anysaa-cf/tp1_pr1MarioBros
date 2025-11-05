@@ -12,7 +12,6 @@ public interface GameItem {
 		public boolean isInPosition(Position pos);
 
 		public boolean interactWith(GameItem other);
-
 		public boolean receiveInteraction(Ground ground);
 		public boolean receiveInteraction(Mario mario);
 		public boolean receiveInteraction(ExitDoor door);

@@ -48,6 +48,7 @@ public class Goomba extends MovingObject {
 	
 	public void update() {
 		move();
+		game.tryInteractionsFrom(this);
 	}
 
 	public void goombaDies() {

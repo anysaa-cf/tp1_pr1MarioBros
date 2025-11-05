@@ -2,6 +2,7 @@ package tp1.logic.gameobjects;
 
 import tp1.logic.Action;
 import tp1.logic.Game;
+import tp1.logic.GameItem;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
@@ -53,5 +54,35 @@ public class Goomba extends MovingObject {
 
 	public void goombaDies() {
 		objectDies();
+	}
+
+	@Override
+	public boolean interactWith(GameItem other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Ground ground) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Mario mario) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(ExitDoor door) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Goomba goomba) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

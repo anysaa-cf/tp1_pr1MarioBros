@@ -3,6 +3,7 @@ package tp1.logic.gameobjects;
 import tp1.logic.ActionList;
 import tp1.logic.Action;
 import tp1.logic.Game;
+import tp1.logic.GameItem;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
@@ -45,7 +46,7 @@ public class Mario extends MovingObject {
 	public void update() {
 		while(!actionList.isEmpty()) {
 			move();
-			game.tryInteractionsFrom();
+			game.tryInteractionsFrom(this);
 		}
 	}
 	
@@ -168,6 +169,36 @@ public class Mario extends MovingObject {
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public boolean interactWith(GameItem other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Ground ground) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Mario mario) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(ExitDoor door) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Goomba goomba) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

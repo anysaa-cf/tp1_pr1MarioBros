@@ -28,7 +28,7 @@ public abstract class MovingObject extends GameObject {
 	
 	public boolean isFalling() {
 		Position nextPos = new Position(getRow() + 1, getCol());
-		boolean ground = GameObjectContainer.isSolid(nextPos);
+		boolean ground = game.isSolid(nextPos);
 		
 		if(ground && action != Action.DOWN)
 			return false;

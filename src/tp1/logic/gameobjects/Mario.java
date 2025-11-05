@@ -3,7 +3,6 @@ package tp1.logic.gameobjects;
 import tp1.logic.ActionList;
 import tp1.logic.Action;
 import tp1.logic.Game;
-import tp1.logic.GameObjectContainer;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
@@ -126,7 +125,7 @@ public class Mario extends MovingObject {
 		
 			if(actionList.isEmpty()) {		// no more actions -> automatic movement
 				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());
-				 ground = GameObjectContainer.isSolid(nextPos); 																						
+				 ground = game.isSolid(nextPos); 																						
 				
 				if(!ground && game.isInsideBounds(nextPos))
 					updatePos(nextPos); // automatic movement if there is no ground taken the last Action movement
@@ -134,7 +133,7 @@ public class Mario extends MovingObject {
 			else {		// actions -> movement declared by the player
 				Action action = this.actionList.getAction();
 				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());
-				 ground = GameObjectContainer.isSolid(nextPos); 																						
+				 ground = game.isSolid(nextPos); 																						
 			
 				if(!ground && game.isInsideBounds(nextPos))
 					processAction(action, nextPos);

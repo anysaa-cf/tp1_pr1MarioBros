@@ -77,6 +77,10 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		}
 	}
 	
+	public boolean isSolid(Position pos) {
+		return gameObjects.isSolid(pos);	
+	}
+	
 	public boolean isFinished() {
 
 		return (!playerWins() ? false : !playerLoses() ? false : !this.exit ? false : true);

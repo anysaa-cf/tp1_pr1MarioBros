@@ -5,7 +5,7 @@ import java.util.List;
 import tp1.view.Messages;
 
 public class GameObjectContainer {
-	private static List<GameObject> gameObjects;
+	private List<GameObject> gameObjects;
 	
 	public GameObjectContainer() {	
 		gameObjects = new ArrayList<GameObject>();
@@ -27,7 +27,7 @@ public class GameObjectContainer {
 		return icon;
 	}
 	
-	public static boolean isSolid(Position pos) {
+	public boolean isSolid(Position pos) {
 		boolean solid = false;
 		for(GameObject o : gameObjects) {
 			if(o.isInPosition(pos) && o.isSolid()) {		// they need argument or not?¿

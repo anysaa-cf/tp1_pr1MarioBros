@@ -52,7 +52,15 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	public boolean playerWins() {
 		return this.win;
 	}
-
+	
+	public void win() {
+		this.win = true;
+	}
+	
+	public void lose() {
+		this.lose = true;
+	}
+	
 	public boolean playerLoses() {
 		return this.lose;
 	}
@@ -80,7 +88,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public boolean isFinished() {
-		return (!playerWins() ? false : !playerLoses() ? false : !this.exit ? false : true);
+		return playerWins() || playerLoses() || this.exit;
 	}
 	
 	public void exit() {
@@ -202,6 +210,10 @@ public class Game implements GameModel, GameStatus, GameWorld {
 
 	public void addPoints(int newPoints) {
 		this.points += newPoints;
+	}
+	
+	public boolean isDifferent(GameItem o1, GameItem o2) {
+		return o1.hashCode() != o2.hashCode();
 	}
 	
 	public boolean isInsideBounds(Position position) {

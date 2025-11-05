@@ -54,6 +54,7 @@ public class Mario extends MovingObject {
 		if(life <= 0) {
 			objectDies();
 			game.marioDies();
+			objectDies();
 		}
 		else {
 			if(big)
@@ -126,61 +127,41 @@ public class Mario extends MovingObject {
 	protected void move() {
 		Position nextPos;
 		boolean ground;
-		
+		if(isAlive()) {
 			if(actionList.isEmpty()) {		// no more actions -> automatic movement
 				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());
-				 ground = game.isSolid(nextPos); 																						
+																										
 				
-				if(!ground && game.isInsideBounds(nextPos))
+				if(game.isInsideBounds(nextPos))
 					updatePos(nextPos); // automatic movement if there is no ground taken the last Action movement
 			}
 			else {		// actions -> movement declared by the player
 				Action action = this.actionList.getAction();
-				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());
-				 ground = game.isSolid(nextPos); 																						
+				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());																					
 			
-				if(!ground && game.isInsideBounds(nextPos))
-					processAction(action, nextPos);
+				if(game.isInsideBounds(nextPos))
+					updatePos(nextPos);
 				this.action = action;
 			}
 			if(actionList.isEmpty())
 				restartC();
-	}
-	
-	public void processAction(Action action, Position nextPos) {
-		switch(action) {
-		
-		case Action.RIGHT:
-			updatePos(nextPos);
-			break;
-		
-		case Action.LEFT:
-			updatePos(nextPos);
-			break;
-
-		case Action.UP:
-			updatePos(nextPos);
-			break;
-
-		case Action.DOWN:
-			updatePos(nextPos);	
-			break;
-		
-		default:
-			break;
 		}
 	}
 
 	@Override
 	public boolean interactWith(GameItem other) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean canInteract = this.isAlive() && other.isAlive() && other.isInPosition(new Position(getRow(), getCol()));
+		if(canInteract) {
+			other.receiveInteraction(this);
+		}
+		return canInteract;
 	}
 
 	@Override
 	public boolean receiveInteraction(Ground ground) {
-		// TODO Auto-generated method stub
-		return false;
+		Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY()); 
+		updatePos(returnPos);
+		return true;
 	}
 
 	@Override
@@ -191,13 +172,20 @@ public class Mario extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(ExitDoor door) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return true;
 	}
 
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
-		// TODO Auto-generated method stub
+		if(!isFalling()) {
+			marioDies();
+			Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY()); 
+			updatePos(returnPos);
+		}
+		else
+			game.addPoints(10);
+			
 		return false;
 	}
 

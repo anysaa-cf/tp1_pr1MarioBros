@@ -30,7 +30,7 @@ public class Goomba extends MovingObject {
 				int nextCol = getCol() + action.getY();
 				int nextRow = getRow() + action.getX();
 				Position nextPos = new Position(nextRow, nextCol);// get the next position given the action
-				if(game.isInsideBounds(nextPos) && !game.isInsideBounds(nextPos)) {
+				if(game.isInsideBounds(nextPos)) {
 					updatePos(nextPos);
 				} else {
 					changeAction();
@@ -58,31 +58,44 @@ public class Goomba extends MovingObject {
 
 	@Override
 	public boolean interactWith(GameItem other) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean canInteract = this.isAlive() && other.isAlive() && other.isInPosition(new Position(this.getRow(), this.getCol()));
+		if(canInteract && game.isDifferent(other, this)) {
+			other.receiveInteraction(this);
+		}
+		return canInteract;
 	}
 
 	@Override
 	public boolean receiveInteraction(Ground ground) {
-		// TODO Auto-generated method stub
+		Position returnPos = new Position(getRow() + 1, getCol());
+		if(ground.isInPosition(returnPos)){
+			updatePos(returnPos);
+		}
+		else {
+			updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
+			changeAction();
+		}
 		return false;
 	}
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-		// TODO Auto-generated method stub
-		return false;
+		if(mario.isFalling())
+			goombaDies();
+		return true;
 	}
 
 	@Override
 	public boolean receiveInteraction(ExitDoor door) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
-		// TODO Auto-generated method stub
-		return false;
+		this.changeAction();
+		move();
+		goomba.changeAction();
+		return true;
 	}
 }

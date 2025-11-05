@@ -20,13 +20,13 @@ public class Ground extends GameObject {
 	
 	}
 
-	public boolean isAlive() {
-		return false;
-	}
-
 	@Override
 	public boolean interactWith(GameItem other) {
-		return false;
+		boolean canInteract = this.isAlive() && other.isAlive() && other.isInPosition(new Position(getRow(), getCol()));
+		if(canInteract) {
+			other.receiveInteraction(this);
+		}
+		return canInteract;
 	}
 
 	@Override
@@ -36,7 +36,8 @@ public class Ground extends GameObject {
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-		return false;
+		
+		return true;
 	}
 
 	@Override
@@ -46,7 +47,8 @@ public class Ground extends GameObject {
 
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
-		return false;
+		
+		return true;
 	}
 
 

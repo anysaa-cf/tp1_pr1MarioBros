@@ -8,29 +8,19 @@ import tp1.logic.Position;
 
 public abstract class MovingObject extends GameObject {
 	protected Action action;
-	private boolean isAlive;
 	private boolean isFalling;
 
 	public MovingObject(Game game, Position pos, Action action) {
 		super(game, pos, false);
-		this.isAlive = true;
 		this.action = action;
 		this.isFalling = isFalling();
 	}
 	
-	public boolean isAlive() {
-		return isAlive;
-	}
-	
-	public void objectDies() {
-		isAlive = false;
-	}
-	
 	public boolean isFalling() {
 		Position nextPos = new Position(getRow() + 1, getCol());
-		boolean ground = game.isSolid(nextPos);
+		boolean solidObject = game.isSolid(nextPos);
 		
-		if(ground && action != Action.DOWN)
+		if(solidObject && action != Action.DOWN)
 			return false;
 		else
 			return true;

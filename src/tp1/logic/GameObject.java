@@ -5,12 +5,14 @@ import tp1.logic.gameobjects.*;
 public abstract class GameObject implements GameItem {
 	private Position pos; 
 	private boolean isSolid;
+	private boolean isAlive;
 	protected Game game; 
 	
 	public GameObject(Game game, Position pos, boolean bool) {
 		this.pos = pos;
 		this.game = game;
 		this.isSolid = bool;
+		this.isAlive = true;
 	}
 	
 	public void updatePos(Position pos) {
@@ -23,6 +25,14 @@ public abstract class GameObject implements GameItem {
 	
 	public int getCol() {
 		return pos.getCol();
+	}
+	
+	public void objectDies() {
+		isAlive = false;
+	}
+	
+	public boolean isAlive() {
+		return this.isAlive;
 	}
 	
 	public boolean isInPosition(Position p) {

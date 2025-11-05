@@ -20,39 +20,38 @@ public class ExitDoor extends GameObject {
 	public void update() {
 		//Leave empty
 	}
-
-	public boolean isAlive() {
-		//Leave empty
-		return false;
-	}
-
+	
 	@Override
 	public boolean interactWith(GameItem other) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean canInteract = this.isAlive() && other.isAlive() && other.isInPosition(new Position(getRow(), getCol()));
+		if(canInteract) {
+			other.receiveInteraction(this);
+		}
+		return canInteract;
 	}
-
+	
 	@Override
 	public boolean receiveInteraction(Ground ground) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
-
+	
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-		// TODO Auto-generated method stub
-		return false;
+		game.win();
+		objectDies();
+		return true;
 	}
-
+	
 	@Override
 	public boolean receiveInteraction(ExitDoor door) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
-
+	
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 }

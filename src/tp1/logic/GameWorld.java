@@ -5,6 +5,6 @@ public interface GameWorld {
 	public int remainingTime();
 	public int points();
 	public int numLives();
-	
-	public void addPoints(int newPoints);	//?¿
+	public void tryInteractionsFrom(GameItem object);
+	public void addPoints(int newPoints);	
 }

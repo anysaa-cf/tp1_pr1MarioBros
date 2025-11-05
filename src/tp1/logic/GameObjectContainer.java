@@ -11,7 +11,7 @@ public class GameObjectContainer {
 		gameObjects = new ArrayList<GameObject>();
 	}
 	
-	public void add(GameObject object) {	// adding every object to the container without knowing which object is
+	public void add(GameObject object) {	
 		gameObjects.add(object);
 	}
 	
@@ -20,7 +20,7 @@ public class GameObjectContainer {
 		String icon = Messages.EMPTY;
 		
 		for(GameObject o: gameObjects) {
-			if(o.isInPosition(pos)) {
+			if(o.isInPosition(pos) && o.isAlive()) {
 				icon += o.getIcon();
 			}
 		}

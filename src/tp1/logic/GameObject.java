@@ -36,25 +36,10 @@ public abstract class GameObject implements GameItem {
 	public abstract void update();
 	public abstract String getIcon();
 	
-	public boolean interactWith(GameItem other) {
-		//TODO
-		return false;
-	}	
-	public boolean receiveInteraction(Ground ground) {
-		//TODO
-		return false;
-	}
-	public boolean receiveInteraction(Mario mario) {
-		//TODO
-		return false;
-	}
-	public boolean receiveInteraction(ExitDoor door) {
-		//TODO
-		return false;
-	}
-	public boolean receiveInteraction(Goomba goomba) {
-		//TODO
-		return false;
-	}
+	abstract public boolean interactWith(GameItem other);
+	abstract public boolean receiveInteraction(Ground ground);
+	abstract public boolean receiveInteraction(Mario mario);
+	abstract public boolean receiveInteraction(ExitDoor door);
+	abstract public boolean receiveInteraction(Goomba goomba);
 
 }

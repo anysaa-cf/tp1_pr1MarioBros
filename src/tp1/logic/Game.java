@@ -95,9 +95,8 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		this.exit = true;
 	}
 	
-	public void resetGame(int level) {
+	public void reset() {
 		this.remainingTime = 100;
-		nLevel = level;
 		initGame();
 	}
 

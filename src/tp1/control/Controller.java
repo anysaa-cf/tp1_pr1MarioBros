@@ -34,8 +34,7 @@ public class Controller {
 			Command command = CommandGenerator.parse(words);
 
 			if (command != null) {
-				command.execute(game, view);
-				view.showGame();				
+				command.execute(game, view);				
 			}
 			else 
 				view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", words)));

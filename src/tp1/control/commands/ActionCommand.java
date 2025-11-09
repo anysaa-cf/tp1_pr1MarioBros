@@ -37,6 +37,7 @@ public class ActionCommand extends AbstractCommand{
 		while(!ACTION.isEmpty()) // for every value of the action list
 			game.addAction(ACTION.getAction()); // here we add the action list to the game. This is what an action command does
 		game.update();
+		view.showGame();
 	}
 
 	public String helpText() {

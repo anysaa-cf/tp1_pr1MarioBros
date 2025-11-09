@@ -45,26 +45,18 @@ public class Mario extends MovingObject {
 	
 
 	public void update() {
-		while(!actionList.isEmpty()) {
+		if(!actionList.isEmpty()) {
+			while(!actionList.isEmpty()) {
+				// mario moves according to the players actions
+				move();	
+				game.tryInteractionsFrom(this);
+			}	
+		} else {
+			// automatic movement if there are no actions?¿
 			move();
 			game.tryInteractionsFrom(this);
 		}
 	}
-	
-	/*public void marioDies() {
-		if(life <= 0) {
-			objectDies();
-			game.marioDies();
-			objectDies();
-		}
-		else {
-			if(big)
-				this.big = false;
-			else
-				this.life--;
-		}
-			
-	}*/
 	
 	public void addAction(Action action) {
 		if(updateC(action)) 

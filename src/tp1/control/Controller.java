@@ -33,11 +33,12 @@ public class Controller {
 			String[] words = view.getPrompt();
 			Command command = CommandGenerator.parse(words);
 
-			if (command != null)
+			if (command != null) {
 				command.execute(game, view);
+				view.showGame();				
+			}
 			else 
 				view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", words)));
-			view.showGame();
 		}
 		view.showEndMessage();
 	}

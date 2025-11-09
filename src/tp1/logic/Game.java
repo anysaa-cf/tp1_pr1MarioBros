@@ -41,9 +41,9 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		}
 	}
 	
-	public void hit() {
+	/*public void hit() {
 		mario.marioDies();
-	}
+	}*/
 	
 	public String positionToString(int col, int row) {
 		return gameObjects.positionToString(col, row);
@@ -77,7 +77,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		return 0;
 	}
 
-	// creation of the update method
 	public void update() {
 			remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
 			gameObjects.update();

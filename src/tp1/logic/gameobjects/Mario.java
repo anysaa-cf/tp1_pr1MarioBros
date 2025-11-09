@@ -42,6 +42,7 @@ public class Mario extends MovingObject {
 		}
 		return icon;
 	}
+	
 
 	public void update() {
 		while(!actionList.isEmpty()) {
@@ -50,7 +51,7 @@ public class Mario extends MovingObject {
 		}
 	}
 	
-	public void marioDies() {
+	/*public void marioDies() {
 		if(life <= 0) {
 			objectDies();
 			game.marioDies();
@@ -63,7 +64,7 @@ public class Mario extends MovingObject {
 				this.life--;
 		}
 			
-	}
+	}*/
 	
 	public void addAction(Action action) {
 		if(updateC(action)) 
@@ -166,27 +167,36 @@ public class Mario extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean receiveInteraction(ExitDoor door) {
-		
+		game.marioExited();
 		return true;
 	}
 
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
-		if(!isFalling()) {
-			marioDies();
-			Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY()); 
-			updatePos(returnPos);
+		boolean marioKillsGoomba = false;
+		
+		if(isFalling()) {
+			marioKillsGoomba = true;	// mario falls on top of a goomba
 		}
-		else
-			game.addPoints(10);
-			
-		return false;
+		else {
+			// mario collides with goomba without falling
+			if(big) {
+				this.big = false;
+			} else {
+				this.life--;
+				if(this.life <= 0) {
+					objectDies();	// object mario dies
+					game.marioDies();	// tells the game that mario has lost
+				}
+			}
+		}
+				
+		return marioKillsGoomba;
 	}
 
 }

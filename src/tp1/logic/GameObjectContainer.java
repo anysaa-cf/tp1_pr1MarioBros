@@ -16,7 +16,7 @@ public class GameObjectContainer {
 	}
 	
 	public String positionToString(int col, int row) {
-		Position pos = new Position(row, col);		// Position pos = new Position(col, row)?¿ 
+		Position pos = new Position(row, col);		 
 		String icon = Messages.EMPTY;
 		
 		for(GameObject o: gameObjects) {
@@ -39,7 +39,7 @@ public class GameObjectContainer {
 	
 	public void update() {
 		for(GameObject o : gameObjects) {
-			o.update();			// update needs to be also in the gameitem?¿
+			o.update();			
 		}
 	}
 

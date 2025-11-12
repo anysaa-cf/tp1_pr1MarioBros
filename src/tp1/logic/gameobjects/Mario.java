@@ -19,6 +19,9 @@ public class Mario extends MovingObject {
 	private static final String NAME = Messages.MARIO_NAME;
 	private static final String SHORTCUT = Messages.MARIO_SHORTCUT;
 	
+	
+	protected Position pos;		// ?¿ im not sure if we need this to do in the parse: new Mario(game, pos)
+	
 	public Mario(Game game, Position pos) {
 		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
 		this.actionList = new ActionList();
@@ -199,24 +202,8 @@ public class Mario extends MovingObject {
 	@Override
 	public GameObject parse(String[] objWords, GameWorld game) {
 		if(objWords.length >= 2 && objWords.length <= 4) {
-			// each coordinate row and col counts as an element in the array
-			int row, col;
+			super.parse(objWords, game);
 			
-			String aux = objWords[0].replaceAll("[()\\s]", ""); // deletes '(', ')' and spaces
-	        String[] parts = aux.split(",");
-			
-	        row = Integer.parseInt(parts[0]);
-	        col = Integer.parseInt(parts[1]);
-	        
-			
-			Position pos = new Position(row, col);
-			
-			updatePos(pos);
-			this.game = game;
-			if(objWords.length > 2)
-				this.action = (Action.parseActionClass(objWords[2].toLowerCase()));		// in moving object , call the super parse method of moving object
-			
-		
 			if(objWords.length > 3) {
 				String attributeMario = objWords[3].toLowerCase();
 				
@@ -226,16 +213,9 @@ public class Mario extends MovingObject {
 					big = true;
 				}
 			}
-			
-			String objType = objWords[1].toLowerCase();
-			
-			if(matchObjectName(objType)) {
-				return this;
-			}
-			
 		}
 		
-		return null;
+		return new Mario(game, pos);		//?¿
 	}
 
 }

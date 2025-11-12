@@ -3,6 +3,7 @@ package tp1.logic.gameobjects;
 import tp1.logic.Action;
 import tp1.logic.Game;
 import tp1.logic.GameObject;
+import tp1.logic.GameWorld;
 import tp1.logic.Position;
 
 public abstract class MovingObject extends GameObject {
@@ -26,4 +27,16 @@ public abstract class MovingObject extends GameObject {
 	}
 	
 	protected abstract void move();
+	
+	public GameObject parse (String objWords[], GameWorld game) {
+		super.parse(objWords, game);
+		
+		if(objWords.length > 2) {
+			this.action = (Action.parseActionClass(objWords[2].toLowerCase()));					
+		}
+		
+		
+		return this;		// ?¿
+		
+	}
 }

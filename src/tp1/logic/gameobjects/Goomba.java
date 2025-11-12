@@ -9,14 +9,12 @@ import tp1.logic.Position;
 import tp1.view.Messages;
 
 public class Goomba extends MovingObject {
-	//private boolean isMobile; // characteristic from goomba
 	
 	private static final String NAME = Messages.GOOMBA_NAME;
 	private static final String SHORTCUT = Messages.GOOMBA_SHORTCUT;
 	
 	public Goomba(Game game, Position pos) {
-		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
-		//this.isMobile = true;		// initial movement from right to left
+		super(game, pos, Action.RIGHT, NAME, SHORTCUT);		// action.left?¿
 	}
 	
 	public String getIcon() {
@@ -106,35 +104,4 @@ public class Goomba extends MovingObject {
 		return true;
 	}
 
-	@Override
-	public GameObject parse(String[] objWords, GameWorld game) {
-		if(objWords.length >= 2 && objWords.length <= 4) {
-			// each coordinate row and col counts as an element in the array
-			int row, col;
-			
-			String aux = objWords[0].replaceAll("[()\\s]", ""); // deletes '(', ')' and spaces
-	        String[] parts = aux.split(",");
-			
-	        row = Integer.parseInt(parts[0]);
-	        col = Integer.parseInt(parts[1]);
-	        
-			
-			Position pos = new Position(row, col);
-			
-			updatePos(pos);
-			this.game = game;
-			if(objWords.length > 2) {
-				this.action = (Action.parseActionClass(objWords[2].toLowerCase()));		//?¿				
-			}
-			
-			String objType = objWords[1].toLowerCase();
-			
-			if(matchObjectName(objType)) {
-				return this;
-			}
-			
-		}
-		
-		return null;
-	}
 }

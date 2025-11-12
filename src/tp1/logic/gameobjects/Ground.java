@@ -52,11 +52,4 @@ public class Ground extends GameObject {
 		return true;
 	}
 
-	/*@Override
-	public GameObject parse(String[] objWords, GameWorld game) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
-
-
 }

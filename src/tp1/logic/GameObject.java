@@ -6,7 +6,7 @@ public abstract class GameObject implements GameItem {
 	private Position pos; 
 	private boolean isSolid;
 	private boolean isAlive;
-	protected Game game; 
+	protected GameWorld game; 
 	
 	private final String name;
 	private final String shortcut;
@@ -58,26 +58,37 @@ public abstract class GameObject implements GameItem {
 	abstract public boolean receiveInteraction(Goomba goomba);
 	
 	public GameObject parse (String objWords[], GameWorld game) {
-		
-		if(objWords.length >= 3) {
+		if(objWords.length >= 2) {
 			// each coordinate row and col counts as an element in the array
 			int row, col;
 			
-			row = Integer.parseInt(objWords[0]);
-			col = Integer.parseInt(objWords[1]);
+			String aux = objWords[0].replaceAll("[()\\s]", ""); // deletes '(', ')' and spaces
+	        String[] parts = aux.split(",");
+			
+	        row = Integer.parseInt(parts[0]);
+	        col = Integer.parseInt(parts[1]);
+	        
 			
 			pos = new Position(row, col);
+			this.game = game;
 			
-			String objType = objWords[2].toLowerCase();
+			String objType = objWords[1].toLowerCase();
 			
-			/*if(matchObjName(objType)) {		// create this method
+			if(matchObjectName(objType)) {
 				return this;
-			}*/
+			}
 		}
 		
 		return null;
 	}
 	
+	protected String getName() { return name; }
+	protected String getShortcut() { return shortcut; }
+	
+	protected boolean matchObjectName(String nameObject) {
+		return getShortcut().equalsIgnoreCase(nameObject) ||
+				getName().equalsIgnoreCase(nameObject);
+	}
 	
 
 }

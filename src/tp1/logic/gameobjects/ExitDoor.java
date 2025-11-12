@@ -55,9 +55,4 @@ public class ExitDoor extends GameObject {
 		return false;
 	}
 
-	/*@Override
-	public GameObject parse(String[] objWords, GameWorld game) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 }

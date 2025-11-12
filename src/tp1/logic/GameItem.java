@@ -16,4 +16,6 @@ public interface GameItem {
 		public boolean receiveInteraction(Mario mario);
 		public boolean receiveInteraction(ExitDoor door);
 		public boolean receiveInteraction(Goomba goomba);
+		
+		public GameObject parse (String objWords[], GameWorld game);
 }

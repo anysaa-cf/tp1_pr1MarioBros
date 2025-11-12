@@ -9,9 +9,11 @@ import tp1.logic.Position;
 
 
 public class ExitDoor extends GameObject {
+	private static final String NAME = Messages.EXITDOOR_NAME;
+	private static final String SHORTCUT = Messages.EXITDOOR_SHORTCUT;
 	
 	public ExitDoor(Game game,Position pos) {
-		super(game, pos, false);
+		super(game, pos, false, NAME, SHORTCUT);
 	}
 	
 	public String getIcon() {

@@ -14,10 +14,13 @@ public class Mario extends MovingObject {
 	private ActionList actionList;
 	private int life; // added recently, now that there is a Mario object in game, we can have life attribute here 
 	private int rightC, leftC, upC, downC;
-	private boolean big;		
+	private boolean big;
+	
+	private static final String NAME = Messages.MARIO_NAME;
+	private static final String SHORTCUT = Messages.MARIO_SHORTCUT;
 	
 	public Mario(Game game, Position pos) {
-		super(game, pos, Action.RIGHT);
+		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
 		this.actionList = new ActionList();
 		this.big = true;
 		this.life = 3;

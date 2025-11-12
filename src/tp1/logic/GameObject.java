@@ -8,11 +8,16 @@ public abstract class GameObject implements GameItem {
 	private boolean isAlive;
 	protected Game game; 
 	
-	public GameObject(Game game, Position pos, boolean bool) {
+	private final String name;
+	private final String shortcut;
+	
+	public GameObject(Game game, Position pos, boolean bool, String name, String shortcut) {
 		this.pos = pos;
 		this.game = game;
 		this.isSolid = bool;
 		this.isAlive = true;
+		this.name = name;
+		this.shortcut = shortcut;
 	}
 	
 	public void updatePos(Position pos) {
@@ -72,5 +77,7 @@ public abstract class GameObject implements GameItem {
 		
 		return null;
 	}
+	
+	
 
 }

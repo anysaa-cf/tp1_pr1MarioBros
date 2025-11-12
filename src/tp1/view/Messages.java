@@ -127,6 +127,31 @@ public class Messages {
 	// action stop
 	public static final String ACTION_STOP = "stop";
 	public static final String ACTION_STOP_SHORTCUT = "s";
+	
+	
+	// gameObjects
+	// mario
+	public static final String MARIO_NAME = "mario";
+	public static final String MARIO_SHORTCUT = "m";
+	
+	// mario attributes
+	public static final String MARIO_BIG_NAME = "big";
+	public static final String MARIO_BIG_SHORTCUT = "b";
+	public static final String MARIO_SMALL_NAME = "small";
+	public static final String MARIO_SMALL_SHORTCUT = "s";
+	
+	// goomba
+	public static final String GOOMBA_NAME = "goomba";
+	public static final String GOOMBA_SHORTCUT = "g";
+	
+	// ground
+	public static final String GROUND_NAME = "ground";
+	public static final String GROUND_SHORTCUT = "gr";
+	
+	// exitDoor
+	public static final String EXITDOOR_NAME = "exitdoor";
+	public static final String EXITDOOR_SHORTCUT = "ed";
+	
 
 //Symbols
 	public static final String EMPTY = "";

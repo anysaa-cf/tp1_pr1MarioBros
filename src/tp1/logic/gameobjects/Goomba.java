@@ -11,8 +11,11 @@ import tp1.view.Messages;
 public class Goomba extends MovingObject {
 	//private boolean isMobile; // characteristic from goomba
 	
+	private static final String NAME = Messages.GOOMBA_NAME;
+	private static final String SHORTCUT = Messages.GOOMBA_SHORTCUT;
+	
 	public Goomba(Game game, Position pos) {
-		super(game, pos, Action.RIGHT);
+		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
 		//this.isMobile = true;		// initial movement from right to left
 	}
 	

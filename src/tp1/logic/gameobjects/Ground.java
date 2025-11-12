@@ -8,9 +8,11 @@ import tp1.logic.Position;
 import tp1.view.Messages;
 
 public class Ground extends GameObject {
-
+	private static final String NAME = Messages.GROUND_NAME;
+	private static final String SHORTCUT = Messages.GROUND_SHORTCUT;
+	
 	public Ground(Game game, Position pos) {
-		super(game, pos, true);
+		super(game, pos, true, NAME, SHORTCUT);
 	}
 	
 	public String getIcon() {

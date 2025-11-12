@@ -22,7 +22,7 @@ public class Mario extends MovingObject {
 	
 	protected Position pos;		// ?¿ im not sure if we need this to do in the parse: new Mario(game, pos)
 	
-	public Mario(Game game, Position pos) {
+	public Mario(GameWorld game, Position pos) {
 		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
 		this.actionList = new ActionList();
 		this.big = true;

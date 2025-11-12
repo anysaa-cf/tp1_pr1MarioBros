@@ -10,7 +10,7 @@ public abstract class MovingObject extends GameObject {
 	protected Action action;
 	private boolean isFalling;
 	
-	public MovingObject(Game game, Position pos, Action action, String name, String shortcut) {
+	public MovingObject(GameWorld game, Position pos, Action action, String name, String shortcut) {
 		super(game, pos, false, name, shortcut);
 		this.action = action;
 		this.isFalling = isFalling();

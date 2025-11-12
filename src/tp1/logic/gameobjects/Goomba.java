@@ -3,6 +3,8 @@ package tp1.logic.gameobjects;
 import tp1.logic.Action;
 import tp1.logic.Game;
 import tp1.logic.GameItem;
+import tp1.logic.GameObject;
+import tp1.logic.GameWorld;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
@@ -90,7 +92,6 @@ public class Goomba extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(ExitDoor door) {
-		
 		return false;
 	}
 
@@ -100,5 +101,11 @@ public class Goomba extends MovingObject {
 		move();
 		goomba.changeAction();
 		return true;
+	}
+
+	@Override
+	public GameObject parse(String[] objWords, GameWorld game) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

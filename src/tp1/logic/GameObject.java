@@ -51,5 +51,26 @@ public abstract class GameObject implements GameItem {
 	abstract public boolean receiveInteraction(Mario mario);
 	abstract public boolean receiveInteraction(ExitDoor door);
 	abstract public boolean receiveInteraction(Goomba goomba);
+	
+	public GameObject parse (String objWords[], GameWorld game) {
+		
+		if(objWords.length >= 3) {
+			// each coordinate row and col counts as an element in the array
+			int row, col;
+			
+			row = Integer.parseInt(objWords[0]);
+			col = Integer.parseInt(objWords[1]);
+			
+			pos = new Position(row, col);
+			
+			String objType = objWords[2].toLowerCase();
+			
+			/*if(matchObjName(objType)) {		// create this method
+				return this;
+			}*/
+		}
+		
+		return null;
+	}
 
 }

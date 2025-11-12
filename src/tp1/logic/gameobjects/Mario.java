@@ -4,6 +4,8 @@ import tp1.logic.Action;
 import tp1.logic.ActionList;
 import tp1.logic.Game;
 import tp1.logic.GameItem;
+import tp1.logic.GameObject;
+import tp1.logic.GameWorld;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
@@ -189,6 +191,12 @@ public class Mario extends MovingObject {
 		}
 				
 		return marioKillsGoomba;
+	}
+
+	@Override
+	public GameObject parse(String[] objWords, GameWorld game) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

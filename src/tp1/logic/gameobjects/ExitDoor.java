@@ -1,6 +1,7 @@
 package tp1.logic.gameobjects;
 
 import tp1.logic.GameObject;
+import tp1.logic.GameWorld;
 import tp1.view.Messages;
 import tp1.logic.Game;
 import tp1.logic.GameItem;
@@ -32,7 +33,6 @@ public class ExitDoor extends GameObject {
 	
 	@Override
 	public boolean receiveInteraction(Ground ground) {
-		
 		return false;
 	}
 	
@@ -45,13 +45,17 @@ public class ExitDoor extends GameObject {
 	
 	@Override
 	public boolean receiveInteraction(ExitDoor door) {
-		
 		return false;
 	}
 	
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
-		
 		return false;
 	}
+
+	/*@Override
+	public GameObject parse(String[] objWords, GameWorld game) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
 }

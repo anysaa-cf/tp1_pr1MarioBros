@@ -3,6 +3,7 @@ package tp1.logic.gameobjects;
 import tp1.logic.Game;
 import tp1.logic.GameItem;
 import tp1.logic.GameObject;
+import tp1.logic.GameWorld;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
@@ -36,7 +37,6 @@ public class Ground extends GameObject {
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-		
 		return true;
 	}
 
@@ -47,9 +47,14 @@ public class Ground extends GameObject {
 
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
-		
 		return true;
 	}
+
+	/*@Override
+	public GameObject parse(String[] objWords, GameWorld game) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
 
 
 }

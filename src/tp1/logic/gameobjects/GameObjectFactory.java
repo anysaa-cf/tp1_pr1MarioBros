@@ -19,7 +19,7 @@ public class GameObjectFactory {
 		for(GameObject obj : availableObjects) {
 			GameObject gameObject = obj.parse(objWords, game);		// calls the parse method of each gameObject
 			
-			if(obj != null) {
+			if(gameObject != null) {
 				return obj;
 			}
 		}

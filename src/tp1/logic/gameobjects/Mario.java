@@ -19,9 +19,6 @@ public class Mario extends MovingObject {
 	private static final String NAME = Messages.MARIO_NAME;
 	private static final String SHORTCUT = Messages.MARIO_SHORTCUT;
 	
-	
-	protected Position pos;		// ?¿ im not sure if we need this to do in the parse: new Mario(game, pos)
-	
 	public Mario(GameWorld game, Position pos) {
 		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
 		this.actionList = new ActionList();
@@ -206,7 +203,6 @@ public class Mario extends MovingObject {
 	}
 
 	public GameObject parse(String[] objWords, GameWorld game) {
-			
 			if(objWords.length > 3) {
 				String attributeMario = objWords[3].toLowerCase();
 				

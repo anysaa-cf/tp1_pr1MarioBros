@@ -11,9 +11,9 @@ public abstract class GameObject implements GameItem {
 	private final String name;
 	private final String shortcut;
 	
-	public GameObject(GameWorld game2, Position pos, boolean bool, String name, String shortcut) {
+	public GameObject(GameWorld game, Position pos, boolean bool, String name, String shortcut) {
 		this.pos = pos;
-		this.game = game2;
+		this.game = game;
 		this.isSolid = bool;
 		this.isAlive = true;
 		this.name = name;

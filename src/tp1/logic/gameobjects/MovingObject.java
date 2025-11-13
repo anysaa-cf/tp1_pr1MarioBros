@@ -29,14 +29,10 @@ public abstract class MovingObject extends GameObject {
 	protected abstract void move();
 	
 	public GameObject parse (String objWords[], GameWorld game) {
-		super.parse(objWords, game);
 		
 		if(objWords.length > 2) {
 			this.action = (Action.parseActionClass(objWords[2].toLowerCase()));					
 		}
-		
-		
-		return this;		// ?¿
-		
+		return super.parse(objWords, game);		
 	}
 }

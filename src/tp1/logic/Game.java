@@ -74,7 +74,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public int numLives() {
-		return 0;
+		return mario.marioLife();
 	}
 
 	public void update() {

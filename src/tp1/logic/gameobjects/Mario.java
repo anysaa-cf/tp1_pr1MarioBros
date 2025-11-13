@@ -51,7 +51,10 @@ public class Mario extends MovingObject {
 		return icon;
 	}
 	
-
+	public int marioLife() {
+		return life;
+	}
+	
 	public void update() {
 		if(!actionList.isEmpty()) {
 			while(!actionList.isEmpty()) {
@@ -175,47 +178,43 @@ public class Mario extends MovingObject {
 		game.marioExited();
 		return true;
 	}
-
-	@Override
-	public boolean receiveInteraction(Goomba goomba) {
-		boolean marioKillsGoomba = false;
-		
-		if(isFalling()) {
-			marioKillsGoomba = true;	// mario falls on top of a goomba
+	
+	public void marioDies() {
+		if(life <= 0) {
+			objectDies();
+			game.marioDies();
 		}
 		else {
-			// mario collides with goomba without falling
-			if(big) {
+			if(big)
 				this.big = false;
-			} else {
+			else
 				this.life--;
-				if(this.life <= 0) {
-					objectDies();	// object mario dies
-					game.marioDies();	// tells the game that mario has lost
-				}
-			}
 		}
-				
-		return marioKillsGoomba;
+	}
+	
+	@Override
+	public boolean receiveInteraction(Goomba goomba) {
+		if(!isFalling()) {
+			marioDies();
+			Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY()); 
+			updatePos(returnPos);
+		}
+		else
+			game.addPoints(10);
+			
+		return true;
 	}
 
-	@Override
 	public GameObject parse(String[] objWords, GameWorld game) {
-		if(objWords.length >= 2 && objWords.length <= 4) {
-			super.parse(objWords, game);
 			
 			if(objWords.length > 3) {
 				String attributeMario = objWords[3].toLowerCase();
 				
 				if(attributeMario == Messages.MARIO_SMALL_NAME || attributeMario == Messages.MARIO_SMALL_SHORTCUT) {
 					big = false;
-				} else {
-					big = true;
 				}
 			}
-		}
-		
-		return new Mario(game, pos);		//?¿
+			return super.parse(objWords, game);
 	}
 
 }

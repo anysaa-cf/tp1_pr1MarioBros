@@ -193,6 +193,10 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		mario.addAction(action);
 	}
 	
+	public void addObj(GameObject obj) {
+		gameObjects.add(obj);
+	}
+	
 	public void marioExited() {
 		this.points = remainingTime * 10;
 		this.win = true;

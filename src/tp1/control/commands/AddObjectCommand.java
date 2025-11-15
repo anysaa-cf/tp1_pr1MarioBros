@@ -17,6 +17,7 @@ public class AddObjectCommand extends NoParamsCommand {
 	private static final String HELP = Messages.COMMAND_ADD_OBJECT_HELP;
 	
 	private String objDescription[];
+	private GameObjectFactory factory;
 	
 	public AddObjectCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
@@ -35,7 +36,7 @@ public class AddObjectCommand extends NoParamsCommand {
 	public void execute(Game game, GameView view) {
 		String objDescr = String.join(" ", objDescription);
 	
-		GameObjectFactory factory = new GameObjectFactory();
+//		GameObjectFactory factory = new GameObjectFactory();
 		GameObject gameObj = factory.parse(objDescription, game);
 		
 		if(gameObj != null) {

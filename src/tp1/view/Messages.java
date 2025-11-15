@@ -61,6 +61,7 @@ public class Messages {
 	/* @formatter:off */
 	public static final String[] HELP_LINES = new String[] { HELP_AVAILABLE_COMMANDS,
 		"[a]ction [[R]IGHT | [L]EFT | [U]P | [D]OWN | [S]TOP]+: user performs actions",
+		"[a]dd[O]bject <object_description>: adds to the board the object described by object_description",
 		"[u]pdate | \"\": user does not perform any action",
 		"[r]eset [numLevel]: reset the game to initial configuration if not numLevel else load the numLevel map",
 		"[h]elp: print this help message",

@@ -206,7 +206,8 @@ public class Mario extends MovingObject {
 			if(objWords.length > 3) {
 				String attributeMario = objWords[3].toLowerCase();
 				
-				if(attributeMario == Messages.MARIO_SMALL_NAME || attributeMario == Messages.MARIO_SMALL_SHORTCUT) {
+				if(attributeMario == Messages.MARIO_SMALL_NAME 
+						|| attributeMario == Messages.MARIO_SMALL_SHORTCUT) {
 					big = false;
 				}
 			}

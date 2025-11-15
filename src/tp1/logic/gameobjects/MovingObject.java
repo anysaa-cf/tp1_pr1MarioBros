@@ -8,15 +8,20 @@ import tp1.logic.Position;
 
 public abstract class MovingObject extends GameObject {
 	protected Action action;
-	private boolean isFalling;
+//	private boolean isFalling;
 	
 	public MovingObject(GameWorld game, Position pos, Action action, String name, String shortcut) {
 		super(game, pos, false, name, shortcut);
 		this.action = action;
-		this.isFalling = isFalling();
+//		this.isFalling = isFalling();
 	}
 	
 	public boolean isFalling() {
+		// if we want to add an obj and game == null or pos == null
+		if(game == null || pos == null || !isAlive()) {
+			return false;
+		}
+		
 		Position nextPos = new Position(getRow() + 1, getCol());
 		boolean solidObject = game.isSolid(nextPos);
 		

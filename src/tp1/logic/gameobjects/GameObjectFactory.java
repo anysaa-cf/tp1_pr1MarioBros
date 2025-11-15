@@ -15,7 +15,7 @@ public class GameObjectFactory {
 			new Mario(null, null)
 	);
 	
-	public GameObject parse (String objWords[], GameWorld game) {
+	public static GameObject parse (String objWords[], GameWorld game) {
 		for(GameObject obj : availableObjects) {
 			GameObject gameObject = obj.parse(objWords, game);		// calls the parse method of each gameObject
 			

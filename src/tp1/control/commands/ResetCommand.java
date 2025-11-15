@@ -4,24 +4,51 @@ import tp1.logic.Game;
 import tp1.view.GameView;
 import tp1.view.Messages;
 
-public class ResetCommand extends NoParamsCommand {
+public class ResetCommand extends AbstractCommand {
 	
     private static final String NAME = Messages.COMMAND_RESET_NAME;
     private static final String SHORTCUT = Messages.COMMAND_RESET_SHORTCUT;
     private static final String DETAILS = Messages.COMMAND_RESET_DETAILS;
     private static final String HELP = Messages.COMMAND_RESET_HELP;
 
+    private Integer level = null;
+    
 	public ResetCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
 
 	@Override
+	public Command parse(String[] commandWords) {
+		if(matchCommandName(commandWords[0])) {
+			// reset with no parameters
+			if(commandWords.length == 1) {
+				this.level = null;
+				return this;
+			} 
+			
+			// reset with parameters
+			else if (commandWords.length == 2) {
+				this.level = Integer.parseInt(commandWords[1]);
+				return this;
+			}
+		}		
+		
+		return null;
+	}
+
+	@Override
 	public void execute(Game game, GameView view) {
-		game.reset();
+		if(level == null) {
+			game.reset();
+		} else {
+			game.setLevel(level);
+			game.initGame();
+		}
 		view.showGame();
 	}
 	
 	public String helpText() {
 		return DETAILS + ": " + HELP;
 	}
+
 }

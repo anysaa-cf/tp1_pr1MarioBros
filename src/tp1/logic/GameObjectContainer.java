@@ -17,7 +17,7 @@ public class GameObjectContainer {
 	
 	public String positionToString(int col, int row) {
 		Position pos = new Position(row, col);		 
-		String icon = Messages.EMPTY;
+		String icon = Messages.EMPTY;		
 		
 		for(GameObject o: gameObjects) {
 			if(o.isInPosition(pos) && o.isAlive()) {

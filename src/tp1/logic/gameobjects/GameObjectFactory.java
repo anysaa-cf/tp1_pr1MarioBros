@@ -20,7 +20,7 @@ public class GameObjectFactory {
 			GameObject gameObject = obj.parse(objWords, game);		// calls the parse method of each gameObject
 			
 			if(gameObject != null) {
-				return obj;
+				return gameObject;
 			}
 		}
 

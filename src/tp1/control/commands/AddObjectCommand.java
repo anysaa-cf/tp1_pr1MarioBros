@@ -33,7 +33,7 @@ public class AddObjectCommand extends NoParamsCommand {
 	
 	@Override
 	public void execute(Game game, GameView view) {
-		String objDescr = String.join(" ", objDescription);
+		String [] objDescr = String.join(" ", objDescription);
 	
 		GameObjectFactory factory = new GameObjectFactory();
 		GameObject gameObj = factory.parse(objDescription, game);

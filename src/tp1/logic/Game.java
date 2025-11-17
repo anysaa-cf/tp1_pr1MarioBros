@@ -16,7 +16,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private int nLevel;
 	private int lives;
 	private Mario mario; 
-	private GameObjectContainer gameObjects;
+	private GameObjectContainer gameObjectContainer;
 	private boolean win;
 	private boolean lose;
 	private boolean exit;
@@ -47,7 +47,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private void initEmptyLevel() {
 		this.remainingTime = 100;
 		this.lives = 3;
-		gameObjects = new GameObjectContainer();	// we don't add any object, the map is empty
+		gameObjectContainer = new GameObjectContainer();	// we don't add any object, the map is empty
 	}
 
 	public void setLevel(int level) {
@@ -57,11 +57,10 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	public String positionToString(int col, int row) {
 		String icon = "";
 		
-		if(nLevel == -1) {
+		icon = gameObjectContainer.positionToString(col, row);
+		
+		if(nLevel == -1 && icon == "")
 			icon = "*";
-		} else {
-			icon = gameObjects.positionToString(col, row);
-		}
 		
 		return icon;
 	}
@@ -99,11 +98,11 @@ public class Game implements GameModel, GameStatus, GameWorld {
 
 	public void update() {
 			remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
-			gameObjects.update();
+			gameObjectContainer.update();
 	}
 	
 	public boolean isSolid(Position pos) {
-		return gameObjects.isSolid(pos);	
+		return gameObjectContainer.isSolid(pos);	
 	}
 	
 	public boolean isFinished() {
@@ -122,25 +121,25 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private void initLevel0() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-		gameObjects = new GameObjectContainer();
+		gameObjectContainer = new GameObjectContainer();
 	
 		for(int col = 0; col < 15; col++) {
-			gameObjects.add(new Ground(this, new Position(13,col)));
-			gameObjects.add(new Ground(this, new Position(14,col)));		
+			gameObjectContainer.add(new Ground(this, new Position(13,col)));
+			gameObjectContainer.add(new Ground(this, new Position(14,col)));		
 		}
 
-		gameObjects.add(new Ground(this, new Position(Game.DIM_Y-3,9)));
-		gameObjects.add(new Ground(this, new Position(Game.DIM_Y-3,12)));
+		gameObjectContainer.add(new Ground(this, new Position(Game.DIM_Y-3,9)));
+		gameObjectContainer.add(new Ground(this, new Position(Game.DIM_Y-3,12)));
 		for(int col = 17; col < Game.DIM_X; col++) {
-			gameObjects.add(new Ground(this, new Position(Game.DIM_Y-2, col)));
-			gameObjects.add(new Ground(this, new Position(Game.DIM_Y-1, col)));		
+			gameObjectContainer.add(new Ground(this, new Position(Game.DIM_Y-2, col)));
+			gameObjectContainer.add(new Ground(this, new Position(Game.DIM_Y-1, col)));		
 		}
 
-		gameObjects.add(new Ground(this, new Position(9,2)));
-		gameObjects.add(new Ground(this, new Position(9,5)));
-		gameObjects.add(new Ground(this, new Position(9,6)));
-		gameObjects.add(new Ground(this, new Position(9,7)));
-		gameObjects.add(new Ground(this, new Position(5,6)));
+		gameObjectContainer.add(new Ground(this, new Position(9,2)));
+		gameObjectContainer.add(new Ground(this, new Position(9,5)));
+		gameObjectContainer.add(new Ground(this, new Position(9,6)));
+		gameObjectContainer.add(new Ground(this, new Position(9,7)));
+		gameObjectContainer.add(new Ground(this, new Position(5,6)));
 		
 		// Final jump
 		int tamX = 8, tamY= 8;
@@ -148,41 +147,41 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		
 		for(int col = 0; col < tamX; col++) {
 			for (int fila = 0; fila < col+1; fila++) {
-				gameObjects.add(new Ground(this, new Position(posIniY- fila, posIniX+ col)));
+				gameObjectContainer.add(new Ground(this, new Position(posIniY- fila, posIniX+ col)));
 			}
 		}
 
-		gameObjects.add(new ExitDoor(this, new Position(Game.DIM_Y-3, Game.DIM_X-1)));
+		gameObjectContainer.add(new ExitDoor(this, new Position(Game.DIM_Y-3, Game.DIM_X-1)));
 
 		// 3. GameObjects
 		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
-		gameObjects.add(mario);
+		gameObjectContainer.add(mario);
 
-		gameObjects.add(new Goomba(this, new Position(0, 19)));
+		gameObjectContainer.add(new Goomba(this, new Position(0, 19)));
 	}
 	
 	private void initLevel1() {
 		this.nLevel = 0;
 		this.remainingTime = 100;
-		gameObjects = new GameObjectContainer();
+		gameObjectContainer = new GameObjectContainer();
 	
 		for(int col = 0; col < 15; col++) {
-			gameObjects.add(new Ground(this, new Position(13,col)));
-			gameObjects.add(new Ground(this, new Position(14,col)));		
+			gameObjectContainer.add(new Ground(this, new Position(13,col)));
+			gameObjectContainer.add(new Ground(this, new Position(14,col)));		
 		}
 
-		gameObjects.add(new Ground(this, new Position(Game.DIM_Y-3,9)));
-		gameObjects.add(new Ground(this, new Position(Game.DIM_Y-3,12)));
+		gameObjectContainer.add(new Ground(this, new Position(Game.DIM_Y-3,9)));
+		gameObjectContainer.add(new Ground(this, new Position(Game.DIM_Y-3,12)));
 		for(int col = 17; col < Game.DIM_X; col++) {
-			gameObjects.add(new Ground(this, new Position(Game.DIM_Y-2, col)));
-			gameObjects.add(new Ground(this, new Position(Game.DIM_Y-1, col)));		
+			gameObjectContainer.add(new Ground(this, new Position(Game.DIM_Y-2, col)));
+			gameObjectContainer.add(new Ground(this, new Position(Game.DIM_Y-1, col)));		
 		}
 
-		gameObjects.add(new Ground(this, new Position(9,2)));
-		gameObjects.add(new Ground(this, new Position(9,5)));
-		gameObjects.add(new Ground(this, new Position(9,6)));
-		gameObjects.add(new Ground(this, new Position(9,7)));
-		gameObjects.add(new Ground(this, new Position(5,6)));
+		gameObjectContainer.add(new Ground(this, new Position(9,2)));
+		gameObjectContainer.add(new Ground(this, new Position(9,5)));
+		gameObjectContainer.add(new Ground(this, new Position(9,6)));
+		gameObjectContainer.add(new Ground(this, new Position(9,7)));
+		gameObjectContainer.add(new Ground(this, new Position(5,6)));
 		
 		// Final jump
 		int tamX = 8, tamY= 8;
@@ -190,23 +189,23 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		
 		for(int col = 0; col < tamX; col++) {
 			for (int fila = 0; fila < col+1; fila++) {
-				gameObjects.add(new Ground(this, new Position(posIniY- fila, posIniX+ col)));
+				gameObjectContainer.add(new Ground(this, new Position(posIniY- fila, posIniX+ col)));
 			}
 		}
 
-		gameObjects.add(new ExitDoor(this, new Position(Game.DIM_Y-3, Game.DIM_X-1)));
+		gameObjectContainer.add(new ExitDoor(this, new Position(Game.DIM_Y-3, Game.DIM_X-1)));
 
 		// 3. GameObjects
 		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
-		gameObjects.add(mario);
+		gameObjectContainer.add(mario);
 
-		gameObjects.add(new Goomba(this, new Position(0, 19)));
-		gameObjects.add(new Goomba(this, new Position(4, 6)));
-		gameObjects.add(new Goomba(this, new Position(12, 6)));
-		gameObjects.add(new Goomba(this, new Position(12, 8)));
-		gameObjects.add(new Goomba(this, new Position(10, 10)));
-		gameObjects.add(new Goomba(this, new Position(12, 11)));
-		gameObjects.add(new Goomba(this, new Position(12, 14)));
+		gameObjectContainer.add(new Goomba(this, new Position(0, 19)));
+		gameObjectContainer.add(new Goomba(this, new Position(4, 6)));
+		gameObjectContainer.add(new Goomba(this, new Position(12, 6)));
+		gameObjectContainer.add(new Goomba(this, new Position(12, 8)));
+		gameObjectContainer.add(new Goomba(this, new Position(10, 10)));
+		gameObjectContainer.add(new Goomba(this, new Position(12, 11)));
+		gameObjectContainer.add(new Goomba(this, new Position(12, 14)));
 	}
 	
 	public void addAction(Action action) {
@@ -214,7 +213,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public void addObj(GameObject obj) {
-		gameObjects.add(obj);
+		gameObjectContainer.add(obj);
 	}
 	
 	public void marioExited() {
@@ -223,7 +222,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public void tryInteractionsFrom(GameItem object) {		// delegates the doInteractionsFrom() to the container
-		gameObjects.tryInteractionsFrom(object);
+		gameObjectContainer.tryInteractionsFrom(object);
 	}
 
 	public void marioDies() {

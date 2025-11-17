@@ -16,8 +16,10 @@ public class GameObjectFactory {
 	);
 	
 	public static GameObject parse (String objWords[], GameWorld game) {
+		GameObject gameObject;
+		
 		for(GameObject obj : availableObjects) {
-			GameObject gameObject = obj.parse(objWords, game);		// calls the parse method of each gameObject
+			gameObject = obj.parse(objWords, game);		// calls the parse method of each gameObject
 			
 			if(gameObject != null) {
 				return gameObject;

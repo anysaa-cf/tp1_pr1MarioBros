@@ -33,7 +33,7 @@ public class AddObjectCommand extends NoParamsCommand {
 	
 	@Override
 	public void execute(Game game, GameView view) {
-		String [] objDescr = String.join(" ", objDescription);
+		String objDescr = String.join(" ", objDescription);
 	
 		GameObject gameObj = GameObjectFactory.parse(objDescription, game);
 		
@@ -48,6 +48,10 @@ public class AddObjectCommand extends NoParamsCommand {
 		} else {
 			view.showError(Messages.INVALID_GAME_OBJECT.formatted(objDescr));
 		}
+	}
+	
+	public String helpText() {
+		return DETAILS + ": " + HELP;
 	}
 
 }

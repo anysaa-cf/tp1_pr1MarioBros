@@ -58,18 +58,6 @@ public class Messages {
 	public static final String ERROR_COMMAND_EXECUTE = "Command execute problem";
 	
 	public static final String HELP_AVAILABLE_COMMANDS = "Available commands:";
-	/* @formatter:off */
-	public static final String[] HELP_LINES = new String[] { HELP_AVAILABLE_COMMANDS,
-		"[a]ction [[R]IGHT | [L]EFT | [U]P | [D]OWN | [S]TOP]+: user performs actions",
-		"[a]dd[O]bject <object_description>: adds to the board the object described by object_description",
-		"[u]pdate | \"\": user does not perform any action",
-		"[r]eset [numLevel]: reset the game to initial configuration if not numLevel else load the numLevel map",
-		"[h]elp: print this help message",
-		"[e]xit: exits the game"
-	};
-	/* @formatter:on */
-	
-	public static final String HELP = String.join(LINE_SEPARATOR+"   ", HELP_LINES) + LINE_SEPARATOR;
 	public static final String COMMAND_HELP_TEXT = "%s: %s";
 	
 	// COMMANDS CREATION
@@ -106,7 +94,7 @@ public class Messages {
 	// [a]dd[O]bject <object_description>: adds to the board the object described by object_description
 	public static final String COMMAND_ADD_OBJECT_NAME = "addObject";
 	public static final String COMMAND_ADD_OBJECT_SHORTCUT = "aO";
-	public static final String COMMAND_ADD_OBJECT_DETAILS = "[a]dd[O]bject <object_description>";
+	public static final String COMMAND_ADD_OBJECT_DETAILS = "[a]dd[O]bject <(x,y)> <object name> <optional <Action>(only with goomba and Mario)> <optional Big/Small(only with Mario)>: \n adds to the board the object described by object_description";
 	public static final String COMMAND_ADD_OBJECT_HELP = "adds to the board the object described by object_description";		
 	
 	// action right

@@ -27,12 +27,10 @@ public class CommandGenerator {
 	}
 		
 	public static String commandHelp() {
-		StringBuilder commands = new StringBuilder();
-		
-		commands.append(Messages.HELP);
+		String commands = new String();
 		
 		for (Command c: availableCommands) {
-			c.helpText();		// helpText() method for each of the commands
+			commands += c.helpText()+"\n";		// helpText() method for each of the commands
 		}
 		
 		return commands.toString();

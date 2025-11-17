@@ -14,6 +14,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private int remainingTime;
 	private int points;
 	private int nLevel;
+	private int lives;
 	private Mario mario; 
 	private GameObjectContainer gameObjects;
 	private boolean win;
@@ -24,14 +25,16 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		this.remainingTime = 100;
 		this.points = 0;
 		this.win = this.lose = this.exit = false;
-		if(nLevel == 0 || nLevel == 1) {
-			this.nLevel = nLevel;
-			initGame();			
-		}
+		
+		this.nLevel = nLevel;
+		initGame();			
 	}
 	
 	public void initGame() {		
 		switch(nLevel) {
+		case -1:
+			initEmptyLevel();
+			break;
 		case 0:
 			initLevel0();
 			break;
@@ -41,12 +44,26 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		}
 	}
 	
-	/*public void hit() {
-		mario.marioDies();
-	}*/
-	
+	private void initEmptyLevel() {
+		this.remainingTime = 100;
+		this.lives = 3;
+		gameObjects = new GameObjectContainer();	// we don't add any object, the map is empty
+	}
+
+	public void setLevel(int level) {
+		this.nLevel = level;
+	}
+
 	public String positionToString(int col, int row) {
-		return gameObjects.positionToString(col, row);
+		String icon = "";
+		
+		if(nLevel == -1) {
+			icon = "*";
+		} else {
+			icon = gameObjects.positionToString(col, row);
+		}
+		
+		return icon;
 	}
 
 	public boolean playerWins() {
@@ -74,7 +91,10 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public int numLives() {
-		return mario.marioLife();
+		if(mario != null) {
+			lives = mario.marioLife();			
+		}
+		return lives;
 	}
 
 	public void update() {
@@ -224,6 +244,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		
 		return row >= 0 && row < Game.DIM_Y && col >= 0 && col < Game.DIM_X;
 	}
+
 
 
 

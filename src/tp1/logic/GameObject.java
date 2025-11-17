@@ -3,7 +3,7 @@ package tp1.logic;
 import tp1.logic.gameobjects.*;
 
 public abstract class GameObject implements GameItem {
-	private Position pos; 
+	protected Position pos; 		// protected or private?¿
 	private boolean isSolid;
 	private boolean isAlive;
 	protected GameWorld game; 

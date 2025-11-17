@@ -35,8 +35,7 @@ public class AddObjectCommand extends NoParamsCommand {
 	public void execute(Game game, GameView view) {
 		String [] objDescr = String.join(" ", objDescription);
 	
-		GameObjectFactory factory = new GameObjectFactory();
-		GameObject gameObj = factory.parse(objDescription, game);
+		GameObject gameObj = GameObjectFactory.parse(objDescription, game);
 		
 		if(gameObj != null) {
 			Position pos = new Position(gameObj.getRow(), gameObj.getCol());

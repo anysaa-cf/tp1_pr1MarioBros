@@ -141,6 +141,9 @@ public class Messages {
 	public static final String EXITDOOR_NAME = "exitdoor";
 	public static final String EXITDOOR_SHORTCUT = "ed";
 	
+	// mushroom
+	public static final String MUSHROOM_NAME = "Mushroom";
+	public static final String MUSHROOM_SHORTCUT = "MU";
 
 //Symbols
 	public static final String EMPTY = "";

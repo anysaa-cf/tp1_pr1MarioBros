@@ -1,7 +1,5 @@
 package tp1.logic;
 
-import tp1.logic.gameobjects.Goomba;
-
 public interface GameWorld {
 	// represent the Model's internal view 
 	public int remainingTime();

@@ -14,7 +14,7 @@ public class Goomba extends MovingObject {
 	private static final String SHORTCUT = Messages.GOOMBA_SHORTCUT;
 	
 	public Goomba(Game game, Position pos) {
-		super(game, pos, Action.RIGHT, NAME, SHORTCUT);		// action.left?¿
+		super(game, pos, Action.RIGHT, NAME, SHORTCUT);		
 	}
 	
 	public String getIcon() {

@@ -12,7 +12,7 @@ public class Mushroom extends MovingObject {
 	private static final String SHORTCUT = Messages.MUSHROOM_SHORTCUT;
 	
 	public Mushroom(GameWorld game, Position pos) {
-		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
+		super(game, pos, Action.RIGHT, NAME, SHORTCUT);			// check if this is the right action for the mushroom
 	}
 
 	@Override
@@ -50,6 +50,7 @@ public class Mushroom extends MovingObject {
 	public boolean receiveInteraction(Mario mario) {
 		this.objectDies(); 		// mushroom disappears
 		
+		if(mario.is)
 		
 		
 		
@@ -68,7 +69,6 @@ public class Mushroom extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Mushroom mushroom) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

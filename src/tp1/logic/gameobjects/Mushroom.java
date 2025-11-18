@@ -66,4 +66,10 @@ public class Mushroom extends MovingObject {
 		return false;
 	}
 
+	@Override
+	public boolean receiveInteraction(Mushroom mushroom) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

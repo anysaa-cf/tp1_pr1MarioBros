@@ -52,4 +52,10 @@ public class Ground extends GameObject {
 		return true;
 	}
 
+	@Override
+	public boolean receiveInteraction(Mushroom mushroom) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

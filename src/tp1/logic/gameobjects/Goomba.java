@@ -101,4 +101,10 @@ public class Goomba extends MovingObject {
 		return true;
 	}
 
+	@Override
+	public boolean receiveInteraction(Mushroom mushroom) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

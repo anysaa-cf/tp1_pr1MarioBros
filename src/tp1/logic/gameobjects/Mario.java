@@ -214,4 +214,10 @@ public class Mario extends MovingObject {
 			return super.parse(objWords, game);
 	}
 
+	@Override
+	public boolean receiveInteraction(Mushroom mushroom) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

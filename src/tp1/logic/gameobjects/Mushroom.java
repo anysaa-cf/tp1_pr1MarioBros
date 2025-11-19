@@ -12,7 +12,7 @@ public class Mushroom extends MovingObject {
 	private static final String SHORTCUT = Messages.MUSHROOM_SHORTCUT;
 	
 	public Mushroom(GameWorld game, Position pos) {
-		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
+		super(game, pos, Action.LEFT, NAME, SHORTCUT);		
 	}
 
 	@Override
@@ -78,6 +78,7 @@ public class Mushroom extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
+
 		return true;
 	}
 
@@ -96,9 +97,10 @@ public class Mushroom extends MovingObject {
 		return false;
 	}
 
+
 	@Override
 	public boolean receiveInteraction(Box box) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 

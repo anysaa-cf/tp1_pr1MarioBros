@@ -54,13 +54,11 @@ public class Ground extends GameObject {
 
 	@Override
 	public boolean receiveInteraction(Mushroom mushroom) {
-		
 		return false;
 	}
 
 	@Override
 	public boolean receiveInteraction(Box box) {
-		
 		return false;
 	}
 

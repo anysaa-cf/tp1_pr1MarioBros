@@ -242,4 +242,12 @@ public class Mario extends MovingObject {
 		return true;
 	}
 
+	@Override
+	public boolean receiveInteraction(Mushroom mushroom) {
+		if(!this.big) {
+			this.big = true;
+		}
+		return true;
+	}
+
 }

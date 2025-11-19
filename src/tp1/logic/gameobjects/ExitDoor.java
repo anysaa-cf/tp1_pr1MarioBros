@@ -63,6 +63,7 @@ public class ExitDoor extends GameObject {
 
 	@Override
 	public boolean receiveInteraction(Box box) {
+
 		// TODO Auto-generated method stub
 		return false;
 	}

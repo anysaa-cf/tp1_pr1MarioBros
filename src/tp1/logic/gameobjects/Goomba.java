@@ -41,15 +41,6 @@ public class Goomba extends MovingObject {
 			}
 		}	
 	}
-	
-	private void changeAction() {
-		if(action == Action.RIGHT) {
-			action = Action.LEFT;
-		} else if(action == Action.LEFT) {
-			action = Action.RIGHT;
-		}	
-	}
-	
 	public void update() {
 		move();
 		game.tryInteractionsFrom(this);
@@ -83,8 +74,12 @@ public class Goomba extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-		if(mario.isFalling())
+		if(!mario.isFalling())
+			updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
+		else {
 			goombaDies();
+			game.addPoints(10);
+		}
 		return true;
 	}
 
@@ -99,6 +94,18 @@ public class Goomba extends MovingObject {
 		move();
 		goomba.changeAction();
 		return true;
+	}
+
+	@Override
+	public boolean receiveInteraction(Mushroom mushroom) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Box box) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

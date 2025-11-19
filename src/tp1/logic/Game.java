@@ -5,6 +5,8 @@ import tp1.logic.gameobjects.ExitDoor;
 import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
+import tp1.logic.gameobjects.Mushroom;
+import tp1.logic.gameobjects.Box;
 
 public class Game implements GameModel, GameStatus, GameWorld {
 
@@ -42,6 +44,11 @@ public class Game implements GameModel, GameStatus, GameWorld {
 			initLevel1();
 			break;
 		}
+	}
+	
+	public int getLevel() {
+		
+		return nLevel;
 	}
 	
 	private void initEmptyLevel() {
@@ -136,7 +143,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		}
 
 		gameObjectContainer.add(new Ground(this, new Position(9,2)));
-		gameObjectContainer.add(new Ground(this, new Position(9,5)));
 		gameObjectContainer.add(new Ground(this, new Position(9,6)));
 		gameObjectContainer.add(new Ground(this, new Position(9,7)));
 		gameObjectContainer.add(new Ground(this, new Position(5,6)));
@@ -156,8 +162,10 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		// 3. GameObjects
 		this.mario = new Mario(this, new Position(Game.DIM_Y-3, 0));
 		gameObjectContainer.add(mario);
-
-		gameObjectContainer.add(new Goomba(this, new Position(0, 19)));
+		
+		gameObjectContainer.add(new Box(this, new Position(9, 5)));
+		gameObjectContainer.add(new Mushroom(this, new Position(8, 7)));
+		gameObjectContainer.add(new Goomba(this, new Position(12, 3)));
 	}
 	
 	private void initLevel1() {

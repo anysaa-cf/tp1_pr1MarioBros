@@ -17,14 +17,36 @@ public class Mushroom extends MovingObject {
 
 	@Override
 	protected void move() {
-		// TODO Auto-generated method stub
+		if(isAlive()) {														
+			if(isFalling()) {
+				Position posBelow = new Position(getRow() + 1, getCol());
+				if(!game.isInsideBounds(posBelow))			
+					mushroomDies(); // goomba dies (for now) if it falls out of the map
+				else
+					updatePos(posBelow);	// if there is no ground below, it falls 1 cell	
+			} else {			// if there is ground it moves horizontally
+				int nextCol = getCol() + action.getY();
+				int nextRow = getRow() + action.getX();
+				Position nextPos = new Position(nextRow, nextCol);// get the next position given the action
+				if(game.isInsideBounds(nextPos)) {
+					updatePos(nextPos);
+				} else {
+					changeAction();
+				}
+			}
+		}	
 		
 	}
+	
+	public void mushroomDies() {
+		objectDies();
+	}
+	
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		move();
+		game.tryInteractionsFrom(this);
 	}
 
 	@Override
@@ -43,17 +65,20 @@ public class Mushroom extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Ground ground) {
+		Position returnPos = new Position(getRow() + 1, getCol());
+		if(ground.isInPosition(returnPos)){
+			updatePos(returnPos);
+		}
+		else {
+			updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
+			changeAction();
+		}
 		return false;
 	}
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-		this.objectDies(); 		// mushroom disappears
-		
-		
-		
-		
-		return false;
+		return true;
 	}
 
 	@Override
@@ -63,6 +88,17 @@ public class Mushroom extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Mushroom mushroom) {
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Box box) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

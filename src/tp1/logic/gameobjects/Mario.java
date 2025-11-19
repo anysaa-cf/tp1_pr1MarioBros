@@ -25,8 +25,10 @@ public class Mario extends MovingObject {
 		this.big = true;
 		this.life = 3;
 		this.rightC = this.leftC = this.upC = this.downC = 0;
+		
 	}
 	
+
 	public String getIcon() {
 		String icon;
 		
@@ -127,7 +129,6 @@ public class Mario extends MovingObject {
 
 	protected void move() {
 		Position nextPos;
-		boolean ground;
 		if(isAlive()) {
 			if(actionList.isEmpty()) {		// no more actions -> automatic movement
 				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());
@@ -177,7 +178,8 @@ public class Mario extends MovingObject {
 	}
 	
 	public void marioDies() {
-		if(life <= 0) {
+		if(life <= 1) {
+			life--;
 			objectDies();
 			game.marioDies();
 		}
@@ -196,8 +198,9 @@ public class Mario extends MovingObject {
 			Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY()); 
 			updatePos(returnPos);
 		}
-		else
+		else {
 			game.addPoints(10);
+		}
 			
 		return true;
 	}
@@ -212,6 +215,31 @@ public class Mario extends MovingObject {
 				}
 			}
 			return super.parse(objWords, game);
+	}
+	
+	public boolean isInPosition(Position p) {
+		Position aux = new Position(p.getRow() + 1, p.getCol());
+		return pos.equals(p) || big && pos.equals(aux);
+	}
+
+	@Override
+	public boolean receiveInteraction(Mushroom mushroom) {
+		this.big = true;
+		mushroom.objectDies();
+		return true;
+	}
+
+
+	@Override
+	public boolean receiveInteraction(Box box) {
+		Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY()); 
+		updatePos(returnPos);
+		if(action == Action.UP && !box.empty()) {
+			box.empty();
+			game.addPoints(50);
+			game.addObj(new Mushroom(this.game, new Position(box.getRow() - 1, box.getCol())));
+		}
+		return true;
 	}
 
 }

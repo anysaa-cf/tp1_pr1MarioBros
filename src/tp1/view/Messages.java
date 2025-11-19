@@ -142,8 +142,16 @@ public class Messages {
 	public static final String EXITDOOR_SHORTCUT = "ed";
 	
 	// mushroom
-	public static final String MUSHROOM_NAME = "Mushroom";
-	public static final String MUSHROOM_SHORTCUT = "MU";
+	public static final String MUSHROOM_NAME = "mushroom";
+	public static final String MUSHROOM_SHORTCUT = "mu";
+	
+	// block
+	public static final String BOX_NAME = "box";
+	public static final String BOX_SHORTCUT = "b";
+	public static final String BOX_FULL = "full";
+	public static final String BOX_EMPTY = "empty";
+	public static final String BOX_FULL_SHORTCUT = "f";
+	public static final String BOX_EMPTY_SHORTCUT = "e";
 
 //Symbols
 	public static final String EMPTY = "";
@@ -153,8 +161,7 @@ public class Messages {
 	public static final String MARIO_RIGHT = "🧍";//"🧍➡️";
 	public static final String MARIO_LEFT = "🚶";//"⬅️🚶";
 	public static final String GOOMBA = "🐻";
-	
 	public static final String MUSHROOM = "🍄";
-	public static final String BOX = MyStringUtils.repeat("?",ConsoleView.CELL_SIZE);
-	public static final String EMPTY_BOX = MyStringUtils.repeat("0",ConsoleView.CELL_SIZE);
+	public static final String BOX = "?";
+	public static final String EMPTY_BOX = "0";
 }

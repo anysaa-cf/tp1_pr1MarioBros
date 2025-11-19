@@ -5,6 +5,7 @@ import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
 import tp1.logic.gameobjects.Mushroom;
+import tp1.logic.gameobjects.Box;
 
 public interface GameItem {
 	
@@ -18,6 +19,7 @@ public interface GameItem {
 		public boolean receiveInteraction(ExitDoor door);
 		public boolean receiveInteraction(Goomba goomba);
 		public boolean receiveInteraction(Mushroom mushroom);
+		public boolean receiveInteraction(Box box);
 		
 		public GameObject parse (String objWords[], GameWorld game);
 }

@@ -33,6 +33,15 @@ public abstract class MovingObject extends GameObject {
 	
 	protected abstract void move();
 	
+	
+	public void changeAction() {
+		if(action == Action.RIGHT) {
+			action = Action.LEFT;
+		} else if(action == Action.LEFT) {
+			action = Action.RIGHT;
+		}	
+	}
+	
 	public GameObject parse (String objWords[], GameWorld game) {
 		if(objWords.length > 2) {
 			this.action = (Action.parseActionClass(objWords[2].toLowerCase()));					

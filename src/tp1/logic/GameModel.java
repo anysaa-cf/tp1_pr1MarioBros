@@ -9,4 +9,5 @@ public interface GameModel {
 	public void marioExited();
 	public boolean isSolid(Position pos);
 	public void addPoints(int newPoints);
+	public void addObj(GameObject obj);
 }

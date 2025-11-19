@@ -55,4 +55,16 @@ public class ExitDoor extends GameObject {
 		return false;
 	}
 
+	@Override
+	public boolean receiveInteraction(Mushroom mushroom) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean receiveInteraction(Box box) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

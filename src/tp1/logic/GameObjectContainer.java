@@ -38,16 +38,19 @@ public class GameObjectContainer {
 	}
 	
 	public void update() {
-		for(GameObject o : gameObjects) {
-			o.update();			
+		int aux = gameObjects.size();
+		for(int i = 0; i < aux; i++) {
+			GameObject o = gameObjects.get(i);
+			o.update();
 		}
 	}
 
 	public void tryInteractionsFrom(GameItem object) {
-		for(GameObject o : gameObjects) {
+		int aux = gameObjects.size();
+		for(int i = 0; i < aux; i++) {
+			GameObject o = gameObjects.get(i);
 			object.interactWith(o);
 			o.interactWith(object);
 		}
-		
 	}
 }

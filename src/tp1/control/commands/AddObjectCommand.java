@@ -34,10 +34,10 @@ public class AddObjectCommand extends NoParamsCommand {
 	@Override
 	public void execute(Game game, GameView view) {
 		String objDescr = String.join(" ", objDescription);
-	
+		
 		GameObject gameObj = GameObjectFactory.parse(objDescription, game);
 		
-		if(gameObj != null) {
+		if(gameObj != null && game.getLevel() == -1) {
 			Position pos = new Position(gameObj.getRow(), gameObj.getCol());
 			 if(game.isInsideBounds(pos)) {
 				 game.addObj(gameObj);

@@ -69,7 +69,6 @@ public abstract class GameObject implements GameItem {
 	        col = Integer.parseInt(parts[1]);
 	        
 			pos = new Position(row, col);
-			updatePos(pos);
 			
 			this.game = game;
 			

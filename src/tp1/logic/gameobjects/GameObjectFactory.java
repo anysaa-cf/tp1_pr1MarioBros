@@ -12,7 +12,9 @@ public class GameObjectFactory {
 			new Ground(null, null),		// they have arguments in their constructors
 			new ExitDoor(null, null),
 			new Goomba(null, null),
-			new Mario(null, null)
+			new Mario(null, null),
+			new Mushroom(null, null),
+			new Box(null, null)
 	);
 	
 	public static GameObject parse (String objWords[], GameWorld game) {

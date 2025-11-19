@@ -12,6 +12,7 @@ public class ConsoleColorsView extends ConsoleView {
 
     private static final String COLOR_LAND_BACKGROUND  = ConsoleColorsAnsiCodes.ANSI_RGB_BACKGROUND.formatted(218, 165, 32); // ConsoleColorsAnsiCodes.ANSI_CYAN_BACKGROUND
     private static final String COLOR_EXIT_BACKGROUND  = ConsoleColorsAnsiCodes.ANSI_CYAN_BACKGROUND;
+    private static final String COLOR_BOX_BACKGROUND = ConsoleColorsAnsiCodes.ANSI_GRAY_BACKGROUND;
 	
 	private static final String CELL_TXT = repeat(SPACE, CELL_SIZE);
 	private static final String EMPTY_CELL = CELL_TXT;
@@ -19,6 +20,12 @@ public class ConsoleColorsView extends ConsoleView {
 	private static final String EXIT_TEXT = ConsoleColorsAnsiCodes.ANSI_WHITE + MyStringUtils.center(Messages.EXIT_DOOR, CELL_SIZE);
 	private static final String EXIT_CELL = COLOR_EXIT_BACKGROUND + EXIT_TEXT + ConsoleColorsAnsiCodes.ANSI_RESET;
 	private static final String EXIT_PLUS = COLOR_EXIT_BACKGROUND + "%s" + ConsoleColorsAnsiCodes.ANSI_RESET;
+	private static final String BOX_TEXT = ConsoleColorsAnsiCodes.ANSI_BLACK + MyStringUtils.center(Messages.BOX, CELL_SIZE);
+	private static final String BOX_CELL = COLOR_BOX_BACKGROUND + BOX_TEXT + ConsoleColorsAnsiCodes.ANSI_RESET;
+	private static final String BOX_PLUS = COLOR_BOX_BACKGROUND + "%s" + ConsoleColorsAnsiCodes.ANSI_RESET;
+	private static final String EMPTY_BOX_TEXT = ConsoleColorsAnsiCodes.ANSI_BLACK + MyStringUtils.center(Messages.EMPTY_BOX, CELL_SIZE);
+	private static final String EMPTY_BOX_CELL = COLOR_BOX_BACKGROUND + EMPTY_BOX_TEXT + ConsoleColorsAnsiCodes.ANSI_RESET;
+	private static final String EMPTY_BOX_PLUS = COLOR_BOX_BACKGROUND + "%s" + ConsoleColorsAnsiCodes.ANSI_RESET;
 
 	public ConsoleColorsView(Game game) {
 		super(game);
@@ -31,7 +38,11 @@ public class ConsoleColorsView extends ConsoleView {
 		if (celStr.equals(Messages.EMPTY)) consoleStr = EMPTY_CELL;
 		else if (celStr.equals(Messages.LAND)) consoleStr = LAND_CELL;
 		else if (celStr.equals(Messages.EXIT_DOOR)) consoleStr = EXIT_CELL;
+		else if (celStr.equals(Messages.BOX)) consoleStr = BOX_CELL;
+		else if (celStr.equals(Messages.EMPTY_BOX)) consoleStr = EMPTY_BOX_CELL;
 		else if (celStr.contains(Messages.EXIT_DOOR)) consoleStr = exitCel(celStr);
+		else if (celStr.contains(Messages.BOX)) consoleStr = boxCel(celStr);
+		else if (celStr.contains(Messages.EMPTY_BOX)) consoleStr = emptyBoxCel(celStr);
 
 		else  consoleStr = characterCell(celStr);
 		
@@ -56,5 +67,13 @@ public class ConsoleColorsView extends ConsoleView {
 	}
 	private static String exitCel(String celStr) {
 		return EXIT_PLUS.formatted(MyStringUtils.center(celStr, CELL_SIZE));
+	}
+	
+	private static String boxCel(String celStr) {
+		return BOX_PLUS.formatted(MyStringUtils.center(celStr, CELL_SIZE));
+	}
+	
+	private static String emptyBoxCel(String celStr) {
+		return EMPTY_BOX_PLUS.formatted(MyStringUtils.center(celStr, CELL_SIZE));
 	}
 }

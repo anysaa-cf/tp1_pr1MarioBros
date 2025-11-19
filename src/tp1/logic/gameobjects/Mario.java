@@ -241,13 +241,13 @@ public class Mario extends MovingObject {
 		}
 		return true;
 	}
-
+	
 	@Override
-	public boolean receiveInteraction(Mushroom mushroom) {
-		if(!this.big) {
-			this.big = true;
-		}
-		return true;
+	public GameObject create(GameWorld game, Position pos) {
+		  Mario m = new Mario(game, pos);
+		  m.action = this.action;
+		  m.big = this.big;
+		  return m;
 	}
 
 }

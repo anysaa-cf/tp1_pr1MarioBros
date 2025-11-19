@@ -2,6 +2,7 @@ package tp1.logic.gameobjects;
 
 import tp1.logic.Action;
 import tp1.logic.GameItem;
+import tp1.logic.GameObject;
 import tp1.logic.GameWorld;
 import tp1.logic.Position;
 import tp1.view.Messages;
@@ -102,6 +103,13 @@ public class Mushroom extends MovingObject {
 	public boolean receiveInteraction(Box box) {
 
 		return false;
+	}
+	
+	@Override
+	public GameObject create(GameWorld game, Position pos) {
+		  Mushroom m = new Mushroom(game, pos);
+		  m.action = this.action;
+		  return m;
 	}
 
 }

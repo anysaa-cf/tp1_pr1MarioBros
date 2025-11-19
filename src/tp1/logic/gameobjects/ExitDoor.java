@@ -12,7 +12,7 @@ public class ExitDoor extends GameObject {
 	private static final String NAME = Messages.EXITDOOR_NAME;
 	private static final String SHORTCUT = Messages.EXITDOOR_SHORTCUT;
 	
-	public ExitDoor(Game game, Position pos) {
+	public ExitDoor(GameWorld game, Position pos) {
 		super(game, pos, false, NAME, SHORTCUT);
 	}
 	
@@ -66,6 +66,12 @@ public class ExitDoor extends GameObject {
 
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public GameObject create(GameWorld game, Position pos) {
+		  ExitDoor d = new ExitDoor(game, pos); 
+		  return d;
 	}
 
 }

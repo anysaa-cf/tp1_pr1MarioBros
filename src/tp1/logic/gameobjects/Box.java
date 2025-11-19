@@ -92,4 +92,11 @@ public class Box extends GameObject {
 		return super.parse(objWords, game);		
 	}
 
+	@Override
+	public GameObject create(GameWorld game, Position pos) {
+		  Box b = new Box(game, pos);
+		  b.full = this.full; 
+		  return b;
+	}
+
 }

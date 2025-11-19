@@ -11,7 +11,7 @@ public class Ground extends GameObject {
 	private static final String NAME = Messages.GROUND_NAME;
 	private static final String SHORTCUT = Messages.GROUND_SHORTCUT;
 	
-	public Ground(Game game, Position pos) {
+	public Ground(GameWorld game, Position pos) {
 		super(game, pos, true, NAME, SHORTCUT);
 	}
 	
@@ -60,6 +60,12 @@ public class Ground extends GameObject {
 	@Override
 	public boolean receiveInteraction(Box box) {
 		return false;
+	}
+	
+	@Override
+	public GameObject create(GameWorld game, Position pos) {
+		  Ground g = new Ground(game, pos);
+		  return g;
 	}
 
 }

@@ -13,7 +13,7 @@ public class Goomba extends MovingObject {
 	private static final String NAME = Messages.GOOMBA_NAME;
 	private static final String SHORTCUT = Messages.GOOMBA_SHORTCUT;
 	
-	public Goomba(Game game, Position pos) {
+	public Goomba(GameWorld game, Position pos) {
 		super(game, pos, Action.RIGHT, NAME, SHORTCUT);		
 	}
 	
@@ -106,6 +106,13 @@ public class Goomba extends MovingObject {
 	public boolean receiveInteraction(Box box) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public GameObject create(GameWorld game, Position pos) {
+		  Goomba g = new Goomba(game, pos);
+		  g.action = this.action;
+		  return g;
 	}
 
 }

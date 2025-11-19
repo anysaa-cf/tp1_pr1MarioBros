@@ -50,6 +50,7 @@ public abstract class GameObject implements GameItem {
 	
 	public abstract void update();
 	public abstract String getIcon();
+	public abstract GameObject create(GameWorld game, Position pos);
 	
 	abstract public boolean interactWith(GameItem other);
 	abstract public boolean receiveInteraction(Ground ground);
@@ -75,7 +76,7 @@ public abstract class GameObject implements GameItem {
 			String objType = objWords[1].toLowerCase();
 			
 			if(matchObjectName(objType)) {
-				return this;
+				return create(game, pos);
 			}
 		}
 		

@@ -47,7 +47,7 @@ public class GameObjectContainer {
 
 	public void tryInteractionsFrom(GameItem object) {
 		int aux = gameObjects.size();
-		for(int i = 0; i < aux; i++) {
+		for(int i = 0; i < aux; i++) { 
 			GameObject o = gameObjects.get(i);
 			object.interactWith(o);
 			o.interactWith(object);

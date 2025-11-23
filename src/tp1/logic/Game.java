@@ -104,8 +104,10 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public void update() {
+		if(nLevel != -1) {
 			remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
 			gameObjectContainer.update();
+		}
 	}
 	
 	public boolean isSolid(Position pos) {

@@ -3,6 +3,7 @@ package tp1.control;
 
 import tp1.control.commands.Command;
 import tp1.control.commands.CommandGenerator;
+import tp1.exceptions.CommandException;
 import tp1.exceptions.CommandParseException;
 import tp1.logic.Game;
 import tp1.view.GameView;
@@ -20,27 +21,26 @@ public class Controller {
 		this.game = game;
 		this.view = view;
 	}
-
 	/**
 	 * Runs the game logic, coordinate Model(game) and View(view)
 	 * @throws CommandParseException 
 	 */
-	public void run() throws CommandParseException {
+	public void run() {
 
 		view.showWelcome();
 
 		view.showGame();
-		
-		while (!game.isFinished()) {
+	while (!game.isFinished()) {
+		try {
 			String[] words = view.getPrompt();
 			Command command = CommandGenerator.parse(words);
-
-			if (command != null) {
-				command.execute(game, view);				
-			}
-			else 
-				view.showError(Messages.UNKNOWN_COMMAND.formatted(String.join(" ", words)));
+			
+			command.execute(game, view);				
 		}
+		catch(CommandException e) {
+			System.err.print(e.getMessage());
+		}
+	}
 		view.showEndMessage();
 	}
 }

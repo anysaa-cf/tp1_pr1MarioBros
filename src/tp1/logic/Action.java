@@ -1,5 +1,7 @@
 package tp1.logic;
 
+import tp1.exceptions.CommandException;
+import tp1.exceptions.CommandParseException;
 import tp1.view.Messages;
 
 /**
@@ -31,11 +33,12 @@ public enum Action {
 		return y;
 	}
 	
-	public static Action parseActionClass(String inputs) { // new parseAction method, simpler
+	// modify this, throw ActionParseException and in the ActionCommand, catch this type of exception
+	public static Action parseActionClass(String inputs) throws CommandParseException { // new parseAction method, simpler
 		for(Action action : Action.values())
 			if(action.name().equalsIgnoreCase(inputs) || action.abrev.equalsIgnoreCase(inputs))
 				return action;
-		return null;
+		throw new CommandParseException(Messages.UNKNOWN_ACTION);
 	}
 	
 }

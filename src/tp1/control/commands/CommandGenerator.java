@@ -18,11 +18,12 @@ public class CommandGenerator {
 	);
 
 	public static Command parse(String[] commandWords) throws CommandParseException {	
-
 		for (Command c: availableCommands) {
 			Command command = c.parse(commandWords);
-			if(command != null) {
-				return command;
+			if(command == null) {
+				throw new CommandParseException(Messages.UNKNOWN_COMMAND.formatted(commandWords[0]));
+			} else {
+				return command;				
 			}
 		}
 		return null;

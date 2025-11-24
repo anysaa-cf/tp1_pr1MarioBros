@@ -3,6 +3,7 @@ package tp1.control.commands;
 import tp1.logic.Game;
 import tp1.view.GameView;
 import tp1.view.Messages;
+import tp1.exceptions.CommandParseException;
 import tp1.logic.Action;
 import tp1.logic.ActionList;
 
@@ -20,7 +21,7 @@ public class ActionCommand extends AbstractCommand{
 	}
 	
 	@Override
-	public Command parse(String[] commandWords) { // here we recognize what action is
+	public Command parse(String[] commandWords) throws CommandParseException { // here we recognize what action is
 		if(matchCommandName(commandWords[0])) { // if the first command is action
 			for(int i = 1; i < commandWords.length; i++) { // from 0 to actionList length in order to read all the commands remaining from action command
 				Action aux = Action.parseActionClass(commandWords[i]); // parse the action command into an action type

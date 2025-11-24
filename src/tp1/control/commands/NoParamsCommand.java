@@ -1,6 +1,6 @@
 package tp1.control.commands;
 
-import tp1.exceptions.*;
+import tp1.exceptions.CommandParseException;
 import tp1.view.Messages;
 
 public abstract class NoParamsCommand extends AbstractCommand {
@@ -12,7 +12,7 @@ public abstract class NoParamsCommand extends AbstractCommand {
 	@Override
 	  public Command parse(String[] commandWords) throws CommandParseException {
 	    // in fact, commandWords.length == 0 not possible due to strip() in getPrompt() method
-	    if commandWords.length != 0 && matchCommandName(commandWords[0])){
+	    if (commandWords.length != 0 && matchCommandName(commandWords[0])){
 	      if (commandWords.length > 1)      // there are extraneous parameters
 	        throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 	      else

@@ -3,6 +3,7 @@ package tp1.control;
 
 import tp1.control.commands.Command;
 import tp1.control.commands.CommandGenerator;
+import tp1.exceptions.CommandParseException;
 import tp1.logic.Game;
 import tp1.view.GameView;
 import tp1.view.Messages;
@@ -22,8 +23,9 @@ public class Controller {
 
 	/**
 	 * Runs the game logic, coordinate Model(game) and View(view)
+	 * @throws CommandParseException 
 	 */
-	public void run() {
+	public void run() throws CommandParseException {
 
 		view.showWelcome();
 

@@ -164,4 +164,9 @@ public class Messages {
 	public static final String MUSHROOM = "🍄";
 	public static final String BOX = "?";
 	public static final String EMPTY_BOX = "0";
+	
+//Exceptions
+	
+	public static final String PARSE_EXCEPTION_MESSAGE = "Wrong command format!";
+	
 }

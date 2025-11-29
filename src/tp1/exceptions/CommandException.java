@@ -16,7 +16,7 @@ public class CommandException extends Exception {
 		super(cause);
 	}
 
-	public CommandException(String message, Throwable cause) {
+	public CommandException(String message, Throwable cause) {		// to wrap low-level exceptions into high-level ones
 		super(message, cause);
 	}
 

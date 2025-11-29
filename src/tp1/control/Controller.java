@@ -26,21 +26,20 @@ public class Controller {
 	 * @throws CommandParseException 
 	 */
 	public void run() {
-
 		view.showWelcome();
-
 		view.showGame();
-	while (!game.isFinished()) {
-		try {
-			String[] words = view.getPrompt();
-			Command command = CommandGenerator.parse(words);
-			
-			command.execute(game, view);				
+		
+		while (!game.isFinished()) {
+			try {
+				String[] words = view.getPrompt();
+				Command command = CommandGenerator.parse(words);
+				
+				command.execute(game, view);				
+			}
+			catch(CommandException e) {
+				System.err.print(e.getMessage());
+			}
 		}
-		catch(CommandException e) {
-			System.err.print(e.getMessage());
-		}
-	}
 		view.showEndMessage();
 	}
 }

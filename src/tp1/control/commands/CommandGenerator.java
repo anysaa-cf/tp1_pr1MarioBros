@@ -8,7 +8,8 @@ import tp1.view.Messages;
 
 public class CommandGenerator {
 
-	private static final List<Command> availableCommands = Arrays.asList( // these are all the possible actions that are going to be parsed by parse method in here
+	// these are all the possible actions that are going to be parsed by parse method in here
+	private static final List<Command> availableCommands = Arrays.asList( 
 			new ResetCommand(),
 			new ActionCommand(),
 			new UpdateCommand(),
@@ -19,14 +20,16 @@ public class CommandGenerator {
 
 	public static Command parse(String[] commandWords) throws CommandParseException {	
 		for (Command c: availableCommands) {
-			Command command = c.parse(commandWords);
-			if(command == null) {
-				throw new CommandParseException(Messages.UNKNOWN_COMMAND.formatted(commandWords[0]));
-			} else {
-				return command;				
+			try {
+				Command command = c.parse(commandWords);
+				if(command != null) {
+					return command;
+				}
+			} catch(CommandParseException cpe) {
+				throw cpe;		// to propagate the exception			
 			}
 		}
-		return null;
+		throw new CommandParseException(Messages.UNKNOWN_COMMAND.formatted(commandWords[0]));
 	}
 		
 	public static String commandHelp() {

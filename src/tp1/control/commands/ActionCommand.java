@@ -21,7 +21,7 @@ public class ActionCommand extends AbstractCommand{
 	}
 	
 	@Override
-	public Command parse(String[] commandWords) throws CommandParseException { // here we recognize what action is
+	public Command parse(String[] commandWords) { // it will catch the actionParseException here
 		if(matchCommandName(commandWords[0])) { // if the first command is action
 			for(int i = 1; i < commandWords.length; i++) { // from 0 to actionList length in order to read all the commands remaining from action command
 				Action aux = Action.parseActionClass(commandWords[i]); // parse the action command into an action type

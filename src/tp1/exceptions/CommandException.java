@@ -3,10 +3,25 @@ package tp1.exceptions;
 public class CommandException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	private String text;
 	
-	public CommandException(String text) {
-		this.text = text;
+	public CommandException() {
+		super();
+	}
+
+	public CommandException(String message) {
+		super(message);
+	}
+
+	public CommandException(Throwable cause) {
+		super(cause);
+	}
+
+	public CommandException(String message, Throwable cause) {		// to wrap low-level exceptions into high-level ones
+		super(message, cause);
+	}
+
+	public CommandException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
 	}
 	
 }

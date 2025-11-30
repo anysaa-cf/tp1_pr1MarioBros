@@ -34,7 +34,7 @@ public class AddObjectCommand extends AbstractCommand {
 	}
 	
 	@Override
-	public void execute(GameWorld game, GameView view) throws CommandExecuteException, CommandParseException {
+	public void execute(GameWorld game, GameView view)  {
 		String objDescr = String.join(" ", objDescription);
 		
 		GameObject gameObj = GameObjectFactory.parse(objDescription, game);

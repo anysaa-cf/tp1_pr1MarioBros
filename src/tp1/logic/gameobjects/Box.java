@@ -1,6 +1,5 @@
 package tp1.logic.gameobjects;
 
-import tp1.logic.Action;
 import tp1.logic.GameItem;
 import tp1.logic.GameObject;
 import tp1.logic.GameWorld;

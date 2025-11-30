@@ -1,6 +1,8 @@
 package tp1.control.commands;
 
 import tp1.exceptions.CommandExecuteException;
+import tp1.exceptions.CommandParseException;
+import tp1.exceptions.GameModelException;
 import tp1.logic.GameModel;
 import tp1.view.GameView;
 import tp1.view.Messages;
@@ -18,15 +20,24 @@ public class UpdateCommand extends NoParamsCommand{
 
 	@Override
 	public void execute(GameModel game, GameView view) throws CommandExecuteException{
-		game.update();
-		view.showGame();
+		try {
+			game.update();
+			view.showGame();			
+		} catch(GameModelException gme) {
+			throw new CommandExecuteException(Messages.ERROR_COMMAND_EXECUTE, gme);
+		}
 	}
 	
 	@Override
-	public Command parse(String[] commandWords) {
-		if((matchCommandName(commandWords[0])) || 
-		(commandWords.length == 0 || (commandWords.length == 1 && commandWords[0].isEmpty()))) {
-			return this;
+	public Command parse(String[] commandWords) throws CommandParseException {
+		if(matchCommandName(commandWords[0])) {
+			if(commandWords.length > 1) {
+				throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+			}
+			
+			else if (commandWords.length == 0 || (commandWords.length == 1 && commandWords[0].isEmpty())) {
+				return this;
+			}
 		}
 		return null;
 	}

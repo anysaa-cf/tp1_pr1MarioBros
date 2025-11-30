@@ -6,6 +6,7 @@ import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
 import tp1.logic.gameobjects.Mushroom;
+import tp1.exceptions.GameModelException;
 import tp1.logic.gameobjects.Box;
 
 public class Game implements GameModel, GameStatus, GameWorld {
@@ -103,7 +104,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		return lives;
 	}
 
-	public void update() {
+	public void update() throws GameModelException {
 		if(nLevel != -1) {
 			remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
 			gameObjectContainer.update();
@@ -218,7 +219,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		gameObjectContainer.add(new Goomba(this, new Position(12, 14)));
 	}
 	
-	public void addAction(Action action) {
+	public void addAction(Action action) throws GameModelException {
 		mario.addAction(action);
 	}
 	

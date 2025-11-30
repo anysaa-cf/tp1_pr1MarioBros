@@ -13,7 +13,7 @@ public abstract class NoParamsCommand extends AbstractCommand {
 	  public Command parse(String[] commandWords) throws CommandParseException {
 	    // in fact, commandWords.length == 0 not possible due to strip() in getPrompt() method
 	    if (commandWords.length != 0 && matchCommandName(commandWords[0]))
-	      if (commandWords.length == 1)      // there are unnecessary parameters
+	      if (commandWords.length == 1)  // there are unnecessary parameters
 	        return this;
 	    throw new CommandParseException(Messages.INVALID_COMMAND);
 	  }

@@ -20,13 +20,10 @@ public class CommandGenerator {
 	public static Command parse(String[] commandWords) throws CommandParseException {	
 		for (Command c: availableCommands) {
 			Command command = c.parse(commandWords);
-			if(command == null) {
-				throw new CommandParseException(Messages.UNKNOWN_COMMAND.formatted(commandWords[0]));
-			} else {
-				return command;				
-			}
+			if(command != null)
+				return command;	
 		}
-		return null;
+		throw new CommandParseException(Messages.UNKNOWN_COMMAND.formatted(commandWords[0]));
 	}
 		
 	public static String commandHelp() {

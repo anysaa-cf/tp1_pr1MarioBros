@@ -30,13 +30,12 @@ public class GameObjectFactory {
 				if(gameObject != null) {
 					return gameObject;
 				}
-			} catch (ObjectParseException e) {
-				throw e;
+			} catch (GameModelParseException gme) {
+				throw gme;
 			}
-			
 		}
 
-		throw new GameModelParseException(Messages.INVALID_GAME_OBJECT);	
+		throw new ObjectParseException(Messages.INVALID_GAME_OBJECT.formatted(String.join(" ", objWords)));	
 	}
 }
 

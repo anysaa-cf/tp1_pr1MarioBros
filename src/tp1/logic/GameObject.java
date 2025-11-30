@@ -1,5 +1,6 @@
 package tp1.logic;
 
+import tp1.exceptions.GameModelParseException;
 import tp1.logic.gameobjects.*;
 
 public abstract class GameObject implements GameItem {
@@ -58,7 +59,7 @@ public abstract class GameObject implements GameItem {
 	abstract public boolean receiveInteraction(ExitDoor door);
 	abstract public boolean receiveInteraction(Goomba goomba);
 	
-	public GameObject parse (String objWords[], GameWorld game) {
+	public GameObject parse (String objWords[], GameWorld game) throws GameModelParseException {
 		if(objWords.length >= 2) {
 			// each coordinate row and col counts as an element in the array
 			int row, col;

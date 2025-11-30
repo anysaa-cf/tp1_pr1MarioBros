@@ -26,10 +26,11 @@ public class Controller {
 	 * @throws CommandParseException 
 	 */
 	public void run() {
+		String[] words = null;
 		view.showWelcome();
 		view.showGame();
 		
-		while (!game.isFinished()) {
+		/*while (!game.isFinished()) {
 			try {
 				String[] words = view.getPrompt();
 				Command command = CommandGenerator.parse(words);
@@ -38,6 +39,37 @@ public class Controller {
 			}
 			catch(CommandException e) {
 				System.err.print(e.getMessage());
+			}
+		}*/
+		while(!game.isFinished()) {
+			words = view.getPrompt();
+			Command command = null;
+			
+			try {
+				command = CommandGenerator.parse(words);
+			} catch(CommandException e) {
+				view.showError(e.getMessage());
+				Throwable wrapped = e;
+				
+				// display all levels of error message
+				while ((wrapped = wrapped.getCause()) != null) {
+					view.showError(wrapped.getMessage());					
+				}
+			}
+			
+			
+			if(command != null) {
+				try{
+					command.execute(game, view);
+				} catch(CommandException e) {
+					view.showError(e.getMessage());
+					Throwable wrapped = e;
+					
+					// display all levels of error message
+					while ((wrapped = wrapped.getCause()) != null) {
+						view.showError(wrapped.getMessage());						
+					}
+				}
 			}
 		}
 		view.showEndMessage();

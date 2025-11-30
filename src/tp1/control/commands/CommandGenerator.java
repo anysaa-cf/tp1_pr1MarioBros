@@ -25,7 +25,7 @@ public class CommandGenerator {
 				if(command != null) {
 					return command;
 				}
-			} catch(CommandParseException cpe) {
+			} catch (CommandParseException cpe) {
 				throw cpe;		// to propagate the exception			
 			}
 		}

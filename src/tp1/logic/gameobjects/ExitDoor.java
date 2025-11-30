@@ -1,11 +1,10 @@
 package tp1.logic.gameobjects;
 
+import tp1.logic.GameItem;
 import tp1.logic.GameObject;
 import tp1.logic.GameWorld;
-import tp1.view.Messages;
-import tp1.logic.Game;
-import tp1.logic.GameItem;
 import tp1.logic.Position;
+import tp1.view.Messages;
 
 
 public class ExitDoor extends GameObject {

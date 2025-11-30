@@ -41,9 +41,14 @@ public abstract class MovingObject extends GameObject {
 	}
 	
 	public GameObject parse (String objWords[], GameWorld game) {
+		try {
 		if(objWords.length > 2) {
 			this.action = (Action.parseActionClass(objWords[2].toLowerCase()));					
 		}
 		return super.parse(objWords, game);		
+		}
+		catch() {
+			
+		}
 	}
 }

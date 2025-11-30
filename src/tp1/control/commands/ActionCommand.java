@@ -1,8 +1,9 @@
 package tp1.control.commands;
 
-import tp1.logic.Game;
+import tp1.logic.GameModel;
 import tp1.view.GameView;
 import tp1.view.Messages;
+import tp1.exceptions.CommandExecuteException;
 import tp1.exceptions.CommandParseException;
 import tp1.logic.Action;
 import tp1.logic.ActionList;
@@ -33,7 +34,7 @@ public class ActionCommand extends AbstractCommand{
 	}
 	
 	@Override
-	public void execute(Game game, GameView view){ // here we add ACTION in the game
+	public void execute(GameModel game, GameView view) throws CommandExecuteException{ // here we add ACTION in the game
 		while(!ACTION.isEmpty()) // for every value of the action list
 			game.addAction(ACTION.getAction()); // here we add the action list to the game. This is what an action command does
 		game.update();

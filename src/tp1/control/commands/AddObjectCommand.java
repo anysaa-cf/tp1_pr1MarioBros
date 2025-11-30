@@ -2,14 +2,16 @@ package tp1.control.commands;
 
 import java.util.Arrays;
 
+import tp1.exceptions.*;
 import tp1.logic.Game;
+import tp1.logic.GameWorld;
 import tp1.logic.GameObject;
 import tp1.logic.Position;
 import tp1.logic.gameobjects.GameObjectFactory;
 import tp1.view.GameView;
 import tp1.view.Messages;
 
-public class AddObjectCommand extends NoParamsCommand {
+public class AddObjectCommand extends AbstractCommand {
 	
 	private static final String NAME = Messages.COMMAND_ADD_OBJECT_NAME;
 	private static final String SHORTCUT = Messages.COMMAND_ADD_OBJECT_SHORTCUT;
@@ -32,7 +34,7 @@ public class AddObjectCommand extends NoParamsCommand {
 	}
 	
 	@Override
-	public void execute(Game game, GameView view) {
+	public void execute(GameWorld game, GameView view) throws CommandExecuteException, CommandParseException {
 		String objDescr = String.join(" ", objDescription);
 		
 		GameObject gameObj = GameObjectFactory.parse(objDescription, game);

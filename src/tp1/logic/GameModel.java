@@ -7,7 +7,9 @@ public interface GameModel {
 	public void reset();
 	public void exit();
 	public void marioExited();
-	public boolean isSolid(Position pos);
 	public void addPoints(int newPoints);
 	public void addObj(GameObject obj);
+	public void addAction(Action action);
+	public void setLevel(int level);
+	public void initGame();
 }

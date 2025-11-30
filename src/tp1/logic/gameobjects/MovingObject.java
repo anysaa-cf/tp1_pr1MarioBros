@@ -1,5 +1,6 @@
 package tp1.logic.gameobjects;
 
+import tp1.exceptions.CommandParseException;
 import tp1.logic.Action;
 import tp1.logic.Game;
 import tp1.logic.GameObject;
@@ -47,8 +48,9 @@ public abstract class MovingObject extends GameObject {
 		}
 		return super.parse(objWords, game);		
 		}
-		catch() {
+		catch(CommandParseException e) {
 			
 		}
+		return null;
 	}
 }

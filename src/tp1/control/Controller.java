@@ -36,6 +36,11 @@ public class Controller {
 			}
 			catch(CommandException e) {
 				System.err.print(e.getMessage());
+				Throwable wrapped = e;
+				
+				while((wrapped = wrapped.getCause()) != null) {
+					System.err.print(wrapped.getMessage());
+				}
 			}
 		}
 		view.showEndMessage();

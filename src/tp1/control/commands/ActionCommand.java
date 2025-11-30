@@ -27,7 +27,7 @@ public class ActionCommand extends AbstractCommand{
 	public Command parse(String[] commandWords) throws CommandParseException { // it will catch the actionParseException here
 		if(matchCommandName(commandWords[0])) { // if the first command is action
 			if(commandWords.length == 1) {
-				throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+				throw new CommandParseException(Messages.INVALID_COMMAND_PARAMETERS);
 			}
 			for(int i = 1; i < commandWords.length; i++) { // from 0 to actionList length in order to read all the commands remaining from action command
 				try {

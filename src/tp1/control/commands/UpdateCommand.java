@@ -31,12 +31,12 @@ public class UpdateCommand extends NoParamsCommand{
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
 		if(matchCommandName(commandWords[0])) {
-			if(commandWords.length > 1) {
-				throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
-			}
-			
-			else if (commandWords.length == 0 || (commandWords.length == 1 && commandWords[0].isEmpty())) {
-				return this;
+			if(commandWords.length == 1 && !commandWords[0].isEmpty() ||	// case: "update" or "u"
+				commandWords.length == 1 && commandWords[0].isEmpty()) {	// case: " "
+					return this;
+				}
+			if(commandWords.length > 1) {	// update cannot have parameters
+				throw new CommandParseException(Messages.INVALID_COMMAND_PARAMETERS);
 			}
 		}
 		return null;

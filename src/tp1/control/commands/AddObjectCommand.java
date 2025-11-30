@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import tp1.exceptions.*;
 import tp1.logic.Game;
+import tp1.logic.GameModel;
 import tp1.logic.GameWorld;
 import tp1.logic.GameObject;
 import tp1.logic.Position;
@@ -25,8 +26,11 @@ public class AddObjectCommand extends AbstractCommand {
 	}
 
 	@Override
-	public Command parse(String[] commandWords) {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		if(matchCommandName(commandWords[0])) {		// always identifies the command type in position 0
+			if(commandWords.length < 2) {
+				throw new CommandParseException(Messages.INVALID_COMMAND_PARAMETERS);
+			}
 			this.objDescription = Arrays.copyOfRange(commandWords, 1, commandWords.length);
 			return this;
 		}
@@ -34,26 +38,20 @@ public class AddObjectCommand extends AbstractCommand {
 	}
 	
 	@Override
-	public void execute(GameWorld game, GameView view)  {
-		String objDescr = String.join(" ", objDescription);
-		
-		GameObject gameObj = GameObjectFactory.parse(objDescription, game);
-		
-		if(gameObj != null && game.getLevel() == -1) {
-			Position pos = new Position(gameObj.getRow(), gameObj.getCol());
-			 if(game.isInsideBounds(pos)) {
-				 game.addObj(gameObj);
-				 view.showGame();
-			 } else {
-				 view.showError(Messages.INVALID_GAME_OBJECT.formatted(objDescr));				 
-			 }
-		} else {
-			view.showError(Messages.INVALID_GAME_OBJECT.formatted(objDescr));
+	public void execute(GameModel game, GameView view) throws CommandExecuteException {
+		try {
+			GameObject gameObj = GameObjectFactory.parse(objDescription, game);
+			game.addObj(gameObj);
+			view.showGame();
+		} catch(GameModelException gme) {
+			throw new CommandExecuteException(Messages.ERROR_COMMAND_EXECUTE, gme);
 		}
 	}
+
 	
 	public String helpText() {
 		return DETAILS + ": " + HELP;
 	}
+
 
 }

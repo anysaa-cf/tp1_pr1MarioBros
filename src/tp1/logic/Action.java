@@ -34,7 +34,7 @@ public enum Action {
 	}
 	
 	// modify this, throw ActionParseException and in the ActionCommand, catch this type of exception
-	public static Action parseActionClass(String inputs) throws CommandParseException { // new parseAction method, simpler
+	public static Action parseActionClass(String inputs) throws CommandParseException { 
 		for(Action action : Action.values())
 			if(action.name().equalsIgnoreCase(inputs) || action.abrev.equalsIgnoreCase(inputs))
 				return action;

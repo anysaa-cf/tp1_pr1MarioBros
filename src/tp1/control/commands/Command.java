@@ -6,6 +6,7 @@ import tp1.exceptions.*;
 
 public interface Command {
 
+
 	public abstract void execute(GameModel game, GameView view) throws CommandExecuteException;	  
 	public abstract Command parse(String[] parameter) throws CommandParseException;
 	public String helpText();

@@ -2,7 +2,7 @@ package tp1.control.commands;
 
 import java.util.Arrays;
 import java.util.List;
-import tp1.exceptions.CommandException;
+
 import tp1.exceptions.CommandParseException;
 import tp1.view.Messages;
 
@@ -18,16 +18,15 @@ public class CommandGenerator {
 			new AddObjectCommand()
 	);
 
-	public static Command parse(String[] commandWords) throws CommandException {	
+	public static Command parse(String[] commandWords) throws CommandParseException {	
 		for (Command c: availableCommands) {
-
 			try {
 				Command command = c.parse(commandWords);
 				if(command != null) {
 					return command;
 				}
-			} catch(CommandException cpe) {
-				System.err.print(cpe.getMessage());			
+			} catch (CommandParseException cpe) {
+				throw cpe;		// to propagate the exception			
 			}
 		}
 		throw new CommandParseException(Messages.UNKNOWN_COMMAND.formatted(commandWords[0]));

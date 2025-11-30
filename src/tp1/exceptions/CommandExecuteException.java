@@ -8,8 +8,8 @@ public class CommandExecuteException extends CommandException {
 		super();
 	}
 
-	public CommandExecuteException(String text) {
-		super(text);
+	public CommandExecuteException(String message) {
+		super(message);
 	}
 
 	public CommandExecuteException(Throwable cause) {

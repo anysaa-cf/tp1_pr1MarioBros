@@ -23,20 +23,20 @@ public class ResetCommand extends AbstractCommand {
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
 		if(matchCommandName(commandWords[0])) {
-			try {
-				// reset with no parameters
-				if(commandWords.length == 1) {
-					this.level = null;
-					return this;
-				} 
-				
-				// reset with parameters
-				else if (commandWords.length == 2) {
+			// reset with no parameters
+			if(commandWords.length == 1) {
+				this.level = null;
+				return this;
+			} else if (commandWords.length == 2) {		// reset with parameters
+				try {
 					this.level = Integer.parseInt(commandWords[1]);
-					return this;
-				}				
-			} catch (NumberFormatException nfe) {		// low-level exception
-				throw new CommandParseException(Messages.LEVEL_NOT_A_NUMBER_ERROR.formatted(commandWords[1]), nfe);
+					return this;				
+				} catch (NumberFormatException nfe) {		// low-level exception
+					throw new CommandParseException(Messages.LEVEL_NOT_A_NUMBER_ERROR.formatted(commandWords[1]), nfe);	
+				}	
+			} else {
+				// commandWords.length > 2
+				throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 			}
 		}		
 		

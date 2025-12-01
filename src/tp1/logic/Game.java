@@ -7,7 +7,10 @@ import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
 import tp1.logic.gameobjects.Mushroom;
 import tp1.exceptions.GameModelException;
+import tp1.exceptions.GameModelParseException;
+import tp1.exceptions.OffBoardException;
 import tp1.logic.gameobjects.Box;
+import tp1.logic.gameobjects.GameObjectFactory;
 
 public class Game implements GameModel, GameStatus, GameWorld {
 
@@ -223,8 +226,8 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		mario.addAction(action);
 	}
 	
-	public void addObj(GameObject obj) {
-		gameObjectContainer.add(obj);
+	public boolean addObj(GameObject obj){
+		return gameObjectContainer.add(obj);
 	}
 	
 	public void marioExited() {
@@ -248,11 +251,12 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		return o1.hashCode() != o2.hashCode();
 	}
 	
-	public boolean isInsideBounds(Position position) {
+	public boolean isInsideBounds(Position position) throws OffBoardException {
 		int row = position.getRow();
 		int col = position.getCol();
-		
-		return row >= 0 && row < Game.DIM_Y && col >= 0 && col < Game.DIM_X;
+		if(row < 0 || row > Game.DIM_Y || col < 0 || col > Game.DIM_X)
+			throw new OffBoardException();
+		return true;
 	}
 
 }

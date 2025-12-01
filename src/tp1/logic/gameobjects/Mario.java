@@ -1,5 +1,6 @@
 package tp1.logic.gameobjects;
 
+import tp1.exceptions.ObjectParseException;
 import tp1.logic.Action;
 import tp1.logic.ActionList;
 import tp1.logic.GameItem;
@@ -205,15 +206,16 @@ public class Mario extends MovingObject {
 	}
 
 	public GameObject parse(String[] objWords, GameWorld game) {
-			if(objWords.length > 3) {
+			if(objWords.length > 3 && matchObjectName(objWords[1].toLowerCase())) {
 				String attributeMario = objWords[3].toLowerCase();
 				
 				if(attributeMario == Messages.MARIO_SMALL_NAME 
 						|| attributeMario == Messages.MARIO_SMALL_SHORTCUT) {
 					big = false;
 				}
+				return super.parse(objWords, game);
 			}
-			return super.parse(objWords, game);
+			return null;
 	}
 	
 	public boolean isInPosition(Position p) {

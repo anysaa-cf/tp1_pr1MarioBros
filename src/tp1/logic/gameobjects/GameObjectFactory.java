@@ -3,10 +3,10 @@ package tp1.logic.gameobjects;
 import java.util.Arrays;
 import java.util.List;
 
-import tp1.exceptions.GameModelParseException;
+import tp1.exceptions.GameModelException;
 import tp1.exceptions.ObjectParseException;
+import tp1.logic.Game;
 import tp1.logic.GameObject;
-import tp1.logic.GameWorld;
 import tp1.view.Messages;
 
 public class GameObjectFactory {
@@ -20,22 +20,15 @@ public class GameObjectFactory {
 			new Box(null, null)
 	);
 	
-	public static GameObject parse (String objWords[], GameWorld game) throws GameModelParseException {
+	public static GameObject parse (String objWords[], Game game) throws GameModelException {
 		GameObject gameObject;
 		
 		for(GameObject obj : availableObjects) {
-			try {
 				gameObject = obj.parse(objWords, game);		// calls the parse method of each gameObject
-				
-				if(gameObject != null) {
+				if(gameObject != null)
 					return gameObject;
-				}
-			} catch (GameModelParseException gme) {
-				throw gme;
-			}
 		}
-
-		throw new ObjectParseException(Messages.INVALID_GAME_OBJECT.formatted(String.join(" ", objWords)));	
+		throw new ObjectParseException(objWords[1] + " not an object.");
 	}
 }
 

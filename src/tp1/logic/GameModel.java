@@ -1,6 +1,7 @@
 package tp1.logic;
 
 import tp1.exceptions.GameModelException;
+import tp1.exceptions.GameModelParseException;
 
 public interface GameModel {
 	// represent the Controller's view
@@ -9,8 +10,7 @@ public interface GameModel {
 	public void reset();
 	public void exit();
 	public void marioExited();
-	public void addPoints(int newPoints);
-	public void addObj(GameObject obj);		// throws GameModelException?¿
+	public boolean addObj(GameObject obj);			
 	public void addAction(Action action) throws GameModelException;
 	public void setLevel(int level);
 	public void initGame();

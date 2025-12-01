@@ -11,8 +11,8 @@ public class GameObjectContainer {
 		gameObjects = new ArrayList<GameObject>();
 	}
 	
-	public void add(GameObject object) {	
-		gameObjects.add(object);
+	public boolean add(GameObject object) {	
+		return gameObjects.add(object);
 	}
 	
 	public String positionToString(int col, int row) {

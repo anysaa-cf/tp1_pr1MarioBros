@@ -1,5 +1,6 @@
 package tp1.logic.gameobjects;
 
+import tp1.exceptions.ActionParseException;
 import tp1.exceptions.CommandParseException;
 import tp1.logic.Action;
 import tp1.logic.GameObject;
@@ -40,16 +41,11 @@ public abstract class MovingObject extends GameObject {
 		}	
 	}
 	
-	public GameObject parse (String objWords[], GameWorld game) {
-		try {
+	public GameObject parse (String objWords[], GameWorld game) throws ActionParseException {
+	
 		if(objWords.length > 2) {
 			this.action = (Action.parseActionClass(objWords[2].toLowerCase()));					
 		}
-		return super.parse(objWords, game);		
-		}
-		catch(CommandParseException e) {
-			
-		}
-		return null;
+		return super.parse(objWords, game);
 	}
 }

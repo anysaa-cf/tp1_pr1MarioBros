@@ -1,6 +1,7 @@
 package tp1.logic;
 
-import tp1.exceptions.GameModelParseException;
+import tp1.exceptions.GameModelException;
+import tp1.exceptions.ObjectParseException;
 import tp1.logic.gameobjects.*;
 
 public abstract class GameObject implements GameItem {
@@ -59,8 +60,8 @@ public abstract class GameObject implements GameItem {
 	abstract public boolean receiveInteraction(ExitDoor door);
 	abstract public boolean receiveInteraction(Goomba goomba);
 	
-	public GameObject parse (String objWords[], GameWorld game) throws GameModelParseException {
-		if(objWords.length >= 2) {
+	public GameObject parse (String objWords[], GameWorld game) throws GameModelException{
+		if(objWords.length >= 2 && matchObjectName(objWords[1].toLowerCase())) {
 			// each coordinate row and col counts as an element in the array
 			int row, col;
 			
@@ -74,14 +75,12 @@ public abstract class GameObject implements GameItem {
 			
 			this.game = game;
 			
-			String objType = objWords[1].toLowerCase();
-			
-			if(matchObjectName(objType)) {
+			if(game.isInsideBounds(pos)) {
 				return create(game, pos);
 			}
+			throw new ObjectParseException(objWords[1] + " not an object.");
 		}
-		
-		return null;
+		throw new ObjectParseException("Too few arguments");
 	}
 	
 	protected String getName() { return name; }

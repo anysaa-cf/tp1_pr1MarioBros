@@ -1,11 +1,10 @@
 package tp1.logic;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 import tp1.exceptions.GameLoadException;
+import tp1.exceptions.GameModelException;
 import tp1.logic.gameobjects.*;
 import tp1.view.Messages;
 import tp1.logic.Game;
@@ -17,6 +16,7 @@ public class FileGameConfiguration implements GameConfiguration {
 	
 	public FileGameConfiguration(String fileName, GameWorld game) throws GameLoadException {
 		this.fileName = fileName;
+		this.game = game;
 	}
 	
 	@Override
@@ -28,9 +28,9 @@ public class FileGameConfiguration implements GameConfiguration {
 			c = fileIn.read();
 			fileIn.close();
 			if(c < 0 || c > 100)
-				throw new GameLoadException();
+				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible time number");
 		} catch (IOException ioe) {
-			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible time number", ioe);
+			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
 		}
 		
 		return c;
@@ -45,9 +45,9 @@ public class FileGameConfiguration implements GameConfiguration {
 			c = fileIn.read();
 			fileIn.close();
 			if(c < 0)
-				throw new GameLoadException();
+				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible points number");
 		} catch (IOException ioe) {
-			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible points number", ioe);
+			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
 		}
 		
 		return c;
@@ -62,9 +62,9 @@ public class FileGameConfiguration implements GameConfiguration {
 			c = fileIn.read();
 			fileIn.close();
 			if(c < 0 || c > 3)
-				throw new GameLoadException();
+				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible lives parse");
 		} catch (IOException ioe) {
-			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible lives parse", ioe);
+			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
 		}
 		
 		return c;
@@ -72,16 +72,19 @@ public class FileGameConfiguration implements GameConfiguration {
 
 	@Override
 	public Mario getMario() throws GameLoadException {
-		FileReader fileIn = null;
+		BufferedReader fileIn = null;
 		Mario mario;
+		String str;
+		
 		try {
-			fileIn = new FileReader(fileName);
-			c = fileIn.read();
+			fileIn = new BufferedReader(new FileReader(fileName));
+			str = fileIn.readLine();
+			mario = GameObjectFactory.parse(str, game);
 			fileIn.close();
-			if(c < 0 || c > 3)
-				throw new GameLoadException();
 		} catch (IOException ioe) {
-			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible lives parse", ioe);
+			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
+		} catch(GameModelException gme) {
+			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, gme);
 		}
 	}
 

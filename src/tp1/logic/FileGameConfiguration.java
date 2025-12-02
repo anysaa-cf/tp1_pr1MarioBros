@@ -75,7 +75,6 @@ public class FileGameConfiguration implements GameConfiguration {
 		BufferedReader fileIn = null;
 		Mario mario;
 		String str;
-		
 		try {
 			fileIn = new BufferedReader(new FileReader(fileName));
 			str = fileIn.readLine();
@@ -86,14 +85,13 @@ public class FileGameConfiguration implements GameConfiguration {
 		} catch(GameModelException gme) {
 			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, gme);
 		}
-	}
-
 		return mario;
 	}
 
+
+
 	@Override
 	public List<GameObject> getNPCObjects() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

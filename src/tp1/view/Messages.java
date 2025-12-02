@@ -56,6 +56,7 @@ public class Messages {
 	public static final String INVALID_COMMAND = "Invalid command: %s";
 	public static final String INVALID_COMMAND_PARAMETERS = "Invalid command parameters";
 	public static final String ERROR_COMMAND_EXECUTE = "Command execute problem";
+	public static final String ERROR_COMMAND_POSITION = "Command position problem";
 	
 	public static final String HELP_AVAILABLE_COMMANDS = "Available commands:";
 	public static final String COMMAND_HELP_TEXT = "%s: %s";

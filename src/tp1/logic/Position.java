@@ -1,6 +1,7 @@
 package tp1.logic;
 
 import tp1.exceptions.PositionParseException;
+import tp1.view.Messages;
 
 /**
  * 
@@ -18,12 +19,17 @@ public class Position {
 	}
 	
 	public static Position parsePosition(String position) throws PositionParseException{
-		int row, col;
-		String aux = position.replaceAll("[()\\s]", ""); // deletes '(', ')' and spaces
-        String[] part = aux.split(",");
-        row = Integer.parseInt(part[0]);
-        col = Integer.parseInt(part[1]);
-        return new Position(row, col);
+		try {
+			int row, col;
+			String aux = position.replaceAll("[()\\s]", ""); // deletes '(', ')' and spaces
+	        String[] part = aux.split(",");
+	        row = Integer.parseInt(part[0]);
+	        col = Integer.parseInt(part[1]);
+	        return new Position(row, col);
+		}
+		catch(NumberFormatException nfe) {
+			throw new PositionParseException (Messages.ERROR_COMMAND_POSITION, nfe);
+		}
         
 	}
 	 

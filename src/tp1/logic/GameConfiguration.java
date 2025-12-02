@@ -4,10 +4,8 @@ import java.util.List;
 
 import tp1.logic.gameobjects.Mario;
 
-public interface GameConfiguration {
-	public int remainingTime();
-	public int points();
-	public int numLives();
+public interface GameConfiguration extends GameRunStatus {
+	
 	public Mario getMario();
 	public List<GameObject> getNPCObjects();
 	

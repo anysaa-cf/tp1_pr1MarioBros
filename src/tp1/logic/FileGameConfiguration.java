@@ -7,12 +7,13 @@ import tp1.exceptions.GameLoadException;
 import tp1.exceptions.GameModelException;
 import tp1.logic.gameobjects.*;
 import tp1.view.Messages;
-import tp1.logic.Game;
 
 public class FileGameConfiguration implements GameConfiguration {
 	
 	private String fileName;
 	private GameWorld game;
+	private Mario mario;
+	private List<GameObject> gameObject;
 	
 	public FileGameConfiguration(String fileName, GameWorld game) throws GameLoadException {
 		this.fileName = fileName;
@@ -73,17 +74,22 @@ public class FileGameConfiguration implements GameConfiguration {
 	@Override
 	public Mario getMario() throws GameLoadException {
 		BufferedReader fileIn = null;
-		Mario mario;
 		String str;
 		try {
 			fileIn = new BufferedReader(new FileReader(fileName));
 			str = fileIn.readLine();
-			mario = GameObjectFactory.parse(str, game);
-			fileIn.close();
+			String[] aux  = str.split(" ");
+			mario = (Mario) GameObjectFactory.parse(aux, (Game)game);
 		} catch (IOException ioe) {
 			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
 		} catch(GameModelException gme) {
 			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, gme);
+		} finally {
+			try {
+				fileIn.close();
+			} catch (IOException ioe) {
+				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
+			}
 		}
 		return mario;
 	}
@@ -91,8 +97,27 @@ public class FileGameConfiguration implements GameConfiguration {
 
 
 	@Override
-	public List<GameObject> getNPCObjects() {
-		return null;
+	public List<GameObject> getNPCObjects() throws GameLoadException {
+		BufferedReader fileIn = null;
+		String str;
+		try {
+			fileIn = new BufferedReader(new FileReader(fileName));
+			while ((str = fileIn.readLine()) != null) {
+				String[] aux  = str.split(" ");
+				gameObject.add(GameObjectFactory.parse(aux, (Game)game));
+			}
+		} catch (IOException ioe) {
+			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
+		} catch(GameModelException gme) {
+			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, gme);
+		} finally {
+			try {
+				fileIn.close();
+			} catch (IOException ioe) {
+				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
+			}
+		}
+		return gameObject;
 	}
 
 }

@@ -9,7 +9,7 @@ public interface GameModel {
 	// represent the Controller's view
 	public boolean isFinished();
 	public void update() throws GameModelException;
-	public void reset();
+	public void reset() throws GameLoadException;
 	public void exit();
 	public void marioExited();
 	public boolean addObj(GameObject obj);			

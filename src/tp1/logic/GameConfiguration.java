@@ -8,6 +8,6 @@ import tp1.logic.gameobjects.Mario;
 public interface GameConfiguration extends GameRunStatus {
 	
 	public Mario getMario() throws GameLoadException;
-	public List<GameObject> getNPCObjects();
+	public List<GameObject> getNPCObjects() throws GameLoadException;
 	
 }

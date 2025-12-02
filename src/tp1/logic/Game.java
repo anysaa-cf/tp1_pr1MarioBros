@@ -133,7 +133,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		this.exit = true;
 	}
 	
-	public void reset() {
+	public void reset() throws GameLoadException {
 		if (previousConfig != null) {
 	        this.remainingTime = previousConfig.remainingTime();
 	        this.points = previousConfig.points();

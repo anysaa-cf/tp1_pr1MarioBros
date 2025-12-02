@@ -11,6 +11,7 @@ public abstract class GameObject implements GameItem {
 	private boolean isSolid;
 	private boolean isAlive;
 	protected GameWorld game; 
+	protected boolean canWrite = true;
 	
 	private final String name;
 	private final String shortcut;
@@ -86,6 +87,12 @@ public abstract class GameObject implements GameItem {
 	protected boolean matchObjectName(String nameObject) {
 		return getShortcut().equalsIgnoreCase(nameObject) ||
 				getName().equalsIgnoreCase(nameObject);
+	}
+	
+	public String toString() {
+		String str = null;
+		str = pos.toString() + name;
+		return str;
 	}
 	
 

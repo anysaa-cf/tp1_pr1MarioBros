@@ -98,5 +98,11 @@ public class Box extends GameObject {
 		  b.full = this.full; 
 		  return b;
 	}
+	
+	public String toString() {
+		String str = null;
+		str = super.toString() + " " + (full ? Messages.BOX_FULL : Messages.BOX_EMPTY);
+		return str;
+	}
 
 }

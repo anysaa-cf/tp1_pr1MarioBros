@@ -1,8 +1,11 @@
 package tp1.logic;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import tp1.exceptions.GameSaveException;
 import tp1.exceptions.OffBoardException;
 import tp1.view.Messages;
 
@@ -53,6 +56,19 @@ public class GameObjectContainer {
 			GameObject o = gameObjects.get(i);
 			object.interactWith(o);
 			o.interactWith(object);
+		}
+	}
+	
+	public void write(BufferedWriter bw) throws GameSaveException {
+		try {
+			for(GameObject o: gameObjects) {
+				if(o.canWrite) {
+					bw.write(o.toString());
+					bw.newLine();
+				}
+			}
+		} catch(IOException ioe) {
+			throw new GameSaveException(Messages.ERROR_COMMAND_SAVE, ioe);
 		}
 	}
 }

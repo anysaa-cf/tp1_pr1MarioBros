@@ -43,5 +43,10 @@ public class Position {
 	public boolean equals(Position position) {
 		return this.col == position.col && this.row == position.row;
 	}
-
+	
+	public String toString() {
+		String str = null;
+		str = "(" + row + "," + col + ") ";
+		return str;
+	}	
 }

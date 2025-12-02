@@ -53,6 +53,7 @@ public class ResetCommand extends AbstractCommand {
 				game.setLevel(level);
 				game.initGame();
 			}
+			
 			view.showGame();
 		}catch(GameLoadException gle) {
 			throw new CommandExecuteException(gle);

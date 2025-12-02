@@ -252,5 +252,12 @@ public class Mario extends MovingObject {
 		  m.big = this.big;
 		  return m;
 	}
+	
+	public String toString() {
+		String str = null;
+		str = super.toString() + " " + (big ? Messages.MARIO_BIG_NAME : Messages.MARIO_SMALL_NAME);
+		canWrite = false;
+		return str;
+	}
 
 }

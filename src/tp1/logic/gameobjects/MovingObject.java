@@ -48,4 +48,10 @@ public abstract class MovingObject extends GameObject {
 		}
 		return super.parse(objWords, game);
 	}
+	
+	public String toString() {
+		String str = null;
+		str = super.toString() + " " + action.toString();
+		return str;
+	}
 }

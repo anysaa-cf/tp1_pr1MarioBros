@@ -41,6 +41,10 @@ public enum Action {
 		throw new ActionParseException(Messages.UNKNOWN_ACTION.formatted(inputs));
 	}
 	
+	public String toString() {
+		return abrev;
+	}	
+	
 }
 	
 	

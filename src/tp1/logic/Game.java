@@ -6,17 +6,14 @@ import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
 import tp1.logic.gameobjects.Mushroom;
+import tp1.view.Messages;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 import tp1.exceptions.GameLoadException;
 import tp1.exceptions.GameModelException;
-import tp1.exceptions.GameModelParseException;
 import tp1.exceptions.GameSaveException;
-import tp1.exceptions.OffBoardException;
 import tp1.logic.gameobjects.Box;
-import tp1.logic.gameobjects.GameObjectFactory;
 
 public class Game implements GameModel, GameStatus, GameWorld {
 
@@ -300,10 +297,27 @@ public class Game implements GameModel, GameStatus, GameWorld {
 
 	@Override
 	public void save(String fileName) throws GameSaveException {
-		try (FileWriter file = new FileWriter(fileName)){
-			file.write(this.toString());
+		FileWriter fileOut = null;
+		BufferedWriter bufferOut = null;
+		try{
+			fileOut = new FileWriter(fileName);
+			bufferOut = new BufferedWriter(fileOut);
+			fileOut.write(this.remainingTime());
+			fileOut.write(this.points());
+			fileOut.write(numLives());
+			bufferOut.newLine();
+			bufferOut.write(mario.toString());
+			bufferOut.newLine();
+			gameObjectContainer.write(bufferOut);
 		} catch(IOException ioe) {
 			throw new GameSaveException(ioe.getMessage(), ioe);
+		} finally {
+			try {
+				fileOut.close();
+				bufferOut.close();
+			} catch (IOException ioe) {
+				throw new GameSaveException(Messages.ERROR_COMMAND_SAVE, ioe);
+			}
 		}
 		
 	}

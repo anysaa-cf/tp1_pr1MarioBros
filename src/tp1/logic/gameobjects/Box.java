@@ -1,6 +1,6 @@
 package tp1.logic.gameobjects;
 
-import tp1.exceptions.GameModelParseException;
+import tp1.exceptions.GameModelException;
 import tp1.logic.GameItem;
 import tp1.logic.GameObject;
 import tp1.logic.GameWorld;
@@ -85,7 +85,7 @@ public class Box extends GameObject {
 		return false;
 	}
 	
-	public GameObject parse (String objWords[], GameWorld game) {
+	public GameObject parse (String objWords[], GameWorld game) throws GameModelException {
 		if(objWords.length > 2) {
 			this.full = (objWords[2].toLowerCase() == Messages.BOX_FULL ? true : objWords[2].toLowerCase() == Messages.BOX_FULL_SHORTCUT ? true : false);					
 		}

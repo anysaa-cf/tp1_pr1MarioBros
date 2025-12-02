@@ -1,8 +1,10 @@
 package tp1.logic;
 
 import tp1.exceptions.GameModelException;
-import tp1.exceptions.ObjectParseException;
+import tp1.exceptions.OffBoardException;
+import tp1.exceptions.PositionParseException;
 import tp1.logic.gameobjects.*;
+import tp1.view.Messages;
 
 public abstract class GameObject implements GameItem {
 	protected Position pos; 		// protected or private?¿
@@ -62,25 +64,20 @@ public abstract class GameObject implements GameItem {
 	
 	public GameObject parse (String objWords[], GameWorld game) throws GameModelException{
 		if(objWords.length >= 2 && matchObjectName(objWords[1].toLowerCase())) {
-			// each coordinate row and col counts as an element in the array
-			int row, col;
-			
-			String aux = objWords[0].replaceAll("[()\\s]", ""); // deletes '(', ')' and spaces
-	        String[] parts = aux.split(",");
-			
-	        row = Integer.parseInt(parts[0]);
-	        col = Integer.parseInt(parts[1]);
-	        
-			pos = new Position(row, col);
-			
-			this.game = game;
-			
-			if(game.isInsideBounds(pos)) {
-				return create(game, pos);
+			try {
+				pos = Position.parsePosition(objWords[0]);
+				
+				this.game = game;
+				
+				if(game.isInsideBounds(pos))
+					return create(game, pos);
+				throw new OffBoardException("Position outside the board.");
 			}
-			throw new ObjectParseException(objWords[1] + " not an object.");
+			catch(PositionParseException ppe){
+				throw new GameModelException(Messages.INVALID_COMMAND_PARAMETERS, ppe);
+			}
 		}
-		throw new ObjectParseException("Too few arguments");
+		return null;
 	}
 	
 	protected String getName() { return name; }

@@ -118,7 +118,8 @@ public class Messages {
 	public static final String ACTION_STOP_SHORTCUT = "s";
 	
 	
-	// gameObjects
+// gameObjects
+	public static final String UNKNOWN_OBJECT = "Unknown object: %s";
 	// mario
 	public static final String MARIO_NAME = "mario";
 	public static final String MARIO_SHORTCUT = "m";

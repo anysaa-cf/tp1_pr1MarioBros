@@ -7,7 +7,7 @@ import tp1.exceptions.OffBoardException;
 public interface GameWorld {
 	// represent the Model's internal view 
 	public void tryInteractionsFrom(GameItem object);
-	public boolean isInsideBounds(Position position) throws OffBoardException;
+	public boolean isInsideBounds(Position position);
 	public boolean isDifferent(GameItem o1, GameItem o2);
 	public void marioExited();
 	public void marioDies();

@@ -22,13 +22,12 @@ public class GameObjectFactory {
 	
 	public static GameObject parse (String objWords[], Game game) throws GameModelException {
 		GameObject gameObject;
-		
 		for(GameObject obj : availableObjects) {
 				gameObject = obj.parse(objWords, game);		// calls the parse method of each gameObject
 				if(gameObject != null)
 					return gameObject;
 		}
-		throw new ObjectParseException(objWords[1] + " not an object.");
+		throw new ObjectParseException(Messages.UNKNOWN_OBJECT);
 	}
 }
 

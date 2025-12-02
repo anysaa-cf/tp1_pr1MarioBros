@@ -2,6 +2,8 @@ package tp1.logic;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import tp1.exceptions.OffBoardException;
 import tp1.view.Messages;
 
 public class GameObjectContainer {
@@ -37,7 +39,7 @@ public class GameObjectContainer {
 		return solid;
 	}
 	
-	public void update() {
+	public void update(){
 		int aux = gameObjects.size();
 		for(int i = 0; i < aux; i++) {
 			GameObject o = gameObjects.get(i);

@@ -251,12 +251,11 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		return o1.hashCode() != o2.hashCode();
 	}
 	
-	public boolean isInsideBounds(Position position) throws OffBoardException {
+	public boolean isInsideBounds(Position position) {
 		int row = position.getRow();
 		int col = position.getCol();
-		if(row < 0 || row > Game.DIM_Y || col < 0 || col > Game.DIM_X)
-			throw new OffBoardException();
-		return true;
+			
+		return (row > -1 && row < DIM_Y && col > -1 && col < DIM_X);
 	}
 
 }

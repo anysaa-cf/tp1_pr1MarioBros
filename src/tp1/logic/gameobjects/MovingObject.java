@@ -1,7 +1,7 @@
 package tp1.logic.gameobjects;
 
-import tp1.exceptions.ActionParseException;
-import tp1.exceptions.CommandParseException;
+import tp1.exceptions.GameModelException;
+import tp1.exceptions.OffBoardException;
 import tp1.logic.Action;
 import tp1.logic.GameObject;
 import tp1.logic.GameWorld;
@@ -30,7 +30,7 @@ public abstract class MovingObject extends GameObject {
 			return true;
 	}
 	
-	protected abstract void move();
+	protected abstract void move() throws OffBoardException;
 	
 	
 	public void changeAction() {
@@ -41,7 +41,7 @@ public abstract class MovingObject extends GameObject {
 		}	
 	}
 	
-	public GameObject parse (String objWords[], GameWorld game) throws ActionParseException {
+	public GameObject parse (String objWords[], GameWorld game) throws GameModelException {
 	
 		if(objWords.length > 2) {
 			this.action = (Action.parseActionClass(objWords[2].toLowerCase()));					

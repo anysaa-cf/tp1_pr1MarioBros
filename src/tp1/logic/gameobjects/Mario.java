@@ -1,5 +1,6 @@
 package tp1.logic.gameobjects;
 
+import tp1.exceptions.GameModelException;
 import tp1.exceptions.ObjectParseException;
 import tp1.logic.Action;
 import tp1.logic.ActionList;
@@ -27,7 +28,6 @@ public class Mario extends MovingObject {
 		this.rightC = this.leftC = this.upC = this.downC = 0;
 		
 	}
-	
 
 	public String getIcon() {
 		String icon;
@@ -205,7 +205,7 @@ public class Mario extends MovingObject {
 		return true;
 	}
 
-	public GameObject parse(String[] objWords, GameWorld game) {
+	public GameObject parse(String[] objWords, GameWorld game) throws GameModelException {
 			if(objWords.length > 3 && matchObjectName(objWords[1].toLowerCase())) {
 				String attributeMario = objWords[3].toLowerCase();
 				

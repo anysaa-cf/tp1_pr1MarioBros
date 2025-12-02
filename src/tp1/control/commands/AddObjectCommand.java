@@ -41,10 +41,10 @@ public class AddObjectCommand extends AbstractCommand {
 	@Override
 	public void execute(GameModel game, GameView view) throws CommandExecuteException {		
 		try {
-			GameObject obj = GameObjectFactory.parse(objDescription, game);
+			GameObject obj = GameObjectFactory.parse(objDescription, (Game) game);
 			game.addObj(obj);
 			view.showGame();
-		} catch(ObjectParseException gme) {
+		} catch(GameModelException gme) {
 			throw new CommandExecuteException(Messages.ERROR_COMMAND_EXECUTE, gme);
 		}
 	}

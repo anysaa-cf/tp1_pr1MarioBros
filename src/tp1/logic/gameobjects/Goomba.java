@@ -1,5 +1,6 @@
 package tp1.logic.gameobjects;
 
+import tp1.exceptions.OffBoardException;
 import tp1.logic.Action;
 import tp1.logic.GameItem;
 import tp1.logic.GameObject;
@@ -90,7 +91,6 @@ public class Goomba extends MovingObject {
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
 		this.changeAction();
-		move();
 		goomba.changeAction();
 		return true;
 	}

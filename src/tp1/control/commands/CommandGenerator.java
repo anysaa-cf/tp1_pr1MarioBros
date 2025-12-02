@@ -25,8 +25,9 @@ public class CommandGenerator {
 				if(command != null) {
 					return command;
 				}
-			} catch (CommandParseException cpe) {
-				throw cpe;		// to propagate the exception			
+			} catch (NumberFormatException nfe) {
+				throw new CommandParseException(
+						Messages.LEVEL_NOT_A_NUMBER_ERROR.formatted(commandWords[1]), nfe);
 			}
 		}
 		throw new CommandParseException(Messages.UNKNOWN_COMMAND.formatted(commandWords[0]));

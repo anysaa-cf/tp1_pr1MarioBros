@@ -2,6 +2,7 @@ package tp1.control.commands;
 
 import tp1.exceptions.CommandExecuteException;
 import tp1.exceptions.CommandParseException;
+import tp1.exceptions.GameLoadException;
 import tp1.logic.Game;
 import tp1.logic.GameModel;
 import tp1.view.GameView;
@@ -45,13 +46,17 @@ public class ResetCommand extends AbstractCommand {
 
 	@Override
 	public void execute(GameModel game, GameView view) throws CommandExecuteException {
-		if(level == null) {
-			game.reset();
-		} else {
-			game.setLevel(level);
-			game.initGame();
+		try {
+			if(level == null) {
+				game.reset();
+			} else {
+				game.setLevel(level);
+				game.initGame();
+			}
+			view.showGame();
+		}catch(GameLoadException gle) {
+			throw new CommandExecuteException(gle);
 		}
-		view.showGame();
 	}
 	
 	public String helpText() {

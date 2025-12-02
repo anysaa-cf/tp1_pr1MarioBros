@@ -19,18 +19,7 @@ public class SaveCommand extends AbstractCommand {
 	public SaveCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
-
-	@Override
-	public void execute(GameModel game, GameView view) throws CommandExecuteException {
-		try {
-			game.save(fileName);
-			view.showMessage(Messages.SAVED_GAME.formatted(fileName));
-		} catch (GameModelException gme) {
-			throw new CommandExecuteException(Messages.ERROR_COMMAND_SAVE, gme);
-		}
-		
-	}
-
+	
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
 		if(matchCommandName(commandWords[0])) {
@@ -43,6 +32,17 @@ public class SaveCommand extends AbstractCommand {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public void execute(GameModel game, GameView view) throws CommandExecuteException {
+		try {
+			game.save(fileName);
+			view.showMessage(Messages.SAVED_GAME.formatted(fileName));
+		} catch (GameModelException gme) {
+			throw new CommandExecuteException(Messages.ERROR_COMMAND_SAVE, gme);
+		}
+		
 	}
 
 }

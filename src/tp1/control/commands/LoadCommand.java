@@ -19,17 +19,7 @@ public class LoadCommand extends AbstractCommand {
 	public LoadCommand() {
 		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
-
-	@Override
-	public void execute(GameModel game, GameView view) throws CommandExecuteException {
-		try {
-			game.load(fileName);
-			view.showGame();
-		} catch(GameModelException gme) {
-			throw new CommandExecuteException(Messages.ERROR_COMMAND_LOAD, gme);
-		}	
-	}
-
+	
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
 		if(matchCommandName(commandWords[0])) {
@@ -42,6 +32,16 @@ public class LoadCommand extends AbstractCommand {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public void execute(GameModel game, GameView view) throws CommandExecuteException {
+		try {
+			game.load(fileName);
+			view.showGame();
+		} catch(GameModelException gme) {
+			throw new CommandExecuteException(Messages.ERROR_COMMAND_LOAD, gme);
+		}	
 	}
 
 }

@@ -94,8 +94,6 @@ public class FileGameConfiguration implements GameConfiguration {
 		return mario;
 	}
 
-
-
 	@Override
 	public List<GameObject> getNPCObjects() throws GameLoadException {
 		BufferedReader fileIn = null;

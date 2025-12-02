@@ -1,6 +1,8 @@
 package tp1.logic;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 import tp1.exceptions.GameLoadException;
@@ -11,6 +13,9 @@ import tp1.view.Messages;
 public class FileGameConfiguration implements GameConfiguration {
 	
 	private String fileName;
+	private int lives = 0;
+	private int time = 0;
+	private int points = 0;
 	private GameWorld game;
 	private Mario mario;
 	private List<GameObject> gameObject;
@@ -18,103 +23,64 @@ public class FileGameConfiguration implements GameConfiguration {
 	public FileGameConfiguration(String fileName, GameWorld game) throws GameLoadException {
 		this.fileName = fileName;
 		this.game = game;
+		mario = new Mario(null, null);
+		gameObject = new ArrayList<GameObject>();
+		
 	}
 	
-	@Override
-	public int remainingTime() throws GameLoadException {
-		FileReader fileIn = null;
-		int c;
+	public void read() throws GameLoadException{
+		InputStreamReader isr = null;
+		BufferedReader br = null;
+		String aux;
+		String [] split;
 		try {
-			fileIn = new FileReader(fileName);
-			c = fileIn.read();
-			fileIn.close();
-			if(c < 0 || c > 100)
-				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible time number");
-		} catch (IOException ioe) {
-			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
-		}
-		
-		return c;
-	}
-
-	@Override
-	public int points() throws GameLoadException {
-		FileReader fileIn = null;
-		int c;
-		try {
-			fileIn = new FileReader(fileName);
-			c = fileIn.read();
-			fileIn.close();
-			if(c < 0)
-				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible points number");
-		} catch (IOException ioe) {
-			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
-		}
-		
-		return c;
-	}
-
-	@Override
-	public int numLives() throws GameLoadException {
-		FileReader fileIn = null;
-		int c;
-		try {
-			fileIn = new FileReader(fileName);
-			c = fileIn.read();
-			fileIn.close();
-			if(c < 0 || c > 3)
-				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible lives parse");
-		} catch (IOException ioe) {
-			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
-		}
-		
-		return c;
-	}
-
-	@Override
-	public Mario getMario() throws GameLoadException {
-		BufferedReader fileIn = null;
-		String str;
-		try {
-			fileIn = new BufferedReader(new FileReader(fileName));
-			str = fileIn.readLine();
-			String[] aux  = str.split(" ");
-			mario = (Mario) GameObjectFactory.parse(aux, (Game)game);
+			isr = new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_16LE);
+			br = new BufferedReader(isr);
+			time = Integer.parseInt(br.readLine().trim());
+			points = Integer.parseInt(br.readLine().trim());
+			lives = Integer.parseInt(br.readLine().trim());
+			aux = br.readLine();
+			split = aux.split(" ");
+			mario = (Mario) GameObjectFactory.parse(split, (Game) game);
+			while ((aux = br.readLine()) != null) {
+				split  = aux.split(" ");
+				gameObject.add(GameObjectFactory.parse(split, (Game)game));
+			}
 		} catch (IOException ioe) {
 			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
 		} catch(GameModelException gme) {
 			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, gme);
 		} finally {
 			try {
-				fileIn.close();
+				if(br != null)br.close();
 			} catch (IOException ioe) {
 				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
 			}
 		}
+	}
+	
+	@Override
+	public int remainingTime() {
+		return time;
+	}
+
+	@Override
+	public int points() {
+		return points;
+	}
+
+	@Override
+	public int numLives() {
+		return lives;
+	}
+
+	@Override
+	public Mario getMario(){
 		return mario;
 	}
 
 	@Override
-	public List<GameObject> getNPCObjects() throws GameLoadException {
-		BufferedReader fileIn = null;
-		String str;
-		try {
-			fileIn = new BufferedReader(new FileReader(fileName));
-			while ((str = fileIn.readLine()) != null) {
-				String[] aux  = str.split(" ");
-				gameObject.add(GameObjectFactory.parse(aux, (Game)game));
-			}
-		} catch (IOException ioe) {
-			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
-		} catch(GameModelException gme) {
-			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, gme);
-		} finally {
-			try {
-				fileIn.close();
-			} catch (IOException ioe) {
-				throw new GameLoadException(Messages.ERROR_COMMAND_LOAD, ioe);
-			}
-		}
+	public List<GameObject> getNPCObjects(){
 		return gameObject;
 	}
 

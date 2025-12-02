@@ -9,6 +9,7 @@ import tp1.logic.gameobjects.Mushroom;
 import tp1.view.Messages;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 import tp1.exceptions.GameLoadException;
 import tp1.exceptions.GameModelException;
@@ -280,13 +281,15 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	public void load(String fileName) throws GameLoadException {
 		GameConfiguration config = new FileGameConfiguration(fileName, this);
 		
+		config.read();
+		
 		this.remainingTime = config.remainingTime();
 	    this.points = config.points();
 	    this.lives = config.numLives();
-
-	    this.mario = config.getMario();
-		
 	    this.gameObjectContainer = new GameObjectContainer();
+	    gameObjectContainer.add(this.mario = config.getMario());
+		
+	   
 	    
 	    for (GameObject obj : config.getNPCObjects()) {
 	        gameObjectContainer.add(obj);
@@ -297,14 +300,18 @@ public class Game implements GameModel, GameStatus, GameWorld {
 
 	@Override
 	public void save(String fileName) throws GameSaveException {
-		FileWriter fileOut = null;
+		FileOutputStream fileOut = null;
+		OutputStreamWriter osw = null;
 		BufferedWriter bufferOut = null;
 		try{
-			fileOut = new FileWriter(fileName);
-			bufferOut = new BufferedWriter(fileOut);
-			fileOut.write(this.remainingTime());
-			fileOut.write(this.points());
-			fileOut.write(numLives());
+			fileOut = new FileOutputStream(fileName);
+			osw = new OutputStreamWriter(fileOut, StandardCharsets.UTF_16LE);
+			bufferOut = new BufferedWriter(osw);
+			bufferOut.write(String.valueOf(this.remainingTime) + " ");
+			bufferOut.newLine();
+			bufferOut.write(String.valueOf(this.points) + " ");
+			bufferOut.newLine();
+			bufferOut.write(String.valueOf(numLives()));
 			bufferOut.newLine();
 			bufferOut.write(mario.toString());
 			bufferOut.newLine();
@@ -313,7 +320,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 			throw new GameSaveException(ioe.getMessage(), ioe);
 		} finally {
 			try {
-				fileOut.close();
 				bufferOut.close();
 			} catch (IOException ioe) {
 				throw new GameSaveException(Messages.ERROR_COMMAND_SAVE, ioe);

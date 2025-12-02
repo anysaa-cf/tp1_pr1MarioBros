@@ -134,8 +134,22 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public void reset() {
-		this.remainingTime = 100;
-		initGame();
+		if (previousConfig != null) {
+	        this.remainingTime = previousConfig.remainingTime();
+	        this.points = previousConfig.points();
+	        this.lives = previousConfig.numLives();
+
+	        this.mario = previousConfig.getMario();
+
+	        this.gameObjectContainer = new GameObjectContainer();
+	        for (GameObject obj : previousConfig.getNPCObjects()) {
+	            gameObjectContainer.add(obj);
+	        }
+
+	    } else {
+	        this.remainingTime = 100;
+	        initGame();
+	    }
 	}
 
 	private void initLevel0() {

@@ -6,6 +6,10 @@ import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
 import tp1.logic.gameobjects.Mushroom;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
 import tp1.exceptions.GameLoadException;
 import tp1.exceptions.GameModelException;
 import tp1.exceptions.GameModelParseException;
@@ -28,6 +32,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private boolean win;
 	private boolean lose;
 	private boolean exit;
+	private GameConfiguration previousConfig;
 	
 	public Game(int nLevel) {
 		this.remainingTime = 100;
@@ -262,13 +267,30 @@ public class Game implements GameModel, GameStatus, GameWorld {
 
 	@Override
 	public void load(String fileName) throws GameLoadException {
-		// TODO Auto-generated method stub
+		GameConfiguration config = new FileGameConfiguration(fileName, this);
 		
+		this.remainingTime = config.remainingTime();
+	    this.points = config.points();
+	    this.lives = config.numLives();
+
+	    this.mario = config.getMario();
+		
+	    this.gameObjectContainer = new GameObjectContainer();
+	    
+	    for (GameObject obj : config.getNPCObjects()) {
+	        gameObjectContainer.add(obj);
+	    }
+	    
+	    this.previousConfig = config;
 	}
 
 	@Override
 	public void save(String fileName) throws GameSaveException {
-		// TODO Auto-generated method stub
+		try (FileWriter file = new FileWriter(fileName)){
+			file.write(this.toString());
+		} catch(IOException ioe) {
+			throw new GameSaveException(ioe.getMessage(), ioe);
+		}
 		
 	}
 

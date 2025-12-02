@@ -74,6 +74,7 @@ public class FileGameConfiguration implements GameConfiguration {
 	public Mario getMario() throws GameLoadException {
 		FileReader fileIn = null;
 		Mario mario;
+		int c;
 		try {
 			fileIn = new FileReader(fileName);
 			c = fileIn.read();
@@ -83,14 +84,13 @@ public class FileGameConfiguration implements GameConfiguration {
 		} catch (IOException ioe) {
 			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible lives parse", ioe);
 		}
-	}
-
 		return mario;
 	}
 
+
+
 	@Override
 	public List<GameObject> getNPCObjects() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

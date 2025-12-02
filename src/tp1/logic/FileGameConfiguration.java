@@ -83,6 +83,8 @@ public class FileGameConfiguration implements GameConfiguration {
 		} catch (IOException ioe) {
 			throw new GameLoadException(Messages.ERROR_COMMAND_LOAD + ", imposible lives parse", ioe);
 		}
+	}
+
 		return mario;
 	}
 

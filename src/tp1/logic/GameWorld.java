@@ -1,8 +1,6 @@
 package tp1.logic;
 
 import tp1.exceptions.GameModelException;
-import tp1.exceptions.GameModelParseException;
-import tp1.exceptions.OffBoardException;
 
 public interface GameWorld {
 	// represent the Model's internal view 
@@ -16,5 +14,4 @@ public interface GameWorld {
 	public boolean addObj(GameObject obj);	
 	public void addAction(Action action) throws GameModelException;
 	public boolean isSolid(Position nextPos);
-	public int getLevel();
 }

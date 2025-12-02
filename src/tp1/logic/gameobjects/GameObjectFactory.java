@@ -27,7 +27,7 @@ public class GameObjectFactory {
 				if(gameObject != null)
 					return gameObject;
 		}
-		throw new ObjectParseException(Messages.UNKNOWN_OBJECT);
+		throw new ObjectParseException(Messages.UNKNOWN_OBJECT.formatted(objWords[1]));
 	}
 }
 

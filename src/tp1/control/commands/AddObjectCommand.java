@@ -37,10 +37,11 @@ public class AddObjectCommand extends AbstractCommand {
 		return null;
 	}
 	
-	// maybe cambiar argumento de gameModel a gameWorld en todos los execute
 	@Override
 	public void execute(GameModel game, GameView view) throws CommandExecuteException {		
 		try {
+			if(game.getLevel() != -1)
+				throw new CommandExecuteException("Invalid execute command in this level");
 			GameObject obj = GameObjectFactory.parse(objDescription, (Game) game);
 			game.addObj(obj);
 			view.showGame();

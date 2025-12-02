@@ -43,7 +43,7 @@ public abstract class MovingObject extends GameObject {
 	
 	public GameObject parse (String objWords[], GameWorld game) throws GameModelException {
 	
-		if(objWords.length > 2) {
+		if(objWords.length > 2 && matchObjectName(objWords[1].toLowerCase())) {
 			this.action = (Action.parseActionClass(objWords[2].toLowerCase()));					
 		}
 		return super.parse(objWords, game);

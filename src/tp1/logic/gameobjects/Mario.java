@@ -206,12 +206,14 @@ public class Mario extends MovingObject {
 	}
 
 	public GameObject parse(String[] objWords, GameWorld game) throws GameModelException {
-			if(objWords.length > 3 && matchObjectName(objWords[1].toLowerCase())) {
-				String attributeMario = objWords[3].toLowerCase();
-				
-				if(attributeMario == Messages.MARIO_SMALL_NAME 
-						|| attributeMario == Messages.MARIO_SMALL_SHORTCUT) {
-					big = false;
+			if(matchObjectName(objWords[1].toLowerCase())) {
+				if(objWords.length > 3) {
+					String attributeMario = objWords[3].toLowerCase();
+					
+					if(attributeMario == Messages.MARIO_SMALL_NAME 
+							|| attributeMario == Messages.MARIO_SMALL_SHORTCUT) {
+						big = false;
+					}
 				}
 				return super.parse(objWords, game);
 			}

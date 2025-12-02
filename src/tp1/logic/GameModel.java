@@ -14,4 +14,5 @@ public interface GameModel {
 	public void addAction(Action action) throws GameModelException;
 	public void setLevel(int level);
 	public void initGame();
+	public int getLevel();
 }

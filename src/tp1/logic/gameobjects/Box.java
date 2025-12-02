@@ -86,7 +86,7 @@ public class Box extends GameObject {
 	}
 	
 	public GameObject parse (String objWords[], GameWorld game) throws GameModelException {
-		if(objWords.length > 2) {
+		if(objWords.length > 2 && matchObjectName(objWords[1].toLowerCase())) {
 			this.full = (objWords[2].toLowerCase() == Messages.BOX_FULL ? true : objWords[2].toLowerCase() == Messages.BOX_FULL_SHORTCUT ? true : false);					
 		}
 		return super.parse(objWords, game);		

@@ -1,7 +1,9 @@
 package tp1.logic;
 
+import tp1.exceptions.GameLoadException;
 import tp1.exceptions.GameModelException;
 import tp1.exceptions.GameModelParseException;
+import tp1.exceptions.GameSaveException;
 
 public interface GameModel {
 	// represent the Controller's view
@@ -15,4 +17,6 @@ public interface GameModel {
 	public void setLevel(int level);
 	public void initGame();
 	public int getLevel();
+	public void load(String fileName) throws GameLoadException;
+	public void save(String fileName) throws GameSaveException;
 }

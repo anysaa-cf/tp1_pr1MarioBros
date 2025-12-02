@@ -6,8 +6,10 @@ import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
 import tp1.logic.gameobjects.Mushroom;
+import tp1.exceptions.GameLoadException;
 import tp1.exceptions.GameModelException;
 import tp1.exceptions.GameModelParseException;
+import tp1.exceptions.GameSaveException;
 import tp1.exceptions.OffBoardException;
 import tp1.logic.gameobjects.Box;
 import tp1.logic.gameobjects.GameObjectFactory;
@@ -256,6 +258,18 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		int col = position.getCol();
 			
 		return (row > -1 && row < DIM_Y && col > -1 && col < DIM_X);
+	}
+
+	@Override
+	public void load(String fileName) throws GameLoadException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void save(String fileName) throws GameSaveException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

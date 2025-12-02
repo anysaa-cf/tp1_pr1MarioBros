@@ -34,10 +34,10 @@ public class ActionCommand extends AbstractCommand{
 					Action aux = Action.parseActionClass(commandWords[i]); // parse the action command into an action type
 					ACTION.addAction(aux); // keep that command already being an action type and increase the counter for the next action space					
 				} catch (ActionParseException ape) {
-					throw new CommandParseException(Messages.UNKNOWN_ACTION.formatted(commandWords[i]), ape);
+					throw new CommandParseException(Messages.INVALID_COMMAND_PARAMETERS, ape);
 				}
 			}
-			return this;// if the first command is action, we return an actionCommand object with all the actions parsed
+			return this;
 		}
 		return null; 
 	}

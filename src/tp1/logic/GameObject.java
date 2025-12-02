@@ -63,7 +63,7 @@ public abstract class GameObject implements GameItem {
 	abstract public boolean receiveInteraction(Goomba goomba);
 	
 	public GameObject parse (String objWords[], GameWorld game) throws GameModelException{
-		if(objWords.length >= 2 && matchObjectName(objWords[1].toLowerCase())) {
+		if(objWords.length > 1 && matchObjectName(objWords[1].toLowerCase())) {
 			try {
 				pos = Position.parsePosition(objWords[0]);
 				

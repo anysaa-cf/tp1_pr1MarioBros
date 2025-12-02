@@ -30,7 +30,6 @@ public class Position {
 		catch(NumberFormatException nfe) {
 			throw new PositionParseException (Messages.ERROR_COMMAND_POSITION, nfe);
 		}
-        
 	}
 	 
 	public int getRow() {

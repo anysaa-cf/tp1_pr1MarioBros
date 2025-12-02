@@ -28,7 +28,7 @@ public class AddObjectCommand extends AbstractCommand {
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
 		if(matchCommandName(commandWords[0])) {		// always identifies the command type in position 0
-			if(commandWords.length < 2) {
+			if(commandWords.length < 3) {
 				throw new CommandParseException(Messages.INVALID_COMMAND_PARAMETERS);
 			}
 			this.objDescription = Arrays.copyOfRange(commandWords, 1, commandWords.length);

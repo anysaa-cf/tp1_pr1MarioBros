@@ -26,8 +26,7 @@ public class CommandGenerator {
 					return command;
 				}
 			} catch (NumberFormatException nfe) {
-				throw new CommandParseException(
-						Messages.LEVEL_NOT_A_NUMBER_ERROR.formatted(commandWords[1]), nfe);
+				throw new CommandParseException(Messages.INVALID_COMMAND_PARAMETERS, nfe);
 			}
 		}
 		throw new CommandParseException(Messages.UNKNOWN_COMMAND.formatted(commandWords[0]));

@@ -27,52 +27,19 @@ public class Controller {
 		String[] words = null;
 		view.showWelcome();
 		view.showGame();
-		
-		/*while (!game.isFinished()) {
-			try {
-				String[] words = view.getPrompt();
-				Command command = CommandGenerator.parse(words);
-				
-				command.execute(game, view);				
-			}
-			catch(CommandException e) {
-				System.err.print(e.getMessage());
-				Throwable wrapped = e;
-				
-				while((wrapped = wrapped.getCause()) != null) {
-					System.err.print(wrapped.getMessage());
-				}
-			}
-		}*/
+
 		while(!game.isFinished()) {
 			words = view.getPrompt();
 			Command command = null;
 			
 			try {
 				command = CommandGenerator.parse(words);
+				command.execute(game, view);
 			} catch(CommandException e) {
 				view.showError(e.getMessage());
 				Throwable wrapped = e;
-				
-				// display all levels of error message
-				while ((wrapped = wrapped.getCause()) != null) {
+				while ((wrapped = wrapped.getCause()) != null)
 					view.showError(wrapped.getMessage());					
-				}
-			}
-			
-			
-			if(command != null) {
-				try{
-					command.execute(game, view);
-				} catch(CommandException e) {
-					view.showError(e.getMessage());
-					Throwable wrapped = e;
-					
-					// display all levels of error message
-					while ((wrapped = wrapped.getCause()) != null) {
-						view.showError(wrapped.getMessage());						
-					}
-				}
 			}
 		}
 		view.showEndMessage();

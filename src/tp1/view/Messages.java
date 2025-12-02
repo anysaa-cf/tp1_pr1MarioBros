@@ -98,6 +98,18 @@ public class Messages {
 	public static final String COMMAND_ADD_OBJECT_DETAILS = "[a]dd[O]bject <(x,y)> <object name> <optional <Action>(only with goomba and Mario)> <optional Big/Small(only with Mario)>: \n adds to the board the object described by object_description";
 	public static final String COMMAND_ADD_OBJECT_HELP = "adds to the board the object described by object_description";		
 	
+	// [l]oad <fileName>: load the game configuration from text file <fileName>
+	public static final String COMMAND_LOAD_NAME = "load";
+	public static final String COMMAND_LOAD_SHORTCUT = "l";
+	public static final String COMMAND_LOAD_DETAILS = "[l]oad <fileName>";
+	public static final String COMMAND_LOAD_HELP = "loads a file";	
+	
+	// [s]ave <fileName>: save the actual configuration in text file <fileName>
+	public static final String COMMAND_SAVE_NAME = "save";
+	public static final String COMMAND_SAVE_SHORTCUT = "s";
+	public static final String COMMAND_SAVE_DETAILS = "[s]ave <fileName>";
+	public static final String COMMAND_SAVE_HELP = "saves a file";	
+	
 	// action right
 	public static final String ACTION_RIGHT = "right";
 	public static final String ACTION_RIGHT_SHORTCUT = "r";

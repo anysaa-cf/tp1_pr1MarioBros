@@ -54,9 +54,4 @@ public class ActionCommand extends AbstractCommand{
 			throw new CommandExecuteException(Messages.ERROR_COMMAND_EXECUTE, gme);
 		}
 	}
-
-	public String helpText() {
-		return DETAILS + ": " + HELP;
-	}
-
 }

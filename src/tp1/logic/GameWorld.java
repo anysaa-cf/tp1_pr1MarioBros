@@ -11,7 +11,8 @@ public interface GameWorld {
 	public void marioDies();
 	public void win();
 	public void addPoints(int i);
-	public boolean addObj(GameObject obj);	
+	public void addObj(GameObject obj) throws GameModelException;	
 	public void addAction(Action action) throws GameModelException;
 	public boolean isSolid(Position nextPos);
+	void addMushroom(Position p);
 }

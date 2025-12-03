@@ -1,7 +1,6 @@
 package tp1.logic.gameobjects;
 
 import tp1.exceptions.GameModelException;
-import tp1.exceptions.ObjectParseException;
 import tp1.logic.Action;
 import tp1.logic.ActionList;
 import tp1.logic.GameItem;
@@ -14,7 +13,6 @@ public class Mario extends MovingObject {
 
 	private ActionList actionList;
 	private int life; // added recently, now that there is a Mario object in game, we can have life attribute here 
-	private int rightC, leftC, upC, downC;
 	private boolean big;
 	
 	private static final String NAME = Messages.MARIO_NAME;
@@ -25,8 +23,6 @@ public class Mario extends MovingObject {
 		this.actionList = new ActionList();
 		this.big = true;
 		this.life = 3;
-		this.rightC = this.leftC = this.upC = this.downC = 0;
-		
 	}
 
 	public String getIcon() {
@@ -69,59 +65,12 @@ public class Mario extends MovingObject {
 	}
 	
 	public void addAction(Action action) {
-		if(updateC(action)) 
-			this.actionList.addAction(action);
+		this.actionList.addAction(action);
 	}
 	
 	public boolean actionListIsEmpty() {
 		return actionList.isEmpty();
 	}
-	
-	 public boolean updateC(Action action) {
-		 boolean ok = false;
-		 switch(action) {
-		 
-		 	case RIGHT:
-		 		if(leftC == 0 && rightC < ActionList.maxActions) {
-		 			ok = true;
-		 			rightC++;
-		 		}
-		 		break;
-		 	
-		 	case LEFT:
-		 		if(rightC == 0 && leftC < ActionList.maxActions) {
-		 			ok = true;
-		 			leftC++;
-		 		}
-				 break;
-			
-		 	case UP:
-		 		if(downC == 0 && upC < ActionList.maxActions) {
-		 			ok = true;
-		 			upC++;
-		 		}
-				 break;
-				 
-		 	case DOWN:
-		 		if(upC == 0 && downC < ActionList.maxActions) {
-		 			ok = true;
-		 			downC++;
-		 		}
-				 break;
-			
-		 	case STOP:
-		 		ok = true; // infinite stops
-		 		break;
-				 
-		 	default:
-		 		break;
-		 }
-		 return ok;
-	 }
-	 
-	 public void restartC() {
-		 rightC = leftC = upC = downC = 0;
-	 }
 	
 	public void addPoints(int newPoints) {
 		game.addPoints(newPoints);
@@ -132,8 +81,6 @@ public class Mario extends MovingObject {
 		if(isAlive()) {
 			if(actionList.isEmpty()) {		// no more actions -> automatic movement
 				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());
-																										
-				
 				if(game.isInsideBounds(nextPos))
 					updatePos(nextPos); // automatic movement if there is no ground taken the last Action movement
 			}
@@ -145,8 +92,6 @@ public class Mario extends MovingObject {
 					updatePos(nextPos);
 				this.action = action;
 			}
-			if(actionList.isEmpty())
-				restartC();
 		}
 	}
 
@@ -240,7 +185,7 @@ public class Mario extends MovingObject {
 		if(action == Action.UP && !box.empty()) {
 			box.empty();
 			game.addPoints(50);
-			game.addObj(new Mushroom(this.game, new Position(box.getRow() - 1, box.getCol())));
+			game.addMushroom(new Position(box.getRow() - 1, box.getCol()));
 		}
 		return true;
 	}

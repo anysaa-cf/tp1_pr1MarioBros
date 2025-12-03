@@ -59,9 +59,4 @@ public class ResetCommand extends AbstractCommand {
 			throw new CommandExecuteException(gle);
 		}
 	}
-	
-	public String helpText() {
-		return DETAILS + ": " + HELP;
-	}
-
 }

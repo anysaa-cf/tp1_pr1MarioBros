@@ -39,10 +39,5 @@ public class UpdateCommand extends NoParamsCommand{
 		}
 		return null;
 	}
-
-	public String helpText() {
-		return DETAILS + ": " + HELP;
-	}
-
 	
 }

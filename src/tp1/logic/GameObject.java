@@ -65,18 +65,9 @@ public abstract class GameObject implements GameItem {
 	
 	public GameObject parse (String objWords[], GameWorld game) throws GameModelException{
 		if(matchObjectName(objWords[1].toLowerCase())) {
-			try {
-				pos = Position.parsePosition(objWords[0]);
-				
-				this.game = game;
-				
-				if(game.isInsideBounds(pos))
-					return create(game, pos);
-				throw new OffBoardException("Position outside the board.");
-			}
-			catch(PositionParseException ppe){
-				throw new GameModelException(Messages.INVALID_COMMAND_PARAMETERS, ppe);
-			}
+			pos = Position.parsePosition(objWords[0]);
+			this.game = game;
+			return create(game, pos);
 		}
 		return null;
 	}

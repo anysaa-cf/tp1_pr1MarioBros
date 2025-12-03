@@ -23,21 +23,26 @@ public class ActionCommand extends AbstractCommand{
 		ACTION = new ActionList();
 	}
 	
+	public void addAction(Action a) {
+		ACTION.addAction(a);
+	}
+	
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException { // it will catch the actionParseException here
 		if(matchCommandName(commandWords[0])) { // if the first command is action
 			if(commandWords.length == 1) {
 				throw new CommandParseException(Messages.INVALID_COMMAND_PARAMETERS);
 			}
+			ActionCommand ac = new ActionCommand();
 			for(int i = 1; i < commandWords.length; i++) { // from 0 to actionList length in order to read all the commands remaining from action command
 				try {
 					Action aux = Action.parseActionClass(commandWords[i]); // parse the action command into an action type
-					ACTION.addAction(aux); // keep that command already being an action type and increase the counter for the next action space					
+					ac.addAction(aux); // keep that command already being an action type and increase the counter for the next action space					
 				} catch (ActionParseException ape) {
 					throw new CommandParseException(Messages.INVALID_COMMAND_PARAMETERS, ape);
 				}
 			}
-			return this;
+			return ac;
 		}
 		return null; 
 	}

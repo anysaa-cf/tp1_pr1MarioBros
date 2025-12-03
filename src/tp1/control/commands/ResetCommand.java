@@ -21,17 +21,21 @@ public class ResetCommand extends AbstractCommand {
 		super(NAME, SHORTCUT, DETAILS, HELP);
 	}
 
+	public void changeLevel(Integer i) {
+		level = i;
+	}
+	
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
 		if(matchCommandName(commandWords[0])) {
-			// reset with no parameters
+			ResetCommand rc = new ResetCommand();
 			if(commandWords.length == 1) {
-				this.level = null;
-				return this;
+				rc.changeLevel(null);
+				return rc;
 			} else if (commandWords.length == 2) {		// reset with parameters
 				try {
-					this.level = Integer.parseInt(commandWords[1]);
-					return this;				
+					rc.changeLevel(Integer.parseInt(commandWords[1]));
+					return rc;				
 				} catch (NumberFormatException nfe) {		// low-level exception
 					throw new CommandParseException(Messages.LEVEL_NOT_A_NUMBER_ERROR.formatted(commandWords[1]), nfe);	
 				}	

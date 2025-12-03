@@ -16,6 +16,10 @@ public class Mushroom extends MovingObject {
 		super(game, pos, Action.LEFT, NAME, SHORTCUT);		
 	}
 
+	public Mushroom() {
+		super(null, null, Action.RIGHT, NAME, SHORTCUT);
+	}
+
 	@Override
 	protected void move() {
 		if(isAlive()) {														

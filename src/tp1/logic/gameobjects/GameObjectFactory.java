@@ -12,12 +12,12 @@ import tp1.view.Messages;
 public class GameObjectFactory {
 
 	private static final List<GameObject> availableObjects = Arrays.asList( // these are all the possible actions that are going to be parsed by parse method in here
-			new Ground(null, null),		// they have arguments in their constructors
-			new ExitDoor(null, null),
-			new Goomba(null, null),
-			new Mario(null, null),
-			new Mushroom(null, null),
-			new Box(null, null)
+			new Ground(),		// they have arguments in their constructors
+			new ExitDoor(),
+			new Goomba(),
+			new Mario(),
+			new Mushroom(),
+			new Box()
 	);
 	
 	public static GameObject parse (String objWords[], Game game) throws GameModelException {

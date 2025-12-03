@@ -14,6 +14,10 @@ public class Ground extends GameObject {
 		super(game, pos, true, NAME, SHORTCUT);
 	}
 	
+	public Ground() {
+		super(null, null, true, NAME, SHORTCUT);
+	}
+
 	public String getIcon() {
 		return Messages.LAND;
 	}

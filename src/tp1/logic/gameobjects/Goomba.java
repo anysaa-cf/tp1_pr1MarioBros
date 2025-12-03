@@ -16,6 +16,10 @@ public class Goomba extends MovingObject {
 		super(game, pos, Action.RIGHT, NAME, SHORTCUT);		
 	}
 	
+	public Goomba() {
+		super(null, null, Action.RIGHT, NAME, SHORTCUT);
+	}
+
 	public String getIcon() {
 		return Messages.GOOMBA;		
 	}

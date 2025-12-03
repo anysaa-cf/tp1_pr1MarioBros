@@ -25,6 +25,10 @@ public class Mario extends MovingObject {
 		this.life = 3;
 	}
 
+	public Mario() {
+		super(null, null, Action.RIGHT, NAME, SHORTCUT);
+	}
+
 	public String getIcon() {
 		String icon;
 		

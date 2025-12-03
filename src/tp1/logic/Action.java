@@ -42,7 +42,7 @@ public enum Action {
 	}
 	
 	public Action changeAction(Action action) {
-		if(action == RIGHT) {
+		if(action == RIGHT || action == DOWN) {
 			return LEFT;
 		} else if(action == LEFT) {
 			return RIGHT;

@@ -19,13 +19,13 @@ public class Mushroom extends MovingObject {
 	@Override
 	protected void move() {
 		if(isAlive()) {														
-			if(isFalling()) {
-				Position posBelow = new Position(getRow() + 1, getCol());
-				if(!game.isInsideBounds(posBelow))			
-					mushroomDies(); // goomba dies (for now) if it falls out of the map
-				else
-					updatePos(posBelow);	// if there is no ground below, it falls 1 cell	
-			} else {			// if there is ground it moves horizontally
+			Position posBelow = new Position(getRow() + 1, getCol());
+			if(!game.isInsideBounds(posBelow))			
+				mushroomDies(); 
+			else if(!game.isSolid(posBelow)) {
+				updatePos(posBelow);
+				action = Action.DOWN;
+			}else {	
 				int nextCol = getCol() + action.getY();
 				int nextRow = getRow() + action.getX();
 				Position nextPos = new Position(nextRow, nextCol);// get the next position given the action
@@ -35,8 +35,7 @@ public class Mushroom extends MovingObject {
 					changeAction();
 				}
 			}
-		}	
-		
+		}		
 	}
 	
 	public void mushroomDies() {
@@ -66,13 +65,12 @@ public class Mushroom extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Ground ground) {
-		Position returnPos = new Position(getRow() + 1, getCol());
-		if(ground.isInPosition(returnPos)){
+		Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY());
+		if(ground.isInPosition(pos)){
 			updatePos(returnPos);
-		}
-		else {
-			updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
 			changeAction();
+			update();
+			return true;
 		}
 		return false;
 	}

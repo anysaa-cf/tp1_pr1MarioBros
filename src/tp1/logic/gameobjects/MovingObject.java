@@ -24,10 +24,10 @@ public abstract class MovingObject extends GameObject {
 		Position nextPos = new Position(getRow() + 1, getCol());
 		boolean solidObject = game.isSolid(nextPos);
 		
-		if(solidObject && action != Action.DOWN)
-			return false;
-		else
+		if(action == Action.DOWN && !solidObject)
 			return true;
+		else
+			return false;
 	}
 	
 	protected abstract void move() throws OffBoardException;

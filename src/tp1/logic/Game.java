@@ -196,7 +196,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		
 		gameObjectContainer.add(new Box(this, new Position(9, 5)));
 		gameObjectContainer.add(new Mushroom(this, new Position(8, 7)));
-		gameObjectContainer.add(new Goomba(this, new Position(12, 3)));
+		gameObjectContainer.add(new Goomba(this, new Position(0, 19)));
 	}
 	
 	private void initLevel1() {

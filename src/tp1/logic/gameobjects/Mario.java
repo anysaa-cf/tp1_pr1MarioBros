@@ -144,6 +144,7 @@ public class Mario extends MovingObject {
 			updatePos(returnPos);
 		}
 		else {
+			goomba.goombaDies();
 			game.addPoints(10);
 		}
 			

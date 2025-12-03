@@ -66,6 +66,7 @@ public class ActionList {
 				break;
 			
 		 	case STOP:
+		 		ok = true;
 		 		break;
 				 
 		 	default:

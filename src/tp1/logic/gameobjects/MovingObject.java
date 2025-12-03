@@ -34,11 +34,7 @@ public abstract class MovingObject extends GameObject {
 	
 	
 	public void changeAction() {
-		if(action == Action.RIGHT) {
-			action = Action.LEFT;
-		} else if(action == Action.LEFT) {
-			action = Action.RIGHT;
-		}	
+		action = action.changeAction(action);
 	}
 	
 	public GameObject parse (String objWords[], GameWorld game) throws GameModelException {

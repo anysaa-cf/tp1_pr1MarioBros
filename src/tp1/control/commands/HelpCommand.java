@@ -20,9 +20,4 @@ public class HelpCommand extends NoParamsCommand {
 	public void execute(GameModel game, GameView view) throws CommandExecuteException {
 		view.showMessage(CommandGenerator.commandHelp());
 	}
-	
-	public String helpText() {
-		return DETAILS + ": " + HELP;
-	}
-
 }

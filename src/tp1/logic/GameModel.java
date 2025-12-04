@@ -12,7 +12,7 @@ public interface GameModel {
 	public void reset() throws GameLoadException;
 	public void exit();
 	public void marioExited();
-	public boolean addObj(GameObject obj);			
+	public void addObj(GameObject obj) throws GameModelException;			
 	public void addAction(Action action) throws GameModelException;
 	public void setLevel(int level);
 	public void initGame();

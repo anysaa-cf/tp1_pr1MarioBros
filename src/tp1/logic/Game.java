@@ -11,9 +11,12 @@ import tp1.view.Messages;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
+import tp1.exceptions.CommandExecuteException;
 import tp1.exceptions.GameLoadException;
 import tp1.exceptions.GameModelException;
 import tp1.exceptions.GameSaveException;
+import tp1.exceptions.OffBoardException;
+import tp1.exceptions.PositionParseException;
 import tp1.logic.gameobjects.Box;
 
 public class Game implements GameModel, GameStatus, GameWorld {
@@ -30,12 +33,14 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private boolean win;
 	private boolean lose;
 	private boolean exit;
+	private boolean addMushroom;
+	private Position mrPosition;
 	private GameConfiguration previousConfig;
 	
 	public Game(int nLevel) {
 		this.remainingTime = 100;
 		this.points = 0;
-		this.win = this.lose = this.exit = false;
+		this.win = this.lose = this.exit = this.addMushroom = false;
 		
 		this.nLevel = nLevel;
 		initGame();			
@@ -116,6 +121,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		if(nLevel != -1) {
 			remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
 			gameObjectContainer.update();
+			onEntry();
 		}
 	}
 	
@@ -190,7 +196,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		
 		gameObjectContainer.add(new Box(this, new Position(9, 5)));
 		gameObjectContainer.add(new Mushroom(this, new Position(8, 7)));
-		gameObjectContainer.add(new Goomba(this, new Position(12, 3)));
+		gameObjectContainer.add(new Goomba(this, new Position(0, 19)));
 	}
 	
 	private void initLevel1() {
@@ -245,8 +251,29 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		mario.addAction(action);
 	}
 	
-	public boolean addObj(GameObject obj){
-		return gameObjectContainer.add(obj);
+	public void  addObj(GameObject obj) throws GameModelException{
+			if(!isInsideBounds(new Position(obj.getRow(), obj.getCol())))
+				throw new OffBoardException("Position outside the board.");
+			else
+				gameObjectContainer.add(obj);
+	}
+	
+	public void addMushroom(Position p) {
+		if(!isSolid(p)) {
+			mrPosition = p;
+			addMushroom = true; 
+		}
+	}
+	
+	public void onEntry() {
+		try {
+			if(addMushroom) {
+				addMushroom = false;
+				addObj(new Mushroom(this, mrPosition));
+			}
+		}catch(GameModelException gme) {
+			System.out.println("Couldn't add a Mushroom: " + gme);
+		}
 	}
 	
 	public void marioExited() {

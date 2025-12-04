@@ -1,6 +1,7 @@
 package tp1.logic.gameobjects;
 
 import tp1.exceptions.GameModelException;
+import tp1.logic.Action;
 import tp1.logic.GameItem;
 import tp1.logic.GameObject;
 import tp1.logic.GameWorld;
@@ -16,6 +17,10 @@ public class Box extends GameObject {
 	public Box(GameWorld game, Position pos) {
 		super(game, pos, true, NAME, SHORTCUT);
 		this.full = true;
+	}
+
+	public Box() {
+		super(null, null, true, NAME, SHORTCUT);
 	}
 
 	@Override

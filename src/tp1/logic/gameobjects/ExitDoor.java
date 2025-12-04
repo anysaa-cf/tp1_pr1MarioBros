@@ -15,6 +15,10 @@ public class ExitDoor extends GameObject {
 		super(game, pos, false, NAME, SHORTCUT);
 	}
 	
+	public ExitDoor() {
+		super(null, null, true, NAME, SHORTCUT);
+	}
+
 	public String getIcon() {
 		return Messages.EXIT_DOOR;		
 	}

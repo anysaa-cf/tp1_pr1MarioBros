@@ -41,6 +41,15 @@ public enum Action {
 		throw new ActionParseException(Messages.UNKNOWN_ACTION.formatted(inputs));
 	}
 	
+	public Action changeAction(Action action) {
+		if(action == RIGHT || action == DOWN) {
+			return LEFT;
+		} else if(action == LEFT) {
+			return RIGHT;
+		}
+		return STOP;	
+	}
+	
 	public String toString() {
 		return abrev;
 	}	

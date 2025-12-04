@@ -1,6 +1,5 @@
 package tp1.logic.gameobjects;
 
-import tp1.exceptions.OffBoardException;
 import tp1.logic.Action;
 import tp1.logic.GameItem;
 import tp1.logic.GameObject;
@@ -17,19 +16,23 @@ public class Goomba extends MovingObject {
 		super(game, pos, Action.RIGHT, NAME, SHORTCUT);		
 	}
 	
+	public Goomba() {
+		super(null, null, Action.RIGHT, NAME, SHORTCUT);
+	}
+
 	public String getIcon() {
 		return Messages.GOOMBA;		
 	}
 	
 	protected void move() {
 		if(isAlive()) {														
-			if(isFalling()) {
-				Position posBelow = new Position(getRow() + 1, getCol());
-				if(!game.isInsideBounds(posBelow))			
-					goombaDies(); // goomba dies (for now) if it falls out of the map
-				else
-					updatePos(posBelow);	// if there is no ground below, it falls 1 cell	
-			} else {			// if there is ground it moves horizontally
+			Position posBelow = new Position(getRow() + 1, getCol());
+			if(!game.isInsideBounds(posBelow))			
+				goombaDies(); 
+			else if(!game.isSolid(posBelow)) {
+				updatePos(posBelow);
+				action = Action.DOWN;
+			}else {	
 				int nextCol = getCol() + action.getY();
 				int nextRow = getRow() + action.getX();
 				Position nextPos = new Position(nextRow, nextCol);// get the next position given the action
@@ -61,24 +64,21 @@ public class Goomba extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Ground ground) {
-		Position returnPos = new Position(getRow() + 1, getCol());
-		if(ground.isInPosition(returnPos)){
+		Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY());
+		if(ground.isInPosition(pos)){
 			updatePos(returnPos);
-		}
-		else {
-			updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
 			changeAction();
+			update();
+			return true;
 		}
 		return false;
 	}
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-		if(!mario.isFalling())
+		if(!mario.isFalling()) {
 			updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
-		else {
-			goombaDies();
-			game.addPoints(10);
+			changeAction();
 		}
 		return true;
 	}
@@ -90,8 +90,8 @@ public class Goomba extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
-		this.changeAction();
-		goomba.changeAction();
+		updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
+		changeAction();
 		return true;
 	}
 

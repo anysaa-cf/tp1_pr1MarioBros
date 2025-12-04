@@ -22,9 +22,4 @@ public class ExitCommand extends NoParamsCommand{
 		// if it needs to close something, it can close it and finish.
 	    game.exit(); 	
 	}
-
-	public String helpText() {
-		return DETAILS + ": " + HELP;
-	}
-
 }

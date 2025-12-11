@@ -29,11 +29,13 @@ public class Box extends GameObject {
 		return false;
 	}
 
-	public boolean empty() {
-		boolean aux = this.full;
-		this.full = false;
-		return !aux;
+	public boolean isFull() {
+		return this.full; 
 	}
+	
+	public void empty() {
+		this.full = false;
+	}	
 	
 	public void update() {
 		
@@ -92,9 +94,13 @@ public class Box extends GameObject {
 	
 	public GameObject parse (String objWords[], GameWorld game) throws GameModelException {
 		if(objWords.length > 2 && matchObjectName(objWords[1].toLowerCase())) {
-			this.full = (objWords[2].toLowerCase() == Messages.BOX_FULL ? true : objWords[2].toLowerCase() == Messages.BOX_FULL_SHORTCUT ? true : false);					
+			Box obj = (Box) super.parse(objWords, game);
+			if(objWords[2].toLowerCase() == Messages.BOX_EMPTY 
+					|| objWords[2].toLowerCase() == Messages.BOX_FULL_SHORTCUT)
+				obj.empty();
+			return obj;	
 		}
-		return super.parse(objWords, game);		
+		return null;		
 	}
 
 	@Override

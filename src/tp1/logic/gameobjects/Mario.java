@@ -153,18 +153,22 @@ public class Mario extends MovingObject {
 			
 		return true;
 	}
+	
+	public void small() {
+		this.big = false;
+	}
 
-	public GameObject parse(String[] objWords, GameWorld game) throws GameModelException {
+	public Mario parse(String[] objWords, GameWorld game) throws GameModelException {
 			if(matchObjectName(objWords[1].toLowerCase())) {
+				Mario obj = (Mario) super.parse(objWords, game);
 				if(objWords.length > 3) {
 					String attributeMario = objWords[3].toLowerCase();
 					
 					if(attributeMario == Messages.MARIO_SMALL_NAME 
-							|| attributeMario == Messages.MARIO_SMALL_SHORTCUT) {
-						big = false;
-					}
+							|| attributeMario == Messages.MARIO_SMALL_SHORTCUT)
+						obj.small();
 				}
-				return super.parse(objWords, game);
+				return obj;
 			}
 			return null;
 	}
@@ -186,7 +190,7 @@ public class Mario extends MovingObject {
 	public boolean receiveInteraction(Box box) {
 		Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY()); 
 		updatePos(returnPos);
-		if(action == Action.UP && !box.empty()) {
+		if(action == Action.UP && box.isFull()) {
 			box.empty();
 			game.addPoints(50);
 			game.addMushroom(new Position(box.getRow() - 1, box.getCol()));

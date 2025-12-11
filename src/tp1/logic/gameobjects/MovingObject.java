@@ -37,12 +37,14 @@ public abstract class MovingObject extends GameObject {
 		action = action.changeAction(action);
 	}
 	
-	public GameObject parse (String objWords[], GameWorld game) throws GameModelException {
+	public MovingObject parse (String objWords[], GameWorld game) throws GameModelException {
+		
+		MovingObject obj = (MovingObject) super.parse(objWords, game);
 	
 		if(objWords.length > 2 && matchObjectName(objWords[1].toLowerCase())) {
 			this.action = (Action.parseActionClass(objWords[2].toLowerCase()));					
 		}
-		return super.parse(objWords, game);
+		return obj;
 	}
 	
 	public String toString() {

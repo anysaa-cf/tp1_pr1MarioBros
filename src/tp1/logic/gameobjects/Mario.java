@@ -17,6 +17,10 @@ public class Mario extends MovingObject {
 	
 	private static final String NAME = Messages.MARIO_NAME;
 	private static final String SHORTCUT = Messages.MARIO_SHORTCUT;
+	private static final String SMALL = Messages.MARIO_SMALL_NAME;
+	private static final String SMALL_SHORTCUT = Messages.MARIO_SMALL_SHORTCUT; 
+	private static final String BIG =  Messages.MARIO_BIG_NAME;
+	private static final String BIG_SHORTCUT =  Messages.MARIO_BIG_SHORTCUT;
 	
 	public Mario(GameWorld game, Position pos) {
 		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
@@ -164,8 +168,8 @@ public class Mario extends MovingObject {
 				if(objWords.length > 3) {
 					String attributeMario = objWords[3].toLowerCase();
 					
-					if(attributeMario == Messages.MARIO_SMALL_NAME 
-							|| attributeMario == Messages.MARIO_SMALL_SHORTCUT)
+					if(attributeMario.equals(SMALL) 
+							|| attributeMario.equals(SMALL_SHORTCUT))
 						obj.small();
 				}
 				return obj;
@@ -208,7 +212,7 @@ public class Mario extends MovingObject {
 	
 	public String toString() {
 		String str = null;
-		str = super.toString() + " " + (big ? Messages.MARIO_BIG_NAME : Messages.MARIO_SMALL_NAME);
+		str = super.toString() + " " + (big ? BIG : SMALL);
 		canWrite = false;
 		return str;
 	}

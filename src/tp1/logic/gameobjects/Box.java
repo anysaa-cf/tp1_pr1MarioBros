@@ -13,6 +13,10 @@ public class Box extends GameObject {
 	private boolean full;
 	private static final String NAME = Messages.BOX_NAME;
 	private static final String SHORTCUT = Messages.BOX_SHORTCUT;
+	private static final String FULL = Messages.BOX_FULL;
+	private static final String FULL_SHORTCUT = Messages.BOX_FULL_SHORTCUT;
+	private static final String EMPTY = Messages.BOX_EMPTY;
+	private static final String EMPTY_SHORTCUT = Messages.BOX_EMPTY_SHORTCUT;
 
 	public Box(GameWorld game, Position pos) {
 		super(game, pos, true, NAME, SHORTCUT);
@@ -95,8 +99,8 @@ public class Box extends GameObject {
 	public GameObject parse (String objWords[], GameWorld game) throws GameModelException {
 		if(objWords.length > 2 && matchObjectName(objWords[1].toLowerCase())) {
 			Box obj = (Box) super.parse(objWords, game);
-			if(objWords[2].toLowerCase() == Messages.BOX_EMPTY 
-					|| objWords[2].toLowerCase() == Messages.BOX_FULL_SHORTCUT)
+			if(objWords[2].toLowerCase().equals(EMPTY)  
+					|| objWords[2].toLowerCase().equals(EMPTY_SHORTCUT))
 				obj.empty();
 			return obj;	
 		}
@@ -112,7 +116,7 @@ public class Box extends GameObject {
 	
 	public String toString() {
 		String str = null;
-		str = super.toString() + " " + (full ? Messages.BOX_FULL : Messages.BOX_EMPTY);
+		str = super.toString() + " " + (full ? FULL : EMPTY);
 		return str;
 	}
 

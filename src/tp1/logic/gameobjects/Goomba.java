@@ -76,10 +76,7 @@ public class Goomba extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-		if(!mario.isFalling()) {
-			updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
-			changeAction();
-		}
+		goombaDies();
 		return true;
 	}
 

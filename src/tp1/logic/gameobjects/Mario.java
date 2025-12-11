@@ -126,7 +126,7 @@ public class Mario extends MovingObject {
 		return true;
 	}
 	
-	public void marioDies() {
+	public void marioHit() {
 		if(life <= 1) {
 			life--;
 			objectDies();
@@ -143,12 +143,11 @@ public class Mario extends MovingObject {
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
 		if(!isFalling()) {
-			marioDies();
+			marioHit();
 			Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY()); 
 			updatePos(returnPos);
 		}
 		else {
-			goomba.goombaDies();
 			game.addPoints(10);
 		}
 			

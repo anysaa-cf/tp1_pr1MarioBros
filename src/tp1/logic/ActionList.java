@@ -76,10 +76,7 @@ public class ActionList {
 	 }
 	
 	 public void addAction(Action action) {
-	        if (isFull()) {
-	            System.out.println("Full list");
-	            return;
-	        }
+	        
 	        if(updateC(action)) {
 		        end = (end + 1) % actionList.length; //cycle path of indexes (from 0 to last index, and then, again 0)
 		        actionList[end] = action;
@@ -88,9 +85,6 @@ public class ActionList {
 	 }
 	 
 	 public Action getAction() {
-	        if (isEmpty()) {
-	        	System.out.println("Empty list");
-	        }
 
 	        Action action = actionList[first];
 	        first = (first + 1) % actionList.length; //cycle path of indexes

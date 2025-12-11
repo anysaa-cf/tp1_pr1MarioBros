@@ -1,17 +1,24 @@
 package tp1.logic;
 
-import tp1.exceptions.GameModelException;
+import java.util.List;
 
 public interface GameWorld {
 	// represent the Model's internal view 
-	public void tryInteractionsFrom(GameItem object);
-	public boolean isInsideBounds(Position position);
-	public boolean isDifferent(GameItem o1, GameItem o2);
-	public void marioExited();
-	public void marioDies();
-	public void win();
-	public void addPoints(int i);
-	public void addAction(Action action) throws GameModelException;
+	
+	public int remainingTime();
+	public int points();
+	public int numLives();
+	public List<GameObject> getContainer();
 	public boolean isSolid(Position nextPos);
-	void addMushroom(Position p);
+	public void addMushroom(Position p);
+	public void onEntry();
+	public void marioExited();
+	public void tryInteractionsFrom(GameItem object);
+	public void marioDies();
+	public void addPoints(int i);
+	public boolean isDifferent(GameItem o1, GameItem o2);
+	public boolean isInsideBounds(Position position);
+	
+	public void win();
+	public void lose();
 }

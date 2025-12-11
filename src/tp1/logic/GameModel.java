@@ -7,16 +7,19 @@ import tp1.exceptions.GameSaveException;
 
 public interface GameModel {
 	// represent the Controller's view
-	public boolean isFinished();
-	public void update() throws GameModelException;
-	public void reset() throws GameLoadException;
-	public void exit();
-	public void marioExited();
-	public void addObj(GameObject obj) throws GameModelException;			
-	public void addAction(Action action) throws GameModelException;
-	public void setLevel(int level);
+	
 	public void initGame();
 	public int getLevel();
+	public void setLevel(int level);
+	public boolean playerWins();
+	public boolean playerLoses();
+	public void update() throws GameModelException;
+	public boolean isFinished();
+	public void exit();
+	public void reset() throws GameLoadException;
+	public void marioExited();
+	public void addAction(Action action) throws GameModelException;
+	public void addObj(GameObject obj) throws GameModelException;	
 	public void load(String fileName) throws GameLoadException;
 	public void save(String fileName) throws GameSaveException;
 }

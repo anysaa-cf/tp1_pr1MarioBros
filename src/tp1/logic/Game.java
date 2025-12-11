@@ -9,14 +9,12 @@ import tp1.logic.gameobjects.Mushroom;
 import tp1.view.Messages;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.util.List;
 
-import tp1.exceptions.CommandExecuteException;
 import tp1.exceptions.GameLoadException;
 import tp1.exceptions.GameModelException;
 import tp1.exceptions.GameSaveException;
 import tp1.exceptions.OffBoardException;
-import tp1.exceptions.PositionParseException;
 import tp1.logic.gameobjects.Box;
 
 public class Game implements GameModel, GameStatus, GameWorld {
@@ -109,12 +107,16 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	public int points() {
 		return points;
 	}
-
+	
 	public int numLives() {
 		if(mario != null) {
 			lives = mario.marioLife();			
 		}
 		return lives;
+	}
+	
+	public List<GameObject> getContainer(){
+		return gameObjectContainer.getContainer();
 	}
 
 	public void update() throws GameModelException {
@@ -308,8 +310,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	public void load(String fileName) throws GameLoadException {
 		GameConfiguration config = new FileGameConfiguration(fileName, this);
 		
-		config.read();
-		
 		this.remainingTime = config.remainingTime();
 	    this.points = config.points();
 	    this.lives = config.numLives();
@@ -327,13 +327,11 @@ public class Game implements GameModel, GameStatus, GameWorld {
 
 	@Override
 	public void save(String fileName) throws GameSaveException {
-		FileOutputStream fileOut = null;
-		OutputStreamWriter osw = null;
 		BufferedWriter bufferOut = null;
-		try{
-			fileOut = new FileOutputStream(fileName);
-			osw = new OutputStreamWriter(fileOut, StandardCharsets.UTF_16LE);
-			bufferOut = new BufferedWriter(osw);
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(fileName);
+			bufferOut = new BufferedWriter(fw);
 			bufferOut.write(String.valueOf(this.remainingTime) + " ");
 			bufferOut.newLine();
 			bufferOut.write(String.valueOf(this.points) + " ");

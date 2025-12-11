@@ -61,10 +61,21 @@ public class GameObjectContainer {
 		}
 	}
 	
+	public List<GameObject> getContainer (){
+		
+		List<GameObject> L = new ArrayList<GameObject>();
+		
+		for(GameObject o: gameObjects) {
+			L.add(o);
+		}
+		
+		return L;
+	}
+	
 	public void write(BufferedWriter bw) throws GameSaveException {
 		try {
 			for(GameObject o: gameObjects) {
-				if(o.canWrite) {
+				if(o.canWrite) {	
 					bw.write(o.toString());
 					bw.newLine();
 				}

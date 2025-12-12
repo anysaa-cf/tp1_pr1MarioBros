@@ -11,6 +11,7 @@ public interface GameWorld {
 	public List<GameObject> getContainer();
 	public boolean isSolid(Position nextPos);
 	public void addMushroom(Position p);
+	public void addFireball(Position p, Action action);
 	public void onEntry();
 	public void marioExited();
 	public void tryInteractionsFrom(GameItem object);

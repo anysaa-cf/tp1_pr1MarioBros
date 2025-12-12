@@ -119,5 +119,10 @@ public class Box extends GameObject {
 		str = super.toString() + " " + (full ? FULL : EMPTY);
 		return str;
 	}
+	
+	public boolean receiveInteraction(FireBall fireball) {
+		fireball.objectDies();
+		return true;
+	}
 
 }

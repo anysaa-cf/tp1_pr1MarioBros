@@ -2,18 +2,19 @@ package tp1.logic;
 
 import tp1.exceptions.ActionParseException;
 import tp1.exceptions.CommandParseException;
+import tp1.logic.gameobjects.Mario;
 import tp1.view.Messages;
 
-/**
+/*
  * Represents the allowed actions in the game
- *
  */
 public enum Action {
 	LEFT(0,-1, Messages.ACTION_LEFT_SHORTCUT), 
 	RIGHT(0,1, Messages.ACTION_RIGHT_SHORTCUT), 
-	DOWN(1,0, Messages.ACTION_DOWN_SHORTCUT), 
-	UP(-1, 0, Messages.ACTION_UP_SHORTCUT), 
-	STOP(0,0, Messages.ACTION_STOP_SHORTCUT); // we want to have another attribute for each value of the enum type for actions since it can be helpful for parsing actions
+	DOWN(1,0, Messages.ACTION_DOWN_SHORTCUT),  
+	UP(-1, 0, Messages.ACTION_UP_SHORTCUT),    
+	STOP(0,0, Messages.ACTION_STOP_SHORTCUT),  
+	THROW(0,0, Messages.ACTION_THROW_SHORTCUT); //we want to have another attribute for each value of the enum type for actions since it can be helpful for parsing actions
 
 	private int x;
 	private int y;
@@ -41,6 +42,17 @@ public enum Action {
 		throw new ActionParseException(Messages.UNKNOWN_ACTION.formatted(inputs));
 	}
 	
+	public static boolean isMovementAction(Action a) {
+		switch(a) {
+		case LEFT: return true;
+		case RIGHT: return true;
+		case UP: return true;
+		case DOWN: return true;
+		case STOP: return true;
+		default: return false;
+		}
+	}
+	
 	public Action changeAction(Action action) {
 		if(action == RIGHT || action == DOWN) {
 			return LEFT;
@@ -53,6 +65,17 @@ public enum Action {
 	public String toString() {
 		return abrev;
 	}	
+	
+	public void execute(Action a, GameWorld game, Mario mario) {
+		switch	(a) {
+		case THROW: throwExe(game, mario);
+		default: break;
+		}
+	}
+	
+	private void throwExe(GameWorld game, Mario mario) {
+		mario.marioThrows();
+	}
 	
 }
 	

@@ -30,7 +30,7 @@ public abstract class MovingObject extends GameObject {
 			return false;
 	}
 	
-	protected abstract void move() throws OffBoardException;
+	protected abstract void move();
 	
 	
 	public void changeAction() {

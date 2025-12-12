@@ -92,7 +92,7 @@ public class Messages {
 	// [a]ction: carries out the action or actions chosen by the player, then updates the game
 	public static final String COMMAND_ACTION_NAME = "action";
 	public static final String COMMAND_ACTION_SHORTCUT = "a";
-	public static final String COMMAND_ACTION_DETAILS = "[a]ction [[R]IGHT | [L]EFT | [U]P | [D]OWN | [S]TOP]+";
+	public static final String COMMAND_ACTION_DETAILS = "[a]ction [[R]IGHT | [L]EFT | [U]P | [D]OWN | [S]TOP] | [TH]ROW";
 	public static final String COMMAND_ACTION_HELP = "user performs actions";		
 
 	// [a]dd[O]bject <object_description>: adds to the board the object described by object_description
@@ -133,6 +133,10 @@ public class Messages {
 	public static final String ACTION_STOP = "stop";
 	public static final String ACTION_STOP_SHORTCUT = "s";
 	
+	// action throw
+	public static final String ACTION_THROW = "throw";
+	public static final String ACTION_THROW_SHORTCUT = "th";
+	
 	
 // gameObjects
 	public static final String UNKNOWN_OBJECT = "Unknown object: %s";
@@ -169,6 +173,10 @@ public class Messages {
 	public static final String BOX_EMPTY = "empty";
 	public static final String BOX_FULL_SHORTCUT = "f";
 	public static final String BOX_EMPTY_SHORTCUT = "e";
+	
+	//FireBall
+	public static final String FIRE_NAME = "fireball";
+	public static final String FIRE_SHORTCUT = "fb";
 
 //Symbols
 	public static final String EMPTY = "";

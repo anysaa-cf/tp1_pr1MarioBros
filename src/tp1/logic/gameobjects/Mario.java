@@ -148,10 +148,12 @@ public class Mario extends MovingObject {
 	public boolean receiveInteraction(Goomba goomba) {
 		if(!isFalling()) {
 			marioHit();
+			Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY());
+			updatePos(returnPos);
 		}
-		else {
+		else
 			game.addPoints(10);
-		}
+		goomba.goombaDies();
 		return true;
 	}
 	

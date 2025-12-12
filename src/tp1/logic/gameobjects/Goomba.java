@@ -77,6 +77,10 @@ public class Goomba extends MovingObject {
 	@Override
 	public boolean receiveInteraction(Mario mario) {
 		goombaDies();
+		if(!isFalling())
+			mario.marioHit();
+		else
+			game.addPoints(10);
 		return true;
 	}
 

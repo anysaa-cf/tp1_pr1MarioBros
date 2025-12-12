@@ -181,4 +181,5 @@ public class Messages {
 	public static final String MUSHROOM = "🍄";
 	public static final String BOX = "?";
 	public static final String EMPTY_BOX = "0";
+	public static final String FIRE = "🔥";
 }

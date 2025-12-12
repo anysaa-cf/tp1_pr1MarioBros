@@ -8,7 +8,8 @@ import tp1.util.MyStringUtils;
 public class ConsoleColorsView extends ConsoleView {
 	
     private static final String MARIO_COLOR  = ConsoleColorsAnsiCodes.ANSI_RED;
-    private static final String GOOMBA_COLOR  = ConsoleColorsAnsiCodes.ANSI_BROWN;;
+    private static final String GOOMBA_COLOR  = ConsoleColorsAnsiCodes.ANSI_BROWN;
+    private static final String FIRE_COLOR  = ConsoleColorsAnsiCodes.ANSI_ORANGE;
 
     private static final String COLOR_LAND_BACKGROUND  = ConsoleColorsAnsiCodes.ANSI_RGB_BACKGROUND.formatted(218, 165, 32); // ConsoleColorsAnsiCodes.ANSI_CYAN_BACKGROUND
     private static final String COLOR_EXIT_BACKGROUND  = ConsoleColorsAnsiCodes.ANSI_CYAN_BACKGROUND;
@@ -62,6 +63,7 @@ public class ConsoleColorsView extends ConsoleView {
 		else if (str.contains(Messages.MARIO_STOP) ||
 				 str.contains(Messages.MARIO_LEFT) ||
 				 str.contains(Messages.MARIO_RIGHT)  ) colorStr = MARIO_COLOR;
+		else if(str.contains(Messages.FIRE)) colorStr = FIRE_COLOR;
 		
 		return colorStr;
 	}

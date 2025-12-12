@@ -24,7 +24,7 @@ public abstract class MovingObject extends GameObject {
 		Position nextPos = new Position(getRow() + 1, getCol());
 		boolean solidObject = game.isSolid(nextPos);
 		
-		if(action == Action.DOWN && !solidObject)
+		if(action == Action.DOWN || !solidObject)
 			return true;
 		else
 			return false;

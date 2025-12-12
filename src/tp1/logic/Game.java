@@ -2,6 +2,7 @@
 package tp1.logic;
 
 import tp1.logic.gameobjects.ExitDoor;
+import tp1.logic.gameobjects.FireBall;
 import tp1.logic.gameobjects.Goomba;
 import tp1.logic.gameobjects.Ground;
 import tp1.logic.gameobjects.Mario;
@@ -18,7 +19,7 @@ import tp1.exceptions.OffBoardException;
 import tp1.logic.gameobjects.Box;
 
 public class Game implements GameModel, GameStatus, GameWorld {
-
+	
 	public static final int DIM_X = 30;
 	public static final int DIM_Y = 15;
 
@@ -32,13 +33,15 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private boolean lose;
 	private boolean exit;
 	private boolean addMushroom;
-	private Position mrPosition;
+	private boolean addFireball;
+	private Mushroom mr;
+	private FireBall fb;
 	private GameConfiguration previousConfig;
 	
 	public Game(int nLevel) {
 		this.remainingTime = 100;
 		this.points = 0;
-		this.win = this.lose = this.exit = this.addMushroom = false;
+		this.win = this.lose = this.exit = this.addMushroom = this.addFireball = false;
 		
 		this.nLevel = nLevel;
 		initGame();			
@@ -261,9 +264,17 @@ public class Game implements GameModel, GameStatus, GameWorld {
 				gameObjectContainer.add(obj);
 	}
 	
+	public void addFireball(Position p, Action action) {
+		if(!isSolid(p)) {
+			fb = new FireBall(this, p);
+			fb.setAction(action);
+			addFireball = true; 
+		}
+	}
+	
 	public void addMushroom(Position p) {
 		if(!isSolid(p)) {
-			mrPosition = p;
+			mr = new Mushroom(this, p);
 			addMushroom = true; 
 		}
 	}
@@ -272,7 +283,13 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		try {
 			if(addMushroom) {
 				addMushroom = false;
-				addObj(new Mushroom(this, mrPosition));
+				addObj(mr);
+				tryInteractionsFrom(mr);
+			}
+			else if(addFireball) {
+				addFireball = false;
+				addObj(fb);
+				tryInteractionsFrom(fb);
 			}
 		}catch(GameModelException gme) {
 			System.out.println("Couldn't add a Mushroom: " + gme);

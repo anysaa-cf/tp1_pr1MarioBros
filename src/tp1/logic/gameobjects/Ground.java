@@ -65,6 +65,11 @@ public class Ground extends GameObject {
 		return false;
 	}
 	
+	public boolean receiveInteraction(FireBall fireball) {
+		fireball.objectDies();
+		return true;
+	}
+	
 	@Override
 	public GameObject create(GameWorld game, Position pos) {
 		  Ground g = new Ground(game, pos);

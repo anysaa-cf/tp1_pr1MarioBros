@@ -76,5 +76,10 @@ public class ExitDoor extends GameObject {
 		  ExitDoor d = new ExitDoor(game, pos); 
 		  return d;
 	}
+	
+	public boolean receiveInteraction(FireBall fireball) {
+		fireball.objectDies();
+		return true;
+	}
 
 }

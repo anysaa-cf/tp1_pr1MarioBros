@@ -17,8 +17,7 @@ public class GameObjectFactory {
 			new Goomba(),
 			new Mario(),
 			new Mushroom(),
-			new Box(),
-			new FireBall()
+			new Box()
 	);
 	
 	public static GameObject parse (String objWords[], Game game) throws GameModelException {

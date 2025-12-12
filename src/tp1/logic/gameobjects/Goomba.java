@@ -115,11 +115,5 @@ public class Goomba extends MovingObject {
 		  g.action = this.action;
 		  return g;
 	}
-	
-	public boolean receiveInteraction(FireBall fireball) {
-		goombaDies();
-		fireball.objectDies();
-		return true;
-	}
 
 }

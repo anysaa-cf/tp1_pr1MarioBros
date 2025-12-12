@@ -7,7 +7,6 @@ import tp1.logic.gameobjects.Mario;
 import tp1.logic.gameobjects.Mushroom;
 import tp1.exceptions.GameModelException;
 import tp1.logic.gameobjects.Box;
-import tp1.logic.gameobjects.FireBall;
 
 public interface GameItem {
 	
@@ -22,7 +21,6 @@ public interface GameItem {
 		public boolean receiveInteraction(Goomba goomba);
 		public boolean receiveInteraction(Mushroom mushroom);
 		public boolean receiveInteraction(Box box);
-		public boolean receiveInteraction(FireBall fireball);
 		
 		public GameObject parse (String objWords[], GameWorld game) throws GameModelException;
 }

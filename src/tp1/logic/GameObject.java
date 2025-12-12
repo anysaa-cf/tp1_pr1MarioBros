@@ -12,7 +12,6 @@ public abstract class GameObject implements GameItem {
 	private boolean isAlive;
 	protected GameWorld game; 
 	protected boolean canWrite = true;
-	protected boolean throwable = false;
 	
 	private final String name;
 	private final String shortcut;
@@ -24,14 +23,6 @@ public abstract class GameObject implements GameItem {
 		this.isAlive = true;
 		this.name = name;
 		this.shortcut = shortcut;
-	}
-	
-	public boolean isThrowable() {
-		return throwable;
-	}
-	
-	public void enableThrow() {
-		throwable = true;
 	}
 	
 	public void updatePos(Position pos) {

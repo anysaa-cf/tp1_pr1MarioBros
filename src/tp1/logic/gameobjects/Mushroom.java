@@ -117,11 +117,5 @@ public class Mushroom extends MovingObject {
 		  m.action = this.action;
 		  return m;
 	}
-	
-	public boolean receiveInteraction(FireBall fireball) {
-		mushroomDies();
-		fireball.objectDies();
-		return true;
-	}
 
 }

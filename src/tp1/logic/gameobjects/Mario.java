@@ -1,8 +1,5 @@
 package tp1.logic.gameobjects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tp1.exceptions.GameModelException;
 import tp1.logic.Action;
 import tp1.logic.ActionList;
@@ -15,7 +12,6 @@ import tp1.view.Messages;
 public class Mario extends MovingObject {
 
 	private ActionList actionList;
-	private List<GameObject> inventory;
 	private int life; // added recently, now that there is a Mario object in game, we can have life attribute here 
 	private boolean big;
 	
@@ -29,17 +25,12 @@ public class Mario extends MovingObject {
 	public Mario(GameWorld game, Position pos) {
 		super(game, pos, Action.RIGHT, NAME, SHORTCUT);
 		this.actionList = new ActionList();
-		this.inventory = new ArrayList<GameObject>();
 		this.big = true;
 		this.life = 3;
 	}
 
 	public Mario() {
 		super(null, null, Action.RIGHT, NAME, SHORTCUT);
-		this.actionList = new ActionList();
-		this.inventory = new ArrayList<GameObject>();
-		this.big = true;
-		this.life = 3;
 	}
 
 	public String getIcon() {
@@ -92,13 +83,6 @@ public class Mario extends MovingObject {
 	public void addPoints(int newPoints) {
 		game.addPoints(newPoints);
 	}
-	
-	public void marioThrows() {
-		if(inventory.isEmpty()) {
-			Action a = action == Action.LEFT ? Action.LEFT : Action.RIGHT;
-			game.addFireball(new Position(getRow() + a.getX(), getCol() + a.getY()), a);
-		}
-	}
 
 	protected void move() {
 		Position nextPos;
@@ -109,16 +93,12 @@ public class Mario extends MovingObject {
 					updatePos(nextPos); // automatic movement if there is no ground taken the last Action movement
 			}
 			else {		// actions -> movement declared by the player
-				Action action = actionList.getAction();
-				if(Action.isMovementAction(action)) {
-					nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());																					
-				
-					if(game.isInsideBounds(nextPos))
-						updatePos(nextPos);
-					this.action = action;
-				}
-				else
-					action.execute(action, game, this);
+				Action action = this.actionList.getAction();
+				nextPos = new Position(getRow() + action.getX(), getCol() + action.getY());																					
+			
+				if(game.isInsideBounds(nextPos))
+					updatePos(nextPos);
+				this.action = action;
 			}
 		}
 	}
@@ -233,12 +213,6 @@ public class Mario extends MovingObject {
 		str = super.toString() + " " + (big ? BIG : SMALL);
 		canWrite = false;
 		return str;
-	}
-	
-	public boolean receiveInteraction(FireBall fireball) {
-		marioHit();
-		fireball.objectDies();
-		return true;
 	}
 
 }

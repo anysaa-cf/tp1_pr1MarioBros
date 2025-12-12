@@ -54,7 +54,7 @@ public class Mario extends MovingObject {
 		return icon;
 	}
 	
-	public int marioLife() {
+	public int getLife() {
 		return life;
 	}
 	
@@ -131,7 +131,7 @@ public class Mario extends MovingObject {
 	}
 	
 	public void marioHit() {
-		if(life <= 1) {
+		if(life == 1) {
 			life--;
 			objectDies();
 			game.marioDies();
@@ -148,13 +148,10 @@ public class Mario extends MovingObject {
 	public boolean receiveInteraction(Goomba goomba) {
 		if(!isFalling()) {
 			marioHit();
-			Position returnPos = new Position(getRow() - action.getX(), getCol() - action.getY()); 
-			updatePos(returnPos);
 		}
 		else {
 			game.addPoints(10);
 		}
-			
 		return true;
 	}
 	
@@ -185,7 +182,6 @@ public class Mario extends MovingObject {
 	@Override
 	public boolean receiveInteraction(Mushroom mushroom) {
 		this.big = true;
-		mushroom.objectDies();
 		return true;
 	}
 

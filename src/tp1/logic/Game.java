@@ -110,7 +110,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	
 	public int numLives() {
 		if(mario != null) {
-			lives = mario.marioLife();			
+			lives = mario.getLife();			
 		}
 		return lives;
 	}
@@ -123,6 +123,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		if(nLevel != -1) {
 			remainingTime = remainingTime() - 1;		// time is reduced by 1 on each cycle
 			gameObjectContainer.update();
+			lives = numLives();
 			onEntry();
 		}
 	}

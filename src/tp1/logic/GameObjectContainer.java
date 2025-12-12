@@ -55,8 +55,8 @@ public class GameObjectContainer {
 		for(int i = 0; i < aux; i++) { 
 			GameObject o = gameObjects.get(i);
 			if(o != object) {
-				object.interactWith(o);
 				o.interactWith(object);
+				object.interactWith(o);
 			}
 		}
 	}

@@ -55,8 +55,8 @@ public class Goomba extends MovingObject {
 
 	@Override
 	public boolean interactWith(GameItem other) {
-		boolean canInteract = this.isAlive() && other.isAlive() && other.isInPosition(new Position(this.getRow(), this.getCol()));
-		if(canInteract && game.isDifferent(other, this)) {
+		boolean canInteract = this.isAlive() && other.isAlive() && other.isInPosition(new Position(getRow(), getCol()));
+		if(canInteract) {
 			other.receiveInteraction(this);
 		}
 		return canInteract;
@@ -94,13 +94,14 @@ public class Goomba extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Mushroom mushroom) {
-
-		return false;
+		updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
+		changeAction();
+		return true;
 	}
 
 	@Override
 	public boolean receiveInteraction(Box box) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 	

@@ -81,7 +81,7 @@ public class Mushroom extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Mario mario) {
-
+		objectDies();
 		return true;
 	}
 
@@ -92,12 +92,16 @@ public class Mushroom extends MovingObject {
 
 	@Override
 	public boolean receiveInteraction(Goomba goomba) {
-		return false;
+		updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
+		changeAction();
+		return true;
 	}
 
 	@Override
 	public boolean receiveInteraction(Mushroom mushroom) {
-		return false;
+		updatePos(new Position(getRow() - action.getX(), getCol() - action.getY()));
+		changeAction();
+		return true;
 	}
 
 
